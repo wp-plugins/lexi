@@ -41,5 +41,3 @@ This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A
 1. Feeds administrator.
 2. Feed editor.
 3. Lexi widget.
-
-`<?php code(); // goes in backticks ?>`
