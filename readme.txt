@@ -17,7 +17,7 @@ Add the Lexi widget to show your feeds.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
-Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it as default.
+Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it by default.
 
 == Installation ==
 
