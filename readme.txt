@@ -9,7 +9,7 @@ An RSS feeder using ajax to show contents after the page has been loaded.
 
 == Description ==
 
-Sometimes an RSS feed has a low bandwidth and the page has to wait after your RSS feeds has been donwloaded. This widget make possible to read your syndications after your page has been shown, so it hasn't to wait.
+Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress has to wait after those RSS feeds has been donwloaded. This plugin allow the site to read the RSS _after_ the page was created, not during the process.
 
 You can use Tools -> Lexi to add, modify or delete your RSS feeds.
 
@@ -21,10 +21,11 @@ Screenshots are in spanish because it's my native language. As you should know y
 
 == Installation ==
 
-1. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the __Plugins__ menu in WordPress
-3. Add the Lexi widget into your side bar.
-4. Use Tools -> Lexi tod add, modify or delete your RSS feeds.
+1. Install __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__.
+2. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
+3. Activate the plugin through the __Plugins__ menu in WordPress
+4. Add the Lexi widget into your side bar.
+5. Use Tools -> Lexi to add, modify or delete your RSS feeds.
 
 == Frequently Asked Questions ==
 
