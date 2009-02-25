@@ -336,7 +336,7 @@ function lexi_manage_page()
 	$messages=array();
 	
 	if(!function_exists('minimax')) { 
-		array_push($messages, __( 'You have to install <a href="http://www.sebaxtian.com/acerca-de/minimax"  target="_BLANK">minimax</a> in order for this plugin to work', 'lexi' ));
+		array_push($messages, sprintf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ));
 	}
 
 	$mode_x=$_POST['mode_x']; // Something from POST
@@ -487,7 +487,7 @@ function lexi_widget_init() {
 		?>
 		<div id='lexi'>
 			<label>
-				<?php _e('You have to install <a href="http://www.sebaxtian.com/acerca-de/minimax"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'); ?>
+				<?php printf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ) ?>
 			</label>
 		</div><?
 		}
