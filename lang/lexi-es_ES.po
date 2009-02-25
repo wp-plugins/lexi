@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: lexi-es_ES\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-24 21:08-0500\n"
-"PO-Revision-Date: 2009-02-24 21:10-0500\n"
+"PO-Revision-Date: 2009-02-24 22:24-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,8 @@ msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
 "order for this plugin to work"
 msgstr ""
-"Deberá instalar <a href=\"%s\" target=\"_BLANK\">minimax</a> para que "
+"Deberá instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para "
+"que "
 "este plugin funcione."
 
 #: lexi.php:385
@@ -40,4 +41,5 @@ msgstr "Se movi&oacute; el RSS"
 #: lexi.php:443
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
+
 
