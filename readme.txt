@@ -13,7 +13,7 @@ Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress
 
 You can use Tools -> Lexi to add, modify or delete your RSS feeds.
 
-Add the Lexi widget to show your feeds, or you can add [lexi:id] in a page, or you can use the function `lexi(id)` in your template. Id is optional, and defines Feed to read. There is a button in the RichText Editor to add a feed in a post.
+Add the Lexi widget to show your feeds, or you can add [lexi:id] in a page, or you can use the function `lexi(id)` in your template. The vatiable _id_ is optional, and defines the Feed to read. If you don't define _id_ the plugin will show all the feeds. There is a button in the RichText Editor to add a feed in a post.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
