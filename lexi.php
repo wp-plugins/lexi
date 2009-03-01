@@ -3,12 +3,12 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.5.3
+Version: 0.6
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
 
-/*  Copyright 2007-2008  Juan Sebastián Echeverry  (email : sebaxtian@gawab.com)
+/*  Copyright 2007-2009  Juan Sebastián Echeverry  (email : sebaxtian@gawab.com)
 
 		This program is free software; you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@ Author URI: http://www.sebaxtian.com
 $db_version=get_option('lexi_db_version');
 
 add_action('init', 'lexi_textdomain');
+add_filter('the_content', 'lexi_content');
 add_action('admin_menu', 'lexi_manage');
 add_action('activate_lexi/lexi.php', 'lexi_activate');
 
@@ -257,6 +258,63 @@ function lexi_cof_readfile($filename)
 }
 
 /**
+  * Returns the HTML with all feeds.
+  *
+  * @return string
+  * @access public
+  */
+  function lexi_post() {
+    global $wpdb;
+
+    $answer="";
+
+    $table_name = $wpdb->prefix . "lexi";
+    $feedlist = $wpdb->get_results("SELECT id FROM $table_name ORDER BY position ASC");
+
+    // These lines generate our output. Widgets can be very complex
+    // but as you can see here, they can also be very, very simple.
+    if(function_exists('minimax') && minimax_version()==0.2) {
+      foreach($feedlist as $feed) {
+        $num = mt_rand();
+        $id=$feed->id;
+        $url=lexi_plugin_url('/content.php')."?id=".$id;
+        $answer.="\n<div id='lexi$num'></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
+        mx_lexi$num.get();
+        </script>";
+      }
+    } else {
+    ?>
+    <div id='lexi'>
+      <label>
+        <?php $answer=sprintf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ) ?>
+      </label>
+    </div><?
+    }
+    return $answer;
+  }
+
+/**
+  * Manage contents, to change [lexi].
+  *
+  * @access public
+  */
+  function lexi_content($content)
+  {
+    //search for lexi
+    $content = str_replace("[lexi]", lexi_post(), $content);
+    return $content;
+  }
+  
+/**
+  * Function to be called in templates.
+  *
+  * @access public
+  */
+  function lexi() {
+    echo lexi_post();
+  }
+
+/**
 	* Returns the HTML to show one Feed.
 	*
 	* @param int id Feed's id
@@ -469,28 +527,13 @@ function lexi_widget_init() {
 		// and after_title are the array keys. Default tags: li and h2.
 		extract($args);
 
-		$table_name = $wpdb->prefix . "lexi";
-		$feedlist = $wpdb->get_results("SELECT id FROM $table_name ORDER BY position ASC");
+		//$table_name = $wpdb->prefix . "lexi";
+		//$feedlist = $wpdb->get_results("SELECT id FROM $table_name ORDER BY position ASC");
 		
 		// These lines generate our output. Widgets can be very complex
 		// but as you can see here, they can also be very, very simple.
 		echo $before_widget;
-		if(function_exists('minimax') && minimax_version()==0.2) { 
-			foreach($feedlist as $feed) {
-				$id=$feed->id;
-				$url=lexi_plugin_url('/content.php')."?id=".$id;
-				echo "\n<div id='lexi".$id."'></div><script type='text/javascript'>mx_lexi".$id." = new minimax('$url', 'lexi".$id."');
-				mx_lexi".$id.".get();
-				</script>";
-			}
-		} else {
-		?>
-		<div id='lexi'>
-			<label>
-				<?php printf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ) ?>
-			</label>
-		</div><?
-		}
+    lexi();
 		echo $after_widget;
 	}
 	

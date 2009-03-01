@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.5.3
+Stable tag: 0.6
 
 An RSS feeder using ajax to show contents after the page has been loaded.
 
@@ -13,7 +13,7 @@ Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress
 
 You can use Tools -> Lexi to add, modify or delete your RSS feeds.
 
-Add the Lexi widget to show your feeds.
+Add the Lexi widget to show your feeds, or you can add [lexi] in a page, or you can use the function `lexi()` in your template.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
