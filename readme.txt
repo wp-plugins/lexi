@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.6
+Stable tag: 0.6.1
 
 An RSS feeder using ajax to show contents after the page has been loaded.
 
