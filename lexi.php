@@ -27,6 +27,7 @@ Author URI: http://www.sebaxtian.com
 
 $db_version=get_option('lexi_db_version');
 
+add_action('init', 'lexi_addbuttons');
 add_action('init', 'lexi_textdomain');
 add_filter('the_content', 'lexi_content');
 add_action('admin_menu', 'lexi_manage');
@@ -263,7 +264,7 @@ function lexi_cof_readfile($filename)
   * @return string
   * @access public
   */
-  function lexi_post() {
+  function lexi_post($id) {
     global $wpdb;
 
     $answer="";
@@ -275,12 +276,13 @@ function lexi_cof_readfile($filename)
     // but as you can see here, they can also be very, very simple.
     if(function_exists('minimax') && minimax_version()==0.2) {
       foreach($feedlist as $feed) {
-        $num = mt_rand();
-        $id=$feed->id;
-        $url=lexi_plugin_url('/content.php')."?id=".$id;
-        $answer.="\n<div id='lexi$num'></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
-        mx_lexi$num.get();
-        </script>";
+        if(!$id || $id==$feed->id) {
+          $num = mt_rand();
+          $url=lexi_plugin_url('/content.php')."?id=".$feed->id;
+          $answer.="\n<div id='lexi$num'></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
+          mx_lexi$num.get();
+          </script>";
+        }
       }
     } else {
     ?>
@@ -300,8 +302,30 @@ function lexi_cof_readfile($filename)
   */
   function lexi_content($content)
   {
-    //search for lexi
-    $content = str_replace("[lexi]", lexi_post(), $content);
+    //Lexi
+    $search = "@(?:<p>)*\s*\[lexi\s*(:\s*\d+)?\]\s*(?:</p>)*@i";
+    if  (preg_match_all($search, $content, $matches))
+    {
+        if (is_array($matches))
+        {
+          foreach ($matches[1] as $key =>$v0)
+          {
+              $v1=$matches[1][$key];
+              $id=false;
+              if($v1) {
+                $v1=substr($v1,1);
+                $id=$v1*1;
+              }
+              
+              $search = $matches[0][$key];
+
+              $replace=lexi_post($id);
+
+              $content = str_replace ($search, $replace, $content);
+          }
+        }
+    }
+
     return $content;
   }
   
@@ -310,8 +334,8 @@ function lexi_cof_readfile($filename)
   *
   * @access public
   */
-  function lexi() {
-    echo lexi_post();
+  function lexi($id=false) {
+    echo lexi_post($id);
   }
 
 /**
@@ -508,6 +532,34 @@ function lexi_manage_page()
 		// Now display the manage screen			
 		include('templates/lexi_manage.php');
 	}
+}
+
+function lexi_addbuttons() {
+   // Don't bother doing this stuff if the current user lacks permissions
+      if ( !current_user_can('edit_posts') && !current_user_can('edit_pages') ) return;
+
+   // Add only in Rich Editor mode
+        if ( get_user_option('rich_editing') == 'true') {
+
+      // add the button for wp21 in a new way
+         add_filter('mce_external_plugins',  'add_lexi_script');
+         add_filter('mce_buttons',  'add_lexi_button');
+      }
+}
+
+function add_lexi_button($buttons) {
+
+   array_push($buttons, 'Lexi');
+   return $buttons;
+
+}
+
+function add_lexi_script($plugins) {
+   $dir_name = '/wp-content/plugins/lexi';
+   $url=get_bloginfo('wpurl');
+   $pluginURL =  $url.$dir_name.'/tinymce/editor_plugin.js';
+   $plugins['Lexi'] = $pluginURL;
+   return $plugins;
 }
 
 

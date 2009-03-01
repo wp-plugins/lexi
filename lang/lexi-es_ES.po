@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi-es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-28 20:08-0500\n"
-"PO-Revision-Date: 2009-02-28 20:10-0500\n"
+"POT-Creation-Date: 2009-02-28 22:27-0500\n"
+"PO-Revision-Date: 2009-02-28 22:29-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lexi.php:289 lexi.php:397
+#: lexi.php:291 lexi.php:421
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
@@ -25,23 +25,23 @@ msgstr ""
 "Deberá instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para "
 "que este plugin funcione."
 
-#: lexi.php:338
+#: lexi.php:362
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:443
+#: lexi.php:467
 msgid "Feed added"
 msgstr "Se agreg&oacute; el RSS"
 
-#: lexi.php:462
+#: lexi.php:486
 msgid "Feed modified"
 msgstr "Se modific&oacute; el RSS"
 
-#: lexi.php:487 lexi.php:494
+#: lexi.php:511 lexi.php:518
 msgid "Feed moved"
 msgstr "Se movi&oacute; el RSS"
 
-#: lexi.php:501
+#: lexi.php:525
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
 
@@ -74,7 +74,7 @@ msgstr "Mostrar Contenido"
 msgid "Save cache"
 msgstr "Almacenar en Caché"
 
-#: templates/lexi_feed.php:48
+#: templates/lexi_feed.php:48 tinymce/mce_lexi.php:63
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -107,7 +107,7 @@ msgstr "Eliminar"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: templates/lexi_manage.php:47
+#: templates/lexi_manage.php:47 tinymce/mce_lexi.php:32
 msgid "Feed"
 msgstr "RSS"
 
@@ -118,4 +118,16 @@ msgstr "Editar"
 #: templates/lexi_manage.php:60
 msgid "Delete this Feed?"
 msgstr "&iquest;Eliminar este RSS?"
+
+#: tinymce/mce_lexi.php:42
+msgid "Feed:"
+msgstr "RSS:"
+
+#: tinymce/mce_lexi.php:44
+msgid "All feeds"
+msgstr "Todos los RSS"
+
+#: tinymce/mce_lexi.php:67
+msgid "Insert"
+msgstr "Insertar"
 

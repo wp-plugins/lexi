@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-28 20:08-0500\n"
+"POT-Creation-Date: 2009-02-28 22:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,30 +16,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lexi.php:289 lexi.php:397
+#: lexi.php:291 lexi.php:421
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
 "order for this plugin to work"
 msgstr ""
 
-#: lexi.php:338
+#: lexi.php:362
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:443
+#: lexi.php:467
 msgid "Feed added"
 msgstr ""
 
-#: lexi.php:462
+#: lexi.php:486
 msgid "Feed modified"
 msgstr ""
 
-#: lexi.php:487 lexi.php:494
+#: lexi.php:511 lexi.php:518
 msgid "Feed moved"
 msgstr ""
 
-#: lexi.php:501
+#: lexi.php:525
 msgid "Feed deleted"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Save cache"
 msgstr ""
 
-#: templates/lexi_feed.php:48
+#: templates/lexi_feed.php:48 tinymce/mce_lexi.php:63
 msgid "Cancel"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: templates/lexi_manage.php:47
+#: templates/lexi_manage.php:47 tinymce/mce_lexi.php:32
 msgid "Feed"
 msgstr ""
 
@@ -115,4 +115,16 @@ msgstr ""
 
 #: templates/lexi_manage.php:60
 msgid "Delete this Feed?"
+msgstr ""
+
+#: tinymce/mce_lexi.php:42
+msgid "Feed:"
+msgstr ""
+
+#: tinymce/mce_lexi.php:44
+msgid "All feeds"
+msgstr ""
+
+#: tinymce/mce_lexi.php:67
+msgid "Insert"
 msgstr ""
