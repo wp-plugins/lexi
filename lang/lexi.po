@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-24 21:08-0500\n"
+"POT-Creation-Date: 2009-02-28 20:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,103 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lexi.php:339 lexi.php:490
+#: lexi.php:289 lexi.php:397
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
 "order for this plugin to work"
 msgstr ""
 
-#: lexi.php:385
-msgid "Feed added"
-msgstr ""
-
-#: lexi.php:404
-msgid "Feed modified"
-msgstr ""
-
-#: lexi.php:429 lexi.php:436
-msgid "Feed moved"
+#: lexi.php:338
+msgid "Subscribe"
 msgstr ""
 
 #: lexi.php:443
+msgid "Feed added"
+msgstr ""
+
+#: lexi.php:462
+msgid "Feed modified"
+msgstr ""
+
+#: lexi.php:487 lexi.php:494
+msgid "Feed moved"
+msgstr ""
+
+#: lexi.php:501
 msgid "Feed deleted"
+msgstr ""
+
+#: templates/lexi_feed.php:6 templates/lexi_manage.php:28
+#: templates/lexi_manage.php:38 templates/lexi_manage.php:79
+msgid "Add Feed"
+msgstr ""
+
+#: templates/lexi_feed.php:6
+msgid "Edit Feed"
+msgstr ""
+
+#: templates/lexi_feed.php:11 templates/lexi_feed.php:20
+msgid "RSS"
+msgstr ""
+
+#: templates/lexi_feed.php:16
+msgid "Name"
+msgstr ""
+
+#: templates/lexi_feed.php:24
+msgid "Items"
+msgstr ""
+
+#: templates/lexi_feed.php:36 templates/lexi_manage.php:48
+msgid "Show contents"
+msgstr ""
+
+#: templates/lexi_feed.php:40 templates/lexi_manage.php:49
+msgid "Save cache"
+msgstr ""
+
+#: templates/lexi_feed.php:48
+msgid "Cancel"
+msgstr ""
+
+#: templates/lexi_feed.php:51
+msgid "Add"
+msgstr ""
+
+#: templates/lexi_feed.php:51
+msgid "Modify"
+msgstr ""
+
+#: templates/lexi_manage.php:21
+msgid "Lexi"
+msgstr ""
+
+#: templates/lexi_manage.php:28
+msgid "No feeds found"
+msgstr ""
+
+#: templates/lexi_manage.php:33 templates/lexi_manage.php:74
+msgid "Bulk Actions"
+msgstr ""
+
+#: templates/lexi_manage.php:34 templates/lexi_manage.php:60
+#: templates/lexi_manage.php:75
+msgid "Delete"
+msgstr ""
+
+#: templates/lexi_manage.php:36 templates/lexi_manage.php:77
+msgid "Apply"
+msgstr ""
+
+#: templates/lexi_manage.php:47
+msgid "Feed"
+msgstr ""
+
+#: templates/lexi_manage.php:59
+msgid "Edit"
+msgstr ""
+
+#: templates/lexi_manage.php:60
+msgid "Delete this Feed?"
 msgstr ""

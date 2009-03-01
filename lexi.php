@@ -335,7 +335,7 @@ function lexi_readfeed($id)
 		$rss = fetch_rss($feed->rss);
 		$items = array_slice($rss->items, 0, $feed->items);
 		
-		$answer = "<h2 class='widgettitle'><a class='rsswidget' href='".$feed->rss."' title='Suscribirse a este contenido'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' /></a> <a class='rsswidget' href='".htmlspecialchars($rss->channel['link'])."' title='".$feed->name."'>".$feed->name."</a></h2><ul>";
+		$answer = "<h2 class='widgettitle'><a class='rsswidget' href='".$feed->rss."' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' /></a> <a class='rsswidget' href='".htmlspecialchars($rss->channel['link'])."' title='".$feed->name."'>".$feed->name."</a></h2><ul>";
 		if($items){
 			foreach ($items as $item) {
 				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank'>".$item['title']."</a>";
