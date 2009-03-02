@@ -11,15 +11,15 @@ An RSS feeder using ajax to show contents after the page has been loaded.
 
 Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress has to wait after those RSS feeds has been downloaded. This plugin allow the site to read the RSS _after_ the page was created, not _during_ the process.
 
-You can use Tools -> Lexi to add, modify or delete the list of RSS feeds.
+To modify or delete the list of RSS feeds go to Tools -> Lexi.
 
-You can add the Lexi widget to show the list, but you can use the tag `[lexi]` in a page, or you can use the function `lexi()` in your template. This will show the entire list.
+You can add the Lexi widget to show the list, but you can also use the tag `[lexi]` in a page, or the function `lexi()` in a template.
 
 To show just one item from the list, use `[lexi:id]` or `lexi(id)`.
 
-To show a Feed that hasn't been declared in the list, you can use `[lexi: rss, max_items, showcontents, cached]` or `lexi($rss, $max_items, $showcontents, $cached)`.
+To show a Feed that hasn't been declared in the list, use `[lexi: rss, max_items, showcontents, cached]` or `lexi($rss, $max_items, $showcontents, $cached)`.
 
-The plugin creates a button in the RichText editor to add a Feed.
+There is a button in the RichText editor created by the plugin to add a Feed.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
