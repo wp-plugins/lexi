@@ -31,7 +31,7 @@ Screenshots are in spanish because it's my native language. As you should know y
 2. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the __Plugins__ menu in WordPress
 4. Add the Lexi widget into your side bar, or add [lexi] into your posts, or use `lexi()` into your templates.
-5. Use Tools -> Lexi to add, modify or delete your RSS feeds.
+5. Use Tools -> Lexi to add, modify or delete your RSS feeds list.
 
 == Frequently Asked Questions ==
 
