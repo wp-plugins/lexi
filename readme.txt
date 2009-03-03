@@ -52,5 +52,5 @@ This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A
 1. Feeds administrator.
 2. Feed editor.
 3. Lexi widget.
-4. Widget to add a Lexi feed.
-5. Widget to add an RSS feed.
+4. Box to add a Lexi feed.
+5. Box to add an RSS feed.
