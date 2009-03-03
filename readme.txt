@@ -39,7 +39,7 @@ Screenshots are in spanish because it's my native language. As you should know y
 
 My page (I don't know if yours too) use to get blocked reading some RSS feeds. I created Lexi to read the RSS _after_ the page was created, not during the process.
 
-= There is cached RSS that doesn't show anything =
+= There is a cached RSS that doesn't show anything =
 
 Yes, I noticed too. It happens with some feeds the first time it's readed, but ten minutes after it works! I think the problem is in `fetch_rss($url)`, the WordPress function Lexi uses to save cached Feeds. There's anything I can do without hacking WP.
 
