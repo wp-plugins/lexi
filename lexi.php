@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7
+Version: 0.7.0.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -281,14 +281,21 @@ function lexi_cof_readfile($filename)
   */
   
 function lexi_postRss($link, $title, $items, $sc, $cache) {
-  $num = mt_rand();
-  $url=lexi_plugin_url('/content.php');
-  if($sc) $sc=1; else $sc=0;
-  if($cache) $cache=1; else $cache=0;
-  $post="url=$link&title=$title&num=$items&sc=$sc&cache=$cache";
-  $answer.="\n<div id='lexi$num'></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
-  mx_lexi$num.post('$post');
-  </script>";
+  $answer="";
+  if(function_exists('minimax') && minimax_version()==0.2) {
+    $num = mt_rand();
+    $url=lexi_plugin_url('/content.php');
+    if($sc) $sc=1; else $sc=0;
+    if($cache) $cache=1; else $cache=0;
+    $post="url=$link&title=$title&num=$items&sc=$sc&cache=$cache";
+    $answer.="\n<div id='lexi$num'></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
+    mx_lexi$num.post('$post');
+    </script>";
+  } else {
+    $answer.= "<div id='lexi'><label>";
+    $answer.= sprintf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
+    $answer.= "</label></div>";
+  }
   return $answer;
 }
 
