@@ -41,7 +41,7 @@ My page (I don't know if yours too) use to get blocked reading some RSS feeds. I
 
 = There is a cached RSS that doesn't show anything =
 
-Yes, I noticed too. It happens with some feeds the first time it's readed, but ten minutes later it works! I think the problem is in `fetch_rss($url)`, the WordPress function Lexi uses to save cached Feeds. There's anything I can do without hacking WP.
+Yes, I noticed too. It happens with some feeds the first time they are readed, but ten minutes later they work! I think the problem is in `fetch_rss($url)`, the WordPress function Lexi uses to save cached Feeds. There's anything I can do without hacking WP.
 
 = It say something about minimax. What's this? =
 
