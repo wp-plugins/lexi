@@ -7,34 +7,13 @@
 <body><?php
 require_once( '../../../wp-config.php' );
 
-// $trans['á'] = '&aacute;';
-// $trans['é'] = '&eacute;';
-// $trans['í'] = '&iacute;';
-// $trans['ó'] = '&oacute;';
-// $trans['ú'] = '&uacute;';
-// $trans['ñ'] = '&ntilde;';
-// $trans['Á'] = '&Aacute;';
-// $trans['É'] = '&Eacute;';
-// $trans['Í'] = '&Iacute;';
-// $trans['Ó'] = '&Oacute;';
-// $trans['Ú'] = '&Uacute;';
-// $trans['Ñ'] = '&Ntilde;';
-// $trans['&'] = '&#038;';
-// $trans['Ü'] = '&#220;';
-// $trans['ü'] = '&#252;';
-// $trans['¡'] = '&#161;';
-// $trans['¿'] = '&#191;';
-// $trans['–'] = '&#8211;';
-// ksort($trans);
+$url   = $_POST['url'];
+$title = $_POST['title']; 
+$num   = $_POST['num'];
+$sc    = $_POST['sc'];
+$cache = $_POST['cache'];
 
-// $trans2['&#038;#'] = '&#';
-// ksort($trans2);
-
-$id=$_GET['id'];
-
-echo lexi_readfeed($id);
-
-// echo strtr( strtr(lexi_readfeed($id), $trans) , $trans2 );
+echo lexi_readfeed($url, $title, $num, $sc, $cache);
 
 ?>
 </body>
