@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.0.1
+Version: 0.7.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -450,19 +450,48 @@ function lexi_readfeed($link, $name, $num, $sc, $cached) {
   if($data) {
     $rss = new SimpleXMLElement($data);
     $channel_link = $rss->channel->link;
-    if($name=="")
-      $name=htmlspecialchars($rss->channel->title);
-    $count=0;
-    if($rss->channel->item){
-      foreach ($rss->channel->item as $item) {
-        if($count<$num) {
-          $answer.="<li><a class='rsswidget' href='".$item->link."' target='_blank'>". $item->title . "</a>";
-          if($sc) $answer.="<br/>".$item->description;
-          $answer.="</li>";
-        }
-        $count++;
-      }
-    }
+		if($channel_link) { //This is RSS 
+		
+			if($name=="")
+				$name=htmlspecialchars($rss->channel->title);
+			$count=0;
+			if($rss->channel->item){
+				foreach ($rss->channel->item as $item) {
+					if($count<$num) {
+						$answer.="<li><a class='rsswidget' href='".$item->link."' target='_blank'>". $item->title . "</a>";
+						if($sc) $answer.="<br/>".$item->description;
+						$answer.="</li>";
+					}
+					$count++;
+				}
+			}
+		} else { //This is Atom
+			$channel_link = "";
+			foreach($rss->link as $link) {
+				if($link['rel']=="alternate") {
+					$channel_link = $link['href'];
+				}
+			}
+			if($name=="")
+				$name=htmlspecialchars($rss->title);
+			$count=0;
+			if($rss->entry){
+				foreach ($rss->entry as $item) {
+					if($count<$num) {
+						$item_link = "";
+						foreach($item->link as $link) {
+							if($link['rel']=="alternate") {
+								$item_link = $link['href'];
+							}
+						}
+						$answer.="<li><a class='rsswidget' href='".$item_link."' target='_blank'>". $item->title . "</a>";
+						if($sc) $answer.="<br/>".$item->content;
+						$answer.="</li>";
+					}
+					$count++;
+				}
+			}
+		}
   }
   
   $header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
@@ -683,17 +712,50 @@ function lexi_widget_init() {
 
     //$table_name = $wpdb->prefix . "lexi";
     //$feedlist = $wpdb->get_results("SELECT id FROM $table_name ORDER BY position ASC");
+		
+		$options = get_option('widget_lexi');
+		$title = $options['title'];
   
     // These lines generate our output. Widgets can be very complex
     // but as you can see here, they can also be very, very simple.
     echo $before_widget;
+		if(strlen($title)>0) {
+			echo $before_title . $title . $after_title;
+		}
     lexi();
     echo $after_widget;
   }
+	
+	// This is the function that outputs the form to let the users edit
+	// the widget's title. It's an optional feature that users cry for.
+	function lexi_widget_control() {
+	
+		// Get our options and see if we're handling a form submission.
+		$options = get_option('widget_lexi');
+		if ( !is_array($options) )
+			$options = array('title'=>'');
+		if ( $_POST['lexi-submit'] ) {
+			// Remember to sanitize and format use input appropriately.
+			$options['title'] = strip_tags(stripslashes($_POST['lexi_title']));
+			update_option('widget_lexi', $options); 
+		}
+
+		// Be sure you format your options to be valid HTML attributes.
+		$title = htmlspecialchars($options['title'], ENT_QUOTES);
+
+ 
+		// Here is our little form segment. Notice that we don't need a
+		// complete form. This will be embedded into the existing form.
+		require('templates/lexi_widget.php');
+	}
   
-  // This registers our widget so it appears with the other available
-  // widgets and can be dragged and dropped into any active sidebars.
-  register_sidebar_widget(array('Lexi RSS Widget', 'widgets'), 'lexi_widget');
+	// This registers our widget so it appears with the other available
+	// widgets and can be dragged and dropped into any active sidebars.
+	register_sidebar_widget(array('Lexi RSS Widget', 'widgets'), 'lexi_widget');
+	
+	// This registers our optional widget control form. Because of this
+	// our widget will have a button that reveals a 300x100 pixel form.
+	register_widget_control(array('Lexi RSS Widget', 'widgets'), 'lexi_widget_control');
 
 }
 

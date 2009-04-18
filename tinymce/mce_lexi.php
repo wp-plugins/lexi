@@ -30,7 +30,7 @@ if(!current_user_can('edit_posts')) die;
 	<div class="tabs">
 		<ul>
 			<li id="lexi_tab" class="current"><span><a href="javascript:mcTabs.displayTab('lexi_tab','lexi_panel');" onmousedown="return false;"><?php _e("Lexi", 'lexi'); ?></a></span></li>
-      <li id="rss_tab"><span><a href="javascript:mcTabs.displayTab('rss_tab','rss_panel');" onmousedown="return false;"><?php _e("Rss", 'lexi'); ?></a></span></li>
+      <li id="rss_tab"><span><a href="javascript:mcTabs.displayTab('rss_tab','rss_panel');" onmousedown="return false;"><?php _e("RSS", 'lexi'); ?></a></span></li>
 		</ul>
 	</div>
 	
@@ -73,11 +73,11 @@ if(!current_user_can('edit_posts')) die;
 
         <tr>
           <td nowrap="nowrap"><label for="rsslink"><?php _e("RSS", 'lexi' ); ?>:</label></td>
-          <td><input type="text" id="rsslink" name="rsslink" style="width: 200px"/></td>
+          <td colspan=2><input type="text" id="rsslink" name="rsslink" style="width: 200px"/></td>
         </tr>
         <tr>
           <td nowrap="nowrap"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
-          <td>
+          <td colspan=2>
             <select name="rssitems" id="rssitems"><?php
                 for($i=1; $i<11; $i++) {
                   echo "<option value=\"$i\"";
@@ -89,12 +89,17 @@ if(!current_user_can('edit_posts')) die;
         </tr>
         <tr>
           <td nowrap="nowrap"><label for="rsssc"><?php _e("Show contents", 'lexi' ); ?>:</label></td>
-          <td><input type="checkbox" id="rsssc" name="rsssc" /></td>
+          <td colspan=2><input type="checkbox" id="rsssc" name="rsssc" /></td>
         </tr>
         <tr>
-          <td nowrap="nowrap"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>:</label></td>
-          <td><input type="checkbox" id="rsscache" name="rsscache" /></td>
+          <td nowrap="nowrap"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>: </label></td>
+          <td><input type="checkbox" id="rsscache" name="rsscache" checked /></td>
+					<td rowspan=2><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
         </tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
       </table>
     </div>
 		
