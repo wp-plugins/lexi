@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi-es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-28 22:27-0500\n"
-"PO-Revision-Date: 2009-02-28 22:29-0500\n"
+"POT-Creation-Date: 2009-04-18 16:14-0500\n"
+"PO-Revision-Date: 2009-04-18 16:16-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
-"Language-Team: Spanish <kde-i18n-doc@lists.kde.org>\n"
+"Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lexi.php:291 lexi.php:421
+#: lexi.php:296 lexi.php:333 lexi.php:528
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
@@ -25,23 +25,23 @@ msgstr ""
 "Deberá instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para "
 "que este plugin funcione."
 
-#: lexi.php:362
+#: lexi.php:497
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:467
+#: lexi.php:574
 msgid "Feed added"
 msgstr "Se agreg&oacute; el RSS"
 
-#: lexi.php:486
+#: lexi.php:593
 msgid "Feed modified"
 msgstr "Se modific&oacute; el RSS"
 
-#: lexi.php:511 lexi.php:518
+#: lexi.php:618 lexi.php:625
 msgid "Feed moved"
 msgstr "Se movi&oacute; el RSS"
 
-#: lexi.php:525
+#: lexi.php:632
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
 
@@ -55,6 +55,7 @@ msgid "Edit Feed"
 msgstr "Editar RSS"
 
 #: templates/lexi_feed.php:11 templates/lexi_feed.php:20
+#: tinymce/mce_lexi.php:33 tinymce/mce_lexi.php:75
 msgid "RSS"
 msgstr "RSS"
 
@@ -62,31 +63,40 @@ msgstr "RSS"
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/lexi_feed.php:24
+#: templates/lexi_feed.php:24 tinymce/mce_lexi.php:79
 msgid "Items"
 msgstr "Items"
 
 #: templates/lexi_feed.php:36 templates/lexi_manage.php:48
+#: tinymce/mce_lexi.php:91
 msgid "Show contents"
 msgstr "Mostrar Contenido"
 
 #: templates/lexi_feed.php:40 templates/lexi_manage.php:49
+#: tinymce/mce_lexi.php:95
 msgid "Save cache"
 msgstr "Almacenar en Caché"
 
-#: templates/lexi_feed.php:48 tinymce/mce_lexi.php:63
+#: templates/lexi_feed.php:42 tinymce/mce_lexi.php:97
+msgid ""
+"Uncheck this option only in case the feed updates several times in an hour."
+msgstr ""
+"Solo quite esta marca si la fuente se actualiza varias veces en una misma "
+"hora."
+
+#: templates/lexi_feed.php:49 tinymce/mce_lexi.php:110
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/lexi_feed.php:51
+#: templates/lexi_feed.php:52
 msgid "Add"
 msgstr "Agregar"
 
-#: templates/lexi_feed.php:51
+#: templates/lexi_feed.php:52
 msgid "Modify"
 msgstr "Modificar"
 
-#: templates/lexi_manage.php:21
+#: templates/lexi_manage.php:21 tinymce/mce_lexi.php:32
 msgid "Lexi"
 msgstr "Lexi"
 
@@ -107,7 +117,7 @@ msgstr "Eliminar"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: templates/lexi_manage.php:47 tinymce/mce_lexi.php:32
+#: templates/lexi_manage.php:47
 msgid "Feed"
 msgstr "RSS"
 
@@ -119,15 +129,28 @@ msgstr "Editar"
 msgid "Delete this Feed?"
 msgstr "&iquest;Eliminar este RSS?"
 
-#: tinymce/mce_lexi.php:42
+#: templates/lexi_widget.php:3
+msgid "Title"
+msgstr "T&iacute;tulo"
+
+#: templates/lexi_widget.php:11
+msgid ""
+"You have to install <a href=\"http://www.sebaxtian.com/acerca-de/minimax\"  "
+"target=\"_BLANK\">minimax</a> in order for this plugin to work"
+msgstr ""
+"Deber&aacute; instalar <a href=\"http://www.sebaxtian."
+"com/acerca-de/minimax\"  "
+"target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione"
+
+#: tinymce/mce_lexi.php:43 tinymce/mce_lexi.php:67
 msgid "Feed:"
 msgstr "RSS:"
 
-#: tinymce/mce_lexi.php:44
+#: tinymce/mce_lexi.php:45 tinymce/mce_lexi.php:69
 msgid "All feeds"
 msgstr "Todos los RSS"
 
-#: tinymce/mce_lexi.php:67
+#: tinymce/mce_lexi.php:114
 msgid "Insert"
 msgstr "Insertar"
 

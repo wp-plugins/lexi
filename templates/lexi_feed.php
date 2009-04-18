@@ -14,15 +14,15 @@
 								<table>
 									<tr>
 										<td width="20%"><?php _e("Name", 'lexi' ); ?>:</td>
-										<td><input type="text" name="lexi_name" value="<?php echo $name; ?>" /></td>
+										<td colspan=2><input type="text" name="lexi_name" value="<?php echo $name; ?>" /></td>
 									</tr>
 									<tr>
 										<td><?php _e("RSS", 'lexi' ); ?>:</td>
-										<td><input type="text" name="lexi_rss" value="<?php echo $rss; ?>" /></td>
+										<td colspan=2><input type="text" name="lexi_rss" value="<?php echo $rss; ?>" /></td>
 									</tr>
 									<tr>
 										<td><?php _e("Items", 'lexi' ); ?>:</td>
-										<td>
+										<td colspan=2>
 											<select name="lexi_items"><?php 
 													for($i=1; $i<11; $i++) {
 														echo "<option value=\"$i\"";
@@ -34,11 +34,12 @@
 									</tr>
 									<tr>
 										<td><?php _e("Show contents", 'lexi' ); ?>:</td>
-										<td><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
+										<td colspan=2><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
 									</tr>
 									<tr>
 										<td><?php _e("Save cache", 'lexi' ); ?>:</td>
-										<td><input type="checkbox" name="lexi_cached" <?php if($cached) echo "checked"; ?>/></td>
+										<td><input type="checkbox" name="lexi_cached" <?php if($cached || !$id) echo "checked"; ?>/></td>
+										<td><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
 									</tr>
 								</table>
 							</div>
