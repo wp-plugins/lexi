@@ -494,7 +494,7 @@ function lexi_readfeed($link, $name, $num, $sc, $cached) {
 		}
   }
   
-  $header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
+  $header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
   return "$header<ul>$answer</ul>";
 }
 
