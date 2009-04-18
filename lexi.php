@@ -467,25 +467,26 @@ function lexi_readfeed($link, $name, $num, $sc, $cached) {
 			}
 		} else { //This is Atom
 			$channel_link = "";
-			foreach($rss->link as $link) {
-				if($link['rel']=="alternate") {
-					$channel_link = $link['href'];
+			foreach($rss->link as $linki) {
+				if($linki['rel']=="alternate") {
+					$channel_link = $linki['href'];
 				}
 			}
 			if($name=="")
 				$name=htmlspecialchars($rss->title);
 			$count=0;
 			if($rss->entry){
+
 				foreach ($rss->entry as $item) {
 					if($count<$num) {
 						$item_link = "";
-						foreach($item->link as $link) {
-							if($link['rel']=="alternate") {
-								$item_link = $link['href'];
+						foreach($item->link as $linki) {
+							if($linki['rel']=="alternate") {
+								$item_link = $linki['href'];
 							}
 						}
 						$answer.="<li><a class='rsswidget' href='".$item_link."' target='_blank'>". $item->title . "</a>";
-						if($sc) $answer.="<br/>".$item->content;
+						if($sc) $answer.="<br/>".$item->summary.$item->content;
 						$answer.="</li>";
 					}
 					$count++;
