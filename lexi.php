@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.1
+Version: 0.7.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -430,70 +430,25 @@ function lexi_content($content)
   */
 function lexi_readfeed($link, $name, $num, $sc, $cached) {
   include_once(ABSPATH . WPINC . '/rss.php');
-  if($cached) {
-    $rss = fetch_rss($link);
-    $channel_link=htmlspecialchars($rss->channel['link']);
-    if($name=="")
-      $name=htmlspecialchars($rss->channel['title']);
+  
+	$aux_cached = MAGPIE_CACHE_ON;
+	if(!$cached) {
+		define('MAGPIE_CACHE_ON', 0);
+	}
+	$rss = fetch_rss($link);
+	define('MAGPIE_CACHE_ON', $aux_cached);
+	$channel_link=htmlspecialchars($rss->channel['link']);
+	if($name=="") {
+		$name=htmlspecialchars($rss->channel['title']);
+	}
 
-    if($rss->items) {
-      foreach (array_slice($rss->items, 0, $num) as $item) {
-        $answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank' >".$item['title']."</a>";
-        if($sc) $answer.="<br/>".$item['description'];
-        $answer.="</li>";
-      }
-    }
-  } else {
-    $data = lexi_cof_readfile($link);
-  }
-
-  if($data) {
-    $rss = new SimpleXMLElement($data);
-    $channel_link = $rss->channel->link;
-		if($channel_link) { //This is RSS 
-		
-			if($name=="")
-				$name=htmlspecialchars($rss->channel->title);
-			$count=0;
-			if($rss->channel->item){
-				foreach ($rss->channel->item as $item) {
-					if($count<$num) {
-						$answer.="<li><a class='rsswidget' href='".$item->link."' target='_blank'>". $item->title . "</a>";
-						if($sc) $answer.="<br/>".$item->description;
-						$answer.="</li>";
-					}
-					$count++;
-				}
-			}
-		} else { //This is Atom
-			$channel_link = "";
-			foreach($rss->link as $linki) {
-				if($linki['rel']=="alternate") {
-					$channel_link = $linki['href'];
-				}
-			}
-			if($name=="")
-				$name=htmlspecialchars($rss->title);
-			$count=0;
-			if($rss->entry){
-
-				foreach ($rss->entry as $item) {
-					if($count<$num) {
-						$item_link = "";
-						foreach($item->link as $linki) {
-							if($linki['rel']=="alternate") {
-								$item_link = $linki['href'];
-							}
-						}
-						$answer.="<li><a class='rsswidget' href='".$item_link."' target='_blank'>". $item->title . "</a>";
-						if($sc) $answer.="<br/>".$item->summary.$item->content;
-						$answer.="</li>";
-					}
-					$count++;
-				}
-			}
+	if($rss->items) {
+		foreach (array_slice($rss->items, 0, $num) as $item) {
+			$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank' >".$item['title']."</a>";
+			if($sc) $answer.="<br/>".$item['atom_content'].$item['summary'];
+			$answer.="</li>";
 		}
-  }
+	}
   
   $header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
   return "$header<ul>$answer</ul>";
