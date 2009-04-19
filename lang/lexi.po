@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-18 16:14-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lexi.php:296 lexi.php:333 lexi.php:528
+#, php-format
+msgid ""
+"You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
+"order for this plugin to work"
+msgstr ""
+
+#: lexi.php:497
+msgid "Subscribe"
+msgstr ""
+
+#: lexi.php:574
+msgid "Feed added"
+msgstr ""
+
+#: lexi.php:593
+msgid "Feed modified"
+msgstr ""
+
+#: lexi.php:618 lexi.php:625
+msgid "Feed moved"
+msgstr ""
+
+#: lexi.php:632
+msgid "Feed deleted"
+msgstr ""
+
+#: templates/lexi_feed.php:6 templates/lexi_manage.php:28
+#: templates/lexi_manage.php:38 templates/lexi_manage.php:79
+msgid "Add Feed"
+msgstr ""
+
+#: templates/lexi_feed.php:6
+msgid "Edit Feed"
+msgstr ""
+
+#: templates/lexi_feed.php:11 templates/lexi_feed.php:20
+#: tinymce/mce_lexi.php:33 tinymce/mce_lexi.php:75
+msgid "RSS"
+msgstr ""
+
+#: templates/lexi_feed.php:16
+msgid "Name"
+msgstr ""
+
+#: templates/lexi_feed.php:24 tinymce/mce_lexi.php:79
+msgid "Items"
+msgstr ""
+
+#: templates/lexi_feed.php:36 templates/lexi_manage.php:48
+#: tinymce/mce_lexi.php:91
+msgid "Show contents"
+msgstr ""
+
+#: templates/lexi_feed.php:40 templates/lexi_manage.php:49
+#: tinymce/mce_lexi.php:95
+msgid "Save cache"
+msgstr ""
+
+#: templates/lexi_feed.php:42 tinymce/mce_lexi.php:97
+msgid ""
+"Uncheck this option only in case the feed updates several times in an hour."
+msgstr ""
+
+#: templates/lexi_feed.php:49 tinymce/mce_lexi.php:110
+msgid "Cancel"
+msgstr ""
+
+#: templates/lexi_feed.php:52
+msgid "Add"
+msgstr ""
+
+#: templates/lexi_feed.php:52
+msgid "Modify"
+msgstr ""
+
+#: templates/lexi_manage.php:21 tinymce/mce_lexi.php:32
+msgid "Lexi"
+msgstr ""
+
+#: templates/lexi_manage.php:28
+msgid "No feeds found"
+msgstr ""
+
+#: templates/lexi_manage.php:33 templates/lexi_manage.php:74
+msgid "Bulk Actions"
+msgstr ""
+
+#: templates/lexi_manage.php:34 templates/lexi_manage.php:60
+#: templates/lexi_manage.php:75
+msgid "Delete"
+msgstr ""
+
+#: templates/lexi_manage.php:36 templates/lexi_manage.php:77
+msgid "Apply"
+msgstr ""
+
+#: templates/lexi_manage.php:47
+msgid "Feed"
+msgstr ""
+
+#: templates/lexi_manage.php:59
+msgid "Edit"
+msgstr ""
+
+#: templates/lexi_manage.php:60
+msgid "Delete this Feed?"
+msgstr ""
+
+#: templates/lexi_widget.php:3
+msgid "Title"
+msgstr ""
+
+#: templates/lexi_widget.php:11
+msgid ""
+"You have to install <a href=\"http://www.sebaxtian.com/acerca-de/minimax\"  "
+"target=\"_BLANK\">minimax</a> in order for this plugin to work"
+msgstr ""
+
+#: tinymce/mce_lexi.php:43 tinymce/mce_lexi.php:67
+msgid "Feed:"
+msgstr ""
+
+#: tinymce/mce_lexi.php:45 tinymce/mce_lexi.php:69
+msgid "All feeds"
+msgstr ""
+
+#: tinymce/mce_lexi.php:114
+msgid "Insert"
+msgstr ""
