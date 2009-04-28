@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-18 16:14-0500\n"
+"POT-Creation-Date: 2009-04-28 09:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,30 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lexi.php:296 lexi.php:333 lexi.php:528
+#: lexi.php:291
+msgid "Loading Feed..."
+msgstr ""
+
+#: lexi.php:296 lexi.php:333 lexi.php:484 templates/lexi_widget.php:16
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
 "order for this plugin to work"
 msgstr ""
 
-#: lexi.php:497
+#: lexi.php:453
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:574
+#: lexi.php:530
 msgid "Feed added"
 msgstr ""
 
-#: lexi.php:593
+#: lexi.php:549
 msgid "Feed modified"
 msgstr ""
 
-#: lexi.php:618 lexi.php:625
+#: lexi.php:574 lexi.php:581
 msgid "Feed moved"
 msgstr ""
 
-#: lexi.php:632
+#: lexi.php:588
 msgid "Feed deleted"
 msgstr ""
 
@@ -129,10 +133,11 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/lexi_widget.php:11
+#: templates/lexi_widget.php:9
+#, php-format
 msgid ""
-"You have to install <a href=\"http://www.sebaxtian.com/acerca-de/minimax\"  "
-"target=\"_BLANK\">minimax</a> in order for this plugin to work"
+"You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
+"strong>"
 msgstr ""
 
 #: tinymce/mce_lexi.php:43 tinymce/mce_lexi.php:67

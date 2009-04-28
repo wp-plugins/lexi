@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi-es_ES\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-18 16:14-0500\n"
-"PO-Revision-Date: 2009-04-18 16:16-0500\n"
+"POT-Creation-Date: 2009-04-28 09:36-0500\n"
+"PO-Revision-Date: 2009-04-28 09:38-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,11 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lexi.php:296 lexi.php:333 lexi.php:528
+#: lexi.php:291
+msgid "Loading Feed..."
+msgstr "Cargando Fuente..."
+
+#: lexi.php:296 lexi.php:333 lexi.php:484 templates/lexi_widget.php:16
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
@@ -25,23 +29,23 @@ msgstr ""
 "Deberá instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para "
 "que este plugin funcione."
 
-#: lexi.php:497
+#: lexi.php:453
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:574
+#: lexi.php:530
 msgid "Feed added"
 msgstr "Se agreg&oacute; el RSS"
 
-#: lexi.php:593
+#: lexi.php:549
 msgid "Feed modified"
 msgstr "Se modific&oacute; el RSS"
 
-#: lexi.php:618 lexi.php:625
+#: lexi.php:574 lexi.php:581
 msgid "Feed moved"
 msgstr "Se movi&oacute; el RSS"
 
-#: lexi.php:632
+#: lexi.php:588
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
 
@@ -133,14 +137,15 @@ msgstr "&iquest;Eliminar este RSS?"
 msgid "Title"
 msgstr "T&iacute;tulo"
 
-#: templates/lexi_widget.php:11
+#: templates/lexi_widget.php:9
+#, php-format
 msgid ""
-"You have to install <a href=\"http://www.sebaxtian.com/acerca-de/minimax\"  "
-"target=\"_BLANK\">minimax</a> in order for this plugin to work"
+"You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
+"strong>"
 msgstr ""
-"Deber&aacute; instalar <a href=\"http://www.sebaxtian."
-"com/acerca-de/minimax\"  "
-"target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione"
+"Puede <a href=\"%s\">modificar</a> la lista de fuentes en el menú <strong>"
+"Herramientas/Lexi</"
+"strong>"
 
 #: tinymce/mce_lexi.php:43 tinymce/mce_lexi.php:67
 msgid "Feed:"
