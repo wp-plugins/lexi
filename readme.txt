@@ -21,7 +21,7 @@ To show a Feed that hasn't been declared in the list, use `[lexi: rss, max_items
 
 There is a button in the RichText editor created by the plugin to add a Feed.
 
-This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. It also detects if your site has _[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.") installed, if so it uses SimplePie instead MagpieRSS.
+This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. It also detects if your site has __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.") installed, if so it uses SimplePie instead MagpieRSS.
 
 Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it by default.
 
