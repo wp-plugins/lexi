@@ -34,7 +34,8 @@
 									</tr>
 									<tr>
 										<td><?php _e("Show contents", 'lexi' ); ?>:</td>
-										<td colspan=2><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
+										<td width="5%"><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
+										<td></td>
 									</tr>
 									<tr>
 										<td><?php _e("Save cache", 'lexi' ); ?>:</td>

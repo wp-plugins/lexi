@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.3
+Version: 0.7.4
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -24,6 +24,10 @@ Author URI: http://www.sebaxtian.com
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+define('CONF_CACHE', 1);
+define('CONF_SHOWCONTENT', 2);
+define('CONF_SHOWHEADER', 4);
 
 $db_version=get_option('lexi_db_version');
 
@@ -287,7 +291,7 @@ function lexi_postRss($link, $title, $items, $sc, $cache) {
     $url=lexi_plugin_url('/content.php');
     if($sc) $sc=1; else $sc=0;
     if($cache) $cache=1; else $cache=0;
-    $post="url=$link&title=$title&num=$items&sc=$sc&cache=$cache";
+    $post="url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=$title&amp;num=$items&amp;sc=$sc&amp;cache=$cache";
     $answer.="\n<div id='lexi$num'><table><tr><td><img src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
     mx_lexi$num.post('$post');
     </script>";
@@ -407,11 +411,11 @@ function lexi_content($content)
   * @param string cached Save feeds in cache?
   * @access public
   */
-  function lexi($id=0, $num=0, $sc=false, $cached=false) {
+  function lexi($id=0, $num=0, $sc=false, $cached=false, $sh=true) {
     if(is_numeric($id)) {
       echo lexi_postId($id);
     } else {
-      echo lexi_postRss($id, "", $num, $sc, $cached);
+      echo lexi_postRss($id, "", $num, $sc, $cached, $sh);
     }
   }
 
@@ -428,29 +432,55 @@ function lexi_content($content)
   * @return string
   * @access public
   */
-function lexi_readfeed($link, $name, $num, $sc, $cached) {
+function lexi_readfeed($link, $name, $num, $config) {
   include_once(ABSPATH . WPINC . '/rss.php');
-  
-	$aux_cached = MAGPIE_CACHE_ON;
-	if(!$cached) {
-		define('MAGPIE_CACHE_ON', 0);
-	}
-	$rss = fetch_rss($link);
-	define('MAGPIE_CACHE_ON', $aux_cached);
-	$channel_link=htmlspecialchars($rss->channel['link']);
-	if($name=="") {
-		$name=htmlspecialchars($rss->channel['title']);
-	}
+	
+	if(class_exists('SimplePie')) {
+		$rss = new SimplePie($link);
+		if(!($config & CONF_CACHE)) {
+			$rss->enable_cache(false);
+			$rss->init();
+		}
+		$channel_link = $rss->get_permalink();
+		if($name=="") {
+			$name=htmlspecialchars($rss->get_title());
+		}
+		
+		$items = $rss->get_items(0, $num);
+		
+		if($items) {
+			foreach ($items as $item) {
+				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item->get_permalink())."' target='_blank' >".$item->get_title()."</a>";
+				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item->get_content();
+				$answer.="</li>";
+			}
+		}
+		
+	} else {
+		$aux_cached = MAGPIE_CACHE_ON;
+		if(!($config & CONF_CACHE)) {
+			define('MAGPIE_CACHE_ON', 0);
+		}
+		$rss = fetch_rss($link);
+		define('MAGPIE_CACHE_ON', $aux_cached);
+		$channel_link=htmlspecialchars($rss->channel['link']);
+		if($name=="") {
+			$name=htmlspecialchars($rss->channel['title']);
+		}
 
-	if($rss->items) {
-		foreach (array_slice($rss->items, 0, $num) as $item) {
-			$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank' >".$item['title']."</a>";
-			if($sc) $answer.="<br/>".$item['atom_content'].$item['summary'];
-			$answer.="</li>";
+		if($rss->items) {
+			foreach (array_slice($rss->items, 0, $num) as $item) {
+				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank' >".$item['title']."</a>";
+				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item['atom_content'].$item['summary'];
+				$answer.="</li>";
+			}
 		}
 	}
-  
-  $header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
+	
+  $header="";
+	if($config & CONF_SHOWHEADER) {
+		$header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img style='background:orange;color:white;border:none;' width='14' height='14' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
+	}
   return "$header<ul>$answer</ul>";
 }
 

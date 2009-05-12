@@ -8,12 +8,22 @@
 require_once( '../../../wp-config.php' );
 
 $url   = $_POST['url'];
-$title = $_POST['title']; 
-$num   = $_POST['num'];
-$sc    = $_POST['sc'];
-$cache = $_POST['cache'];
 
-echo lexi_readfeed($url, $title, $num, $sc, $cache);
+$title = $_POST['title']; 
+
+$num   = $_POST['num'];
+
+$sc    = 0;
+if($_POST['sc']) $sc = 1;
+
+$cache = 0;
+if($_POST['cache']) $cache = 1;
+
+$sh    = 1;
+
+$config = $cache*CONF_CACHE + $sc*CONF_SHOWCONTENT + $sh*CONF_SHOWHEADER;
+
+echo lexi_readfeed($url, $title, $num, $config);
 
 ?>
 </body>
