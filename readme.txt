@@ -45,7 +45,7 @@ Yes, I noticed too. It happens with some feeds the first time they are readed, b
 
 = It says something about a write problem in cache =
 
-Sure you are using SimplePie. Check you have write permission in wp-content/plugins/lexi/cache.
+Sure you are using SimplePie. Check you have write permission in `wp-content/plugins/lexi/cache`.
 
 = It say something about minimax. What's this? =
 
