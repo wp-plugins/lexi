@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.7.4
+Stable tag: 0.7.4.1
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -38,6 +38,12 @@ Screenshots are in spanish because it's my native language. As you should know y
 = Other RSS reader! How do you dare? =
 
 My page (I don't know if yours too) use to get blocked reading some RSS feeds. I created Lexi to read the RSS _after_ the page was created, not during the process.
+
+= Lexi shows strange characters with some feeds =
+
+Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
+
+If your site is in UTF-8 and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
 
 = There is a cached RSS that doesn't show anything =
 
