@@ -42,7 +42,6 @@ My page (I don't know if yours too) use to get blocked reading some RSS feeds. I
 = Lexi shows strange characters with some feeds =
 
 Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
-
 If your site is in UTF-8 and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
 
 = There is a cached RSS that doesn't show anything =
