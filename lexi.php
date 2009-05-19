@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.4.1
+Version: 0.7.4.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -33,6 +33,7 @@ $db_version=get_option('lexi_db_version');
 
 add_action('init', 'lexi_addbuttons');
 add_action('init', 'lexi_textdomain');
+add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
 add_action('admin_menu', 'lexi_manage');
 add_action('activate_lexi/lexi.php', 'lexi_activate');
@@ -45,6 +46,17 @@ add_action('activate_lexi/lexi.php', 'lexi_activate');
 
 function lexi_textdomain() {
   load_plugin_textdomain('lexi', 'wp-content/plugins/lexi/lang');
+}
+
+/**
+  * Function to add Lexi's css
+  *
+  * @access public
+  */
+
+function lexi_header() {
+	$css = lexi_plugin_url("/css/lexi.css");
+	echo "\n<link rel='stylesheet' href='$css' type='text/css' media='screen' />";
 }
 
 
@@ -292,7 +304,7 @@ function lexi_postRss($link, $title, $items, $sc, $cache) {
     if($sc) $sc=1; else $sc=0;
     if($cache) $cache=1; else $cache=0;
     $post="url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=$title&amp;num=$items&amp;sc=$sc&amp;cache=$cache";
-    $answer.="\n<div id='lexi$num'><table><tr><td><img src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
+    $answer.="\n<div id='lexi$num'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
     mx_lexi$num.post('$post');
     </script>";
   } else {
@@ -479,7 +491,7 @@ function lexi_readfeed($link, $name, $num, $config) {
 	
   $header="";
 	if($config & CONF_SHOWHEADER) {
-		$header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
+		$header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img class='lexi' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
 	}
   return "$header<ul>$answer</ul>";
 }
