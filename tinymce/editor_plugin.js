@@ -19,7 +19,7 @@
             ed.windowManager.open({
                file : url + '/mce_lexi.php',
                width : 380 + ed.getLang('Lexi.delta_width', 0),
-               height : 220 + ed.getLang('Lexi.delta_height', 0),
+               height : 310 + ed.getLang('Lexi.delta_height', 0),
                inline : 1
             }, {
                   plugin_url : url, // Plugin absolute URL

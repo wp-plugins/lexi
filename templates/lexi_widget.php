@@ -5,6 +5,11 @@
 	</label>
 </p>
 <p>
+	<label for="lexi_showtitle">
+		<input type="checkbox" id="showfeedtitle" name="showfeedtitle"<?php if($show_feed_title) echo " checked"; ?>/> <?php _e('Show feed title', 'lexi'); ?>
+	</label>
+</p>
+<p>
 	<label>
 		<?php printf(__('You can <a href="%s">modify</a> the feeds list in <strong>Tools/Lexi</strong>', 'lexi'), "tools.php?page=leximanage"); ?>
 	</label>

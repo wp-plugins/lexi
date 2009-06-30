@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-28 09:36-0500\n"
+"POT-Creation-Date: 2009-06-29 20:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,34 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lexi.php:291
+#: lexi.php:278
 msgid "Loading Feed..."
 msgstr ""
 
-#: lexi.php:296 lexi.php:333 lexi.php:484 templates/lexi_widget.php:16
+#: lexi.php:283 lexi.php:336 lexi.php:586 templates/lexi_widget.php:21
 #, php-format
 msgid ""
 "You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
 "order for this plugin to work"
 msgstr ""
 
-#: lexi.php:453
+#: lexi.php:554
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:530
+#: lexi.php:632
 msgid "Feed added"
 msgstr ""
 
-#: lexi.php:549
+#: lexi.php:651
 msgid "Feed modified"
 msgstr ""
 
-#: lexi.php:574 lexi.php:581
+#: lexi.php:676 lexi.php:683
 msgid "Feed moved"
 msgstr ""
 
-#: lexi.php:588
+#: lexi.php:690
 msgid "Feed deleted"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgid "Edit Feed"
 msgstr ""
 
 #: templates/lexi_feed.php:11 templates/lexi_feed.php:20
-#: tinymce/mce_lexi.php:33 tinymce/mce_lexi.php:75
+#: tinymce/mce_lexi.php:53
 msgid "RSS"
 msgstr ""
 
@@ -65,38 +65,38 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: templates/lexi_feed.php:24 tinymce/mce_lexi.php:79
+#: templates/lexi_feed.php:24 tinymce/mce_lexi.php:62
 msgid "Items"
 msgstr ""
 
 #: templates/lexi_feed.php:36 templates/lexi_manage.php:48
-#: tinymce/mce_lexi.php:91
+#: tinymce/mce_lexi.php:79
 msgid "Show contents"
 msgstr ""
 
-#: templates/lexi_feed.php:40 templates/lexi_manage.php:49
-#: tinymce/mce_lexi.php:95
+#: templates/lexi_feed.php:41 templates/lexi_manage.php:49
+#: tinymce/mce_lexi.php:74
 msgid "Save cache"
 msgstr ""
 
-#: templates/lexi_feed.php:42 tinymce/mce_lexi.php:97
+#: templates/lexi_feed.php:43 tinymce/mce_lexi.php:76
 msgid ""
 "Uncheck this option only in case the feed updates several times in an hour."
 msgstr ""
 
-#: templates/lexi_feed.php:49 tinymce/mce_lexi.php:110
+#: templates/lexi_feed.php:50 tinymce/mce_lexi.php:97
 msgid "Cancel"
 msgstr ""
 
-#: templates/lexi_feed.php:52
+#: templates/lexi_feed.php:53
 msgid "Add"
 msgstr ""
 
-#: templates/lexi_feed.php:52
+#: templates/lexi_feed.php:53
 msgid "Modify"
 msgstr ""
 
-#: templates/lexi_manage.php:21 tinymce/mce_lexi.php:32
+#: templates/lexi_manage.php:21
 msgid "Lexi"
 msgstr ""
 
@@ -129,25 +129,45 @@ msgstr ""
 msgid "Delete this Feed?"
 msgstr ""
 
-#: templates/lexi_widget.php:3
+#: templates/lexi_widget.php:3 tinymce/mce_lexi.php:57
 msgid "Title"
 msgstr ""
 
-#: templates/lexi_widget.php:9
+#: templates/lexi_widget.php:9 tinymce/mce_lexi.php:83
+msgid "Show feed title"
+msgstr ""
+
+#: templates/lexi_widget.php:14
 #, php-format
 msgid ""
 "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
 "strong>"
 msgstr ""
 
-#: tinymce/mce_lexi.php:43 tinymce/mce_lexi.php:67
+#: tinymce/mce_lexi.php:32
+msgid "Lexi Feed"
+msgstr ""
+
+#: tinymce/mce_lexi.php:45
 msgid "Feed:"
 msgstr ""
 
-#: tinymce/mce_lexi.php:45 tinymce/mce_lexi.php:69
+#: tinymce/mce_lexi.php:47
 msgid "All feeds"
 msgstr ""
 
-#: tinymce/mce_lexi.php:114
+#: tinymce/mce_lexi.php:58
+msgid "Use the title from the feed"
+msgstr ""
+
+#: tinymce/mce_lexi.php:59
+msgid "Use a specific title"
+msgstr ""
+
+#: tinymce/mce_lexi.php:87
+msgid "Open links in new page"
+msgstr ""
+
+#: tinymce/mce_lexi.php:101
 msgid "Insert"
 msgstr ""

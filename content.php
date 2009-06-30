@@ -13,17 +13,9 @@ $title = $_POST['title'];
 
 $num   = $_POST['num'];
 
-$sc    = 0;
-if($_POST['sc']) $sc = 1;
+$conf  = $_POST['conf'];
 
-$cache = 0;
-if($_POST['cache']) $cache = 1;
-
-$sh    = 1;
-
-$config = $cache*CONF_CACHE + $sc*CONF_SHOWCONTENT + $sh*CONF_SHOWHEADER;
-
-echo lexi_readfeed($url, $title, $num, $config);
+echo lexi_readfeed($url, $title, $num, $conf);
 
 ?>
 </body>

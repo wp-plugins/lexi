@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.7.4.2
+Stable tag: 0.7.95
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -17,11 +17,20 @@ You can add the Lexi widget to show the list, but you can also use the tag `[lex
 
 To show just one item from the list, use `[lexi:id]` or `lexi(id)`.
 
-To show a Feed that hasn't been declared in the list, use `[lexi: rss, max_items, showcontents, cached]` or `lexi($rss, $max_items, $showcontents, $cached)`.
+To show a Feed that hasn't been declared in the list, use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`. The configuration number can be calculated as follow:
+
+Add 1 if you want to save it in cache.
+Add 2 if you want to show the contents.
+Add 4 if you want to show the title.
+Add 8 if you want to open it in a new page.
+
+If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
 There is a button in the RichText editor created by the plugin to add a Feed.
 
-This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. It also detects if your site has __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ installed, if so it uses SimplePie instead MagpieRSS.
+This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. 
+
+Lexi detects if your site has the __[SimplePie](http://simplepie.org/ "SimplePie: Super-fast, easy-to-use, RSS and Atom feed parsing in PHP.")__ library enabled. Since Wordpress 2.8 comes with it by default you don't need to activate anithing, but in earlier versions you have to install the __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ to use it instead MagpieRSS. I recomend to use SimplePie. Remember to uninstall SimplePieCore if you are using Worpress 2.8 or any latter version.
 
 Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it by default.
 
@@ -42,7 +51,7 @@ My page (I don't know if yours too) use to get blocked reading some RSS feeds. I
 = Lexi shows strange characters with some feeds =
 
 Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
-If your site is in UTF-8 and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
+If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
 
 = There is a cached RSS that doesn't show anything =
 

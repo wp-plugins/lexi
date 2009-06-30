@@ -25,29 +25,27 @@ function insertLexiLink() {
 	var tagtext;
   var add_text = false;
 	
-	var lexi = document.getElementById('lexi_panel');
   var rss = document.getElementById('rss_panel');
 	
 	// who is active ?
-	if (lexi.className.indexOf('current') != -1) {
-		var lexiid = document.getElementById('lexiid').value;
-    if (lexiid != 0 ) {
-			tagtext = "[lexi:" + lexiid + "]";
-    } else {
-				tagtext = "[lexi]";
-    }
-    add_text = true;
-	}
   if (rss.className.indexOf('current') != -1) {
     var rsslink = document.getElementById('rsslink').value;
     var items = document.getElementById('rssitems')
     var rssitems = items.options[items.selectedIndex].value;
-    var rsssc = false;
-    if (document.getElementById('rsssc').checked) rsssc = true;
-    var rsscache = false;
-    if (document.getElementById('rsscache').checked) rsscache = true;
+		var title="";
+		if(getCheckedValue(document.Lexi.group1)==2) {
+			title = ","+document.getElementById('rssowntitle').value;
+		}
 
-    tagtext = "[lexi:" + rsslink + "," + rssitems + "," + rsssc + "," + rsscache + "]";
+		var config = 0;
+
+		if (document.getElementById('rsscache').checked) config = config + 1;
+		if (document.getElementById('rsssc').checked) config = config + 2;
+		if (document.getElementById('rssst').checked) config = config + 4;
+		if (document.getElementById('rsstb').checked) config = config + 8;
+
+
+    tagtext = "[lexi:" + config + "," + rsslink + title + "," + rssitems + "]";
     add_text = true;
   }
 

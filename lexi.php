@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.4.2
+Version: 0.7.95
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -28,6 +28,7 @@ Author URI: http://www.sebaxtian.com
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
 define('CONF_SHOWHEADER', 4);
+define('CONF_TARGETBLANK', 8);
 
 $db_version=get_option('lexi_db_version');
 
@@ -254,36 +255,6 @@ function lexi_downfeed($id)
 
 
 /**
-  * Function to open a filename. It uses CURL if the library has been installed, or
-  * fopen if not.
-  *
-  * @param string filename File's URL
-  * @return string
-  * @access public
-  */
-
-function lexi_cof_readfile($filename)
-{
-  $data=false;
-  if(function_exists(curl_init)) {
-    $ch = curl_init($filename);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    $data=curl_exec($ch);
-    curl_close($ch);
-  } else {
-    if($fop  = @fopen($filename, 'r')) {
-      $data = null;
-      while(!feof($fop))
-        $data .= fread($fop, 1024);
-      fclose($fop);
-    }
-  }
-  return $data;
-}
-
-
-/**
   * Returns the html code with 'minimax' script and div.
   * Add this code into the html page to create the RSS reader.
   *
@@ -296,14 +267,14 @@ function lexi_cof_readfile($filename)
   * @access public
   */
   
-function lexi_postRss($link, $title, $items, $sc, $cache) {
+function lexi_postRss($link, $title, $items, $conf) {
   $answer="";
   if(function_exists('minimax') && minimax_version()==0.2) {
     $num = mt_rand();
     $url=lexi_plugin_url('/content.php');
     if($sc) $sc=1; else $sc=0;
     if($cache) $cache=1; else $cache=0;
-    $post="url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=$title&amp;num=$items&amp;sc=$sc&amp;cache=$cache";
+    $post="url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf";
     $answer.="\n<div id='lexi$num'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
     mx_lexi$num.post('$post');
     </script>";
@@ -328,6 +299,14 @@ function lexi_postRss($link, $title, $items, $sc, $cache) {
 function lexi_postId($id) {
   global $wpdb;
 
+	$show_feed_title = true;
+
+	if($id==-1) {
+		$options = get_option('widget_lexi');
+		$show_feed_title = $options['show_feed_title'];
+		$id=0;
+	}
+
   $answer="";
 
   $table_name = $wpdb->prefix . "lexi";
@@ -338,10 +317,18 @@ function lexi_postId($id) {
 
   // These lines generate our output. Widgets can be very complex
   // but as you can see here, they can also be very, very simple.
+  
   if(function_exists('minimax') && minimax_version()==0.2) {
     foreach($feedlist as $feed) {
+
+			//Configuration
+			$conf = CONF_TARGETBLANK;
+			if($feed->showcontent) $conf += CONF_SHOWCONTENT;
+			if($feed->cached) $conf += CONF_CACHE;
+			if($show_feed_title) $conf += CONF_SHOWHEADER;
+
       if(!$id || $id==$feed->id) {
-        $answer.= lexi_postRss($feed->rss,$feed->name,$feed->items,$feed->showcontent,$feed->cached);
+        $answer.= lexi_postRss($feed->rss,$feed->name,$feed->items,$conf);
       }
     }
   } else {
@@ -388,20 +375,62 @@ function lexi_content($content)
   {
     if (is_array($matches))
     {
-      foreach ($matches[1] as $key =>$v0)
+      foreach ($matches[1] as $key =>$rss)
       {
-        $v1=$matches[2][$key];
-        $v2=$matches[3][$key];
-        if($v2=='true') $v2=1; else $v2=0;
-        $v3=$matches[4][$key];
-        if($v3=='true') $v3=1; else $v3=0;
+        $items=$matches[2][$key];
+        $sc=$matches[3][$key];
+        if($sc=='true') $sc=1; else $sc=0;
+        $cache=$matches[4][$key];
+        if($cache=='true') $cache=1; else $cache=0;
+
+				$conf = CONF_SHOWHEADER + CONF_TARGETBLANK;
+				if($sc) $conf += CONF_SHOWCONTENT;
+				if($cache) $conf += CONF_CACHE;
 
         $search = $matches[0][$key];
-        $replace=lexi_postRss($v0, "", $v1, $v2, $v3);
+        $replace=lexi_postRss($rss,"",$items,$conf);
         $content = str_replace ($search, $replace, $content);
       }
     }
   }
+
+	//Lexi 2 w/ title
+	$search = "@(?:<p>)*\s*\[lexi\s*:(\d+),([^,]+),([^,]+),(\d+)?\]\s*(?:</p>)*@i";
+  if  (preg_match_all($search, $content, $matches))
+  {
+    if (is_array($matches))
+    {
+      foreach ($matches[1] as $key =>$conf)
+      {
+        $rss=$matches[2][$key];
+        $title=$matches[3][$key];
+        $items=$matches[4][$key];
+
+        $search = $matches[0][$key];
+        $replace=lexi_postRss($rss, $title, $items, $conf);
+        $content = str_replace ($search, $replace, $content);
+      }
+    }
+  }
+
+	//Lexi 2 w/out title
+	$search = "@(?:<p>)*\s*\[lexi\s*:(\d+),([^,]+),(\d+)?\]\s*(?:</p>)*@i";
+  if  (preg_match_all($search, $content, $matches))
+  {
+    if (is_array($matches))
+    {
+      foreach ($matches[1] as $key =>$conf)
+      {
+        $url=$matches[2][$key];        
+        $items=$matches[3][$key];
+
+        $search = $matches[0][$key];
+        $replace=lexi_postRss($rss, "", $items, $conf);
+        $content = str_replace ($search, $replace, $content);
+      }
+    }
+  }
+
   return $content;
 }
 
@@ -431,6 +460,28 @@ function lexi_content($content)
     }
   }
 
+/**
+  * Function to be called in templates. Returns the html code
+  * with 'minimax' script and div. Add this function into the html
+  * page to create the RSS reader.
+  * If the id is numeric, the function returns the code for the
+  * corresponding feed in the lexi list, and forget the other
+  * parameters. If its a string, the function would use it as the URL,
+  * and would use the other parameters.
+  * If you call the function without parameters, it returns the code
+  * for the entire lexi list.
+  *
+  * @param string id Would be the URL or the lexi id. See function description.
+  * @param string num Max number of feeds to show
+  * @param string sc Show feed contents?
+  * @param string cached Save feeds in cache?
+  * @access public
+  */
+  function lexiRSS($conf, $rss, $title, $max_items) {
+    if(!$title) $title="";
+    echo lexi_postRss($rss, $title, $max_items, $conf); 
+  }
+
 
 /**
   * Returns the HTML list for an RSS feed.
@@ -446,13 +497,22 @@ function lexi_content($content)
   */
 function lexi_readfeed($link, $name, $num, $config) {
   include_once(ABSPATH . WPINC . '/rss.php');
+	@include_once(ABSPATH . WPINC . '/class-simplepie.php');
+	
+	$name=str_replace("\\\"","\"",$name);
+
+	if(($config & CONF_TARGETBLANK)) {
+		$target = " target='_blank'";
+	}
 	
 	if(class_exists('SimplePie')) {
 		$rss = new SimplePie($link);
+
 		if(!($config & CONF_CACHE)) {
 			$rss->enable_cache(false);
 			$rss->init();
 		}
+		
 		$channel_link = $rss->get_permalink();
 		if($name=="") {
 			$name=htmlspecialchars($rss->get_title());
@@ -462,7 +522,7 @@ function lexi_readfeed($link, $name, $num, $config) {
 		
 		if($items) {
 			foreach ($items as $item) {
-				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item->get_permalink())."' target='_blank' >".$item->get_title()."</a>";
+				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item->get_permalink())."'".$target.">".$item->get_title()."</a>";
 				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item->get_content();
 				$answer.="</li>";
 			}
@@ -482,7 +542,7 @@ function lexi_readfeed($link, $name, $num, $config) {
 
 		if($rss->items) {
 			foreach (array_slice($rss->items, 0, $num) as $item) {
-				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."' target='_blank' >".$item['title']."</a>";
+				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."'".$target.">".$item['title']."</a>";
 				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item['atom_content'].$item['summary'];
 				$answer.="</li>";
 			}
@@ -713,6 +773,7 @@ function lexi_widget_init() {
 		
 		$options = get_option('widget_lexi');
 		$title = $options['title'];
+		$show_feed_title = $options['show_feed_title'];
   
     // These lines generate our output. Widgets can be very complex
     // but as you can see here, they can also be very, very simple.
@@ -720,7 +781,7 @@ function lexi_widget_init() {
 		if(strlen($title)>0) {
 			echo $before_title . $title . $after_title;
 		}
-    lexi();
+    lexi(-1);
     echo $after_widget;
   }
 	
@@ -731,15 +792,20 @@ function lexi_widget_init() {
 		// Get our options and see if we're handling a form submission.
 		$options = get_option('widget_lexi');
 		if ( !is_array($options) )
-			$options = array('title'=>'');
+			$options = array('title'=>'', 'show_feed_title'=>1);
 		if ( $_POST['lexi-submit'] ) {
 			// Remember to sanitize and format use input appropriately.
 			$options['title'] = strip_tags(stripslashes($_POST['lexi_title']));
+			if($_POST['showfeedtitle']=='on')
+				$options['show_feed_title'] = true; 
+			else 
+				$options['show_feed_title'] = false;
 			update_option('widget_lexi', $options); 
 		}
 
 		// Be sure you format your options to be valid HTML attributes.
 		$title = htmlspecialchars($options['title'], ENT_QUOTES);
+		$show_feed_title = $options['show_feed_title'];
 
  
 		// Here is our little form segment. Notice that we don't need a

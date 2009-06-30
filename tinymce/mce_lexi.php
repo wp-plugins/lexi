@@ -24,41 +24,19 @@ if(!current_user_can('edit_posts')) die;
    <script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-content/plugins/lexi/tinymce/lexi.js"></script>
 	<base target="_self" />
 </head>
-<body id="link" onload="tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';document.getElementById('lexiid').focus();" style="display: none">
+<body id="link" onload="tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';document.getElementById('rss_tab').focus();" style="display: none">
 <!-- <form onsubmit="insertLink();return false;" action="#"> -->
 	<form name="Lexi" action="#">
 	<div class="tabs">
-		<ul>
-			<li id="lexi_tab" class="current"><span><a href="javascript:mcTabs.displayTab('lexi_tab','lexi_panel');" onmousedown="return false;"><?php _e("Lexi", 'lexi'); ?></a></span></li>
-      <li id="rss_tab"><span><a href="javascript:mcTabs.displayTab('rss_tab','rss_panel');" onmousedown="return false;"><?php _e("RSS", 'lexi'); ?></a></span></li>
+		<ul>			
+      <li id="rss_tab" class="current"><span><a href="javascript:mcTabs.displayTab('rss_tab','rss_panel');" onmousedown="return false;"><?php _e("Lexi Feed", 'lexi'); ?></a></span></li>
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper">
-		<!-- lexi panel -->
-		<div id="lexi_panel" class="panel current">
-		<br />
-		<table border="0" cellpadding="4" cellspacing="0">
-         <tr>
-            <td nowrap="nowrap"><label for="lexiid"><?php _e("Feed:", 'lexi'); ?></label></td>
-            <td><select id="lexiid" name="lexiid" style="width: 200px">
-                <option value="0"><?php _e("All feeds", 'lexi'); ?></option>
-        <?php
-          $table_name = $wpdb->prefix . "lexi";
-          $feeds = $wpdb->get_results("SELECT * FROM $table_name ORDER BY position ASC");
-          if(is_array($feeds)) {
-            foreach($feeds as $feed) {
-              echo '<option value="'.$feed->id.'" >'.$feed->name.'</option>'."\n";
-            }
-          }
-        ?>
-            </select></td>
-          </tr>
-        </table>
-		</div>
+	<div class="panel_wrapper" style="height: 230px;">
 
     <!-- rss panel -->
-    <div id="rss_panel" class="panel">
+    <div id="rss_panel" class="panel current">
       <br />
       <table border="0" cellpadding="4" cellspacing="0">
 
@@ -75,10 +53,15 @@ if(!current_user_can('edit_posts')) die;
           <td nowrap="nowrap"><label for="rsslink"><?php _e("RSS", 'lexi' ); ?>:</label></td>
           <td colspan=2><input type="text" id="rsslink" name="rsslink" style="width: 200px"/></td>
         </tr>
-        <tr>
-          <td nowrap="nowrap"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
+				<tr>
+          <td nowrap="nowrap" valign="top"><label><?php _e("Title", 'lexi' ); ?>:</label></td>
+          <td colspan=2><input type="radio" id="rsstitle" name="group1" value="1" checked/> <?php _e("Use the title from the feed", 'lexi'); ?>
+					<br><input type="radio" id="rsstitle" name="group1" value="2" onclick="document.getElementById('rssowntitle').value='';" /> <input type="text" id="rssowntitle" name="rssowntitle" style="width: 170px" value="<?php _e("Use a specific title", 'lexi'); ?>" /></td>
+        </tr>
+				<tr>
+          <td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
           <td colspan=2>
-            <select name="rssitems" id="rssitems"><?php
+            <select name="rssitems" id="rssitems" style="width: 200px"><?php
                 for($i=1; $i<11; $i++) {
                   echo "<option value=\"$i\"";
                   if ($items == $i) echo(' selected');
@@ -87,19 +70,23 @@ if(!current_user_can('edit_posts')) die;
             </select>
           </td>
         </tr>
+				<tr>
+          <td nowrap="nowrap" valign="top"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>: </label></td>
+          <td valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /></td>
+					<td><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
+        </tr>
         <tr>
           <td nowrap="nowrap"><label for="rsssc"><?php _e("Show contents", 'lexi' ); ?>:</label></td>
           <td colspan=2><input type="checkbox" id="rsssc" name="rsssc" /></td>
         </tr>
-        <tr>
-          <td nowrap="nowrap"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>: </label></td>
-          <td><input type="checkbox" id="rsscache" name="rsscache" checked /></td>
-					<td rowspan=2><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
+				<tr>
+          <td nowrap="nowrap"><label for="rssst"><?php _e("Show feed title", 'lexi' ); ?>:</label></td>
+          <td colspan=2><input type="checkbox" id="rssst" name="rssst" checked /></td>
         </tr>
 				<tr>
-					<td></td>
-					<td></td>
-				</tr>
+          <td nowrap="nowrap"><label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?>:</label></td>
+          <td colspan=2><input type="checkbox" id="rsstb" name="rsstb" checked /></td>
+        </tr>
       </table>
     </div>
 		
