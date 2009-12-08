@@ -65,6 +65,10 @@ Sure you are using SimplePie. Check you have write permission in `wp-content/plu
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
+= Can I set my own css style? =
+
+Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
+
 == Screenshots ==
 
 1. Feeds administrator.
