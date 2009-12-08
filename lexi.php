@@ -58,7 +58,7 @@ function lexi_textdomain() {
 function lexi_header() {
 	$css = get_theme_root()."/".get_template()."/lexi.css";
 	if(file_exists($css)) {
-		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/indizar.css' type='text/css' media='screen' />";
+		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css' type='text/css' media='screen' />";
 	} else {
 		echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."' type='text/css' media='screen' />";
 	}
