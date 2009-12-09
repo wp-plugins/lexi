@@ -33,7 +33,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 230px;">
+	<div class="panel_wrapper" style="height: 250px;">
 
     <!-- rss panel -->
     <div id="rss_panel" class="panel current">

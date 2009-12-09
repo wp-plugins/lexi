@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.7.96
+Stable tag: 0.7.97
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -65,7 +65,7 @@ Sure you are using SimplePie. Check you have write permission in `wp-content/plu
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
-= Can I set my own css style? =
+= Can I set my own CSS? =
 
 Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 
@@ -76,3 +76,8 @@ Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 3. Lexi widget.
 4. Box to add a Lexi feed.
 5. Box to add an RSS feed.
+
+== Changelog ==
+
+= 0.7.97 =
+* Now you can set your own css file (see FAQ).

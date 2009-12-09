@@ -18,8 +18,8 @@
          ed.addCommand('mceLexi', function() {
             ed.windowManager.open({
                file : url + '/mce_lexi.php',
-               width : 380 + ed.getLang('Lexi.delta_width', 0),
-               height : 310 + ed.getLang('Lexi.delta_height', 0),
+               width : 420 + ed.getLang('Lexi.delta_width', 0),
+               height : 330 + ed.getLang('Lexi.delta_height', 0),
                inline : 1
             }, {
                   plugin_url : url, // Plugin absolute URL
