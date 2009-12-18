@@ -23,15 +23,15 @@ function getCheckedValue(radioObj) {
 function insertLexiLink() {
 	
 	var tagtext;
-  var add_text = false;
-	
-  var rss = document.getElementById('rss_panel');
-	
+	var add_text = false;
+
+	var rss = document.getElementById('rss_panel');
+
 	// who is active ?
-  if (rss.className.indexOf('current') != -1) {
-    var rsslink = document.getElementById('rsslink').value;
-    var items = document.getElementById('rssitems')
-    var rssitems = items.options[items.selectedIndex].value;
+	if(rss.className.indexOf('current') != -1) {
+		var rsslink = document.getElementById('rsslink').value;
+		var items = document.getElementById('rssitems')
+		var rssitems = items.options[items.selectedIndex].value;
 		var title="";
 		if(getCheckedValue(document.Lexi.group1)==2) {
 			title = ","+document.getElementById('rssowntitle').value;
@@ -45,13 +45,13 @@ function insertLexiLink() {
 		if (document.getElementById('rsstb').checked) config = config + 8;
 
 
-    tagtext = "[lexi:" + config + "," + rsslink + title + "," + rssitems + "]";
-    add_text = true;
-  }
+		tagtext = "[lexi:" + config + "," + rsslink + title + "," + rssitems + "]";
+		add_text = true;
+	}
 
 	
 	if(add_text) {
-		window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, tagtext);
+		window.tinyMCEPopup.execCommand('mceInsertContent', false, tagtext);
 	}
 	window.tinyMCEPopup.close();
 }

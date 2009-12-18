@@ -18,7 +18,7 @@
 if(!function_exists('minimax')) { ?>
 <p>
 	<label>
-		<?php printf(__('You have to install <a href="%s"  target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
+		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
 	</label>
 </p><?
 } ?>

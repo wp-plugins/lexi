@@ -10,11 +10,6 @@
 		echo "</div>";
 	}
 	
-	//if pressed deletespam, delete all spam
-	if($_POST['deletespam']) {
-		sk_deleteSpam();
-	}
-	
 ?>
 <div class="wrap">
 	<div id="icon-tools" class="icon32"><br /></div>
@@ -34,7 +29,7 @@
 					<option value="delete"><?php _e('Delete'); ?></option>
 				</select>
 				<input type="submit" name="doaction" id="doaction" value="<?php _e('Apply'); ?>" class="button-secondary apply" />
-				<input type="hidden" id="_wpnonce" name="_wpnonce" value="c70ddc4ef7" /><input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit-feeds.php" />
+				<input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit-feeds.php" />
 				<input type="submit" value="<?php _e( 'Add Feed', 'lexi' ); ?>" class="button" name="addfeed" />
 			</div>
 			<br class="clear" />
@@ -56,10 +51,10 @@
 					<td>
 						<strong><?php echo $feed->name." (".$feed->items.")"; ?></strong><br /><?php echo $feed->ip; ?>
 						<div class="row-actions">
-							<span><a href="<?php echo wp_nonce_url(add_query_arg( array('mode' => 'edit', 'id' => $feed->id) ), 'lexi_editfeed')?>" class='edit'><?php _e('Edit', 'lexi') ?></a></span>
-							<span class='delete'> | <a href="<?php echo wp_nonce_url(add_query_arg( array('mode' => 'delete', 'id' => $feed->id) ), 'lexi_deletefeed')?>" class="delete" onclick="javascript:check=confirm( '<?php _e("Delete this Feed?",'lexi')?>');if(check==false) return false;"><?php _e('Delete', 'lexi') ?></a></span>
-							<span class='edit'><?php if($feed->position!=1) {?> | <a href="<?php echo wp_nonce_url(add_query_arg( array('mode' => 'up', 'id' => $feed->id) ), 'lexi_upfeed')?>" class='edit'> <?php echo "<img src='../wp-content/plugins/lexi/img/up.png' border='0'>"; ?></a><?php } ?></span>
-							<span class='edit'><?php if($feed->position!==$max_position) { ?> | <a href="<?php echo wp_nonce_url(add_query_arg( array('mode' => 'down', 'id' => $feed->id) ), 'lexi_downfeed')?>" class='edit'> <?php echo "<img src='../wp-content/plugins/lexi/img/down.png' border='0'>"; ?></a><?php } ?></span>
+							<span><a href="<?php echo add_query_arg( array('mode' => 'edit', 'id' => $feed->id) ); ?>" class='edit'><?php _e('Edit', 'lexi') ?></a></span>
+							<span class='delete'> | <a href="<?php echo add_query_arg( array('mode' => 'delete', 'id' => $feed->id) ); ?>" class="delete" onclick="javascript:check=confirm( '<?php _e("Delete this Feed?",'lexi')?>');if(check==false) return false;"><?php _e('Delete', 'lexi') ?></a></span>
+							<span class='edit'><?php if($feed->position!=1) {?> | <a href="<?php echo add_query_arg( array('mode' => 'up', 'id' => $feed->id) ); ?>" class='edit'> <?php echo "<img src='../wp-content/plugins/lexi/img/up.png' border='0'>"; ?></a><?php } ?></span>
+							<span class='edit'><?php if($feed->position!==$max_position) { ?> | <a href="<?php echo add_query_arg( array('mode' => 'down', 'id' => $feed->id) ); ?>" class='edit'> <?php echo "<img src='../wp-content/plugins/lexi/img/down.png' border='0'>"; ?></a><?php } ?></span>
 						</div>
 					</td>
 					<td class="feed column-feed"><div align="center"><?php if($feed->showcontent) echo "<img src='../wp-content/plugins/lexi/img/yes.png'>"; else echo "<img src='../wp-content/plugins/lexi/img/no.png'>";?></div></td>
@@ -75,7 +70,7 @@
 					<option value="delete"><?php _e('Delete'); ?></option>
 				</select>
 				<input type="submit" name="doaction2" id="doaction2" value="<?php _e('Apply'); ?>" class="button-secondary apply" />
-				<input type="hidden" id="_wpnonce" name="_wpnonce" value="c70ddc4ef7" /><input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit-feeds.php" />
+				<input type="hidden" name="_wp_http_referer" value="/wordpress/wp-admin/edit-feeds.php" />
 				<input type="submit" value="<?php _e( 'Add Feed', 'lexi' ); ?>" class="button" name="addfeed" />
 			</div>
 			<br class="clear" />

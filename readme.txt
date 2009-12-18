@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.7.1
-Stable tag: 0.7.97
+Stable tag: 0.7.98
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -78,6 +78,11 @@ Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 5. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.7.98 =
+* The code has been indented, documented and standardised.
+* Solved a bug with the headers, now Lexi works with the plugin POD.
+* Solved a bug when tinyMCE editor in full window.
 
 = 0.7.97 =
 * Now you can set your own css file (see FAQ).

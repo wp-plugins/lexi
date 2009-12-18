@@ -3,171 +3,211 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-29 20:32-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2009-12-18 10:03-0500\n"
+"PO-Revision-Date: 2009-12-18 10:03-0500\n"
+"Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
+"Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: spanish\n"
+"X-Poedit-Country: COLOMBIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/\n"
+"X-Poedit-SearchPath-0: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi\n"
+"X-Poedit-SearchPath-1: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates\n"
+"X-Poedit-SearchPath-2: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce\n"
 
-#: lexi.php:278
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:253
 msgid "Loading Feed..."
 msgstr ""
 
-#: lexi.php:283 lexi.php:336 lexi.php:586 templates/lexi_widget.php:21
-#, php-format
-msgid ""
-"You have to install <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> in "
-"order for this plugin to work"
-msgstr ""
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:258
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:310
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:548
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_widget.php:21
+#, fuzzy, php-format
+msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> in order for this plugin to work"
+msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:554
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:517
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:632
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:590
+#, fuzzy
 msgid "Feed added"
-msgstr ""
+msgstr "Se agregó la galería"
 
-#: lexi.php:651
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:605
+#, fuzzy
 msgid "Feed modified"
-msgstr ""
+msgstr "Comentario modificado"
 
-#: lexi.php:676 lexi.php:683
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:627
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:631
 msgid "Feed moved"
 msgstr ""
 
-#: lexi.php:690
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/lexi.php:635
+#, fuzzy
 msgid "Feed deleted"
-msgstr ""
+msgstr "Se eliminó el comentario"
 
-#: templates/lexi_feed.php:6 templates/lexi_manage.php:28
-#: templates/lexi_manage.php:38 templates/lexi_manage.php:79
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:6
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:23
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:33
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:74
+#, fuzzy
 msgid "Add Feed"
-msgstr ""
+msgstr "Agregar Galería"
 
-#: templates/lexi_feed.php:6
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:6
+#, fuzzy
 msgid "Edit Feed"
-msgstr ""
+msgstr "Editar comentario"
 
-#: templates/lexi_feed.php:11 templates/lexi_feed.php:20
-#: tinymce/mce_lexi.php:53
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:11
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:20
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:53
 msgid "RSS"
 msgstr ""
 
-#: templates/lexi_feed.php:16
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:16
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "T&iacute;­tulo del Cap&iacute;­tulo:"
 
-#: templates/lexi_feed.php:24 tinymce/mce_lexi.php:62
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:24
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:62
+#, fuzzy
 msgid "Items"
-msgstr ""
+msgstr "Items por página"
 
-#: templates/lexi_feed.php:36 templates/lexi_manage.php:48
-#: tinymce/mce_lexi.php:79
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:36
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:43
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:79
+#, fuzzy
 msgid "Show contents"
-msgstr ""
+msgstr "Mostrar Avatar"
 
-#: templates/lexi_feed.php:41 templates/lexi_manage.php:49
-#: tinymce/mce_lexi.php:74
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:41
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:44
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:74
 msgid "Save cache"
 msgstr ""
 
-#: templates/lexi_feed.php:43 tinymce/mce_lexi.php:76
-msgid ""
-"Uncheck this option only in case the feed updates several times in an hour."
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:43
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:76
+msgid "Uncheck this option only in case the feed updates several times in an hour."
 msgstr ""
 
-#: templates/lexi_feed.php:50 tinymce/mce_lexi.php:97
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:50
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:96
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
-#: templates/lexi_feed.php:53
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:53
+#, fuzzy
 msgid "Add"
-msgstr ""
+msgstr "Agregar"
 
-#: templates/lexi_feed.php:53
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_feed.php:53
+#, fuzzy
 msgid "Modify"
-msgstr ""
+msgstr "Modificar"
 
-#: templates/lexi_manage.php:21
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:16
 msgid "Lexi"
 msgstr ""
 
-#: templates/lexi_manage.php:28
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:23
+#, fuzzy
 msgid "No feeds found"
-msgstr ""
+msgstr "No se encontraron comentarios"
 
-#: templates/lexi_manage.php:33 templates/lexi_manage.php:74
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:28
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:69
+#, fuzzy
 msgid "Bulk Actions"
-msgstr ""
+msgstr "Acciones en bloque"
 
-#: templates/lexi_manage.php:34 templates/lexi_manage.php:60
-#: templates/lexi_manage.php:75
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:29
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:55
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:70
+#, fuzzy
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
-#: templates/lexi_manage.php:36 templates/lexi_manage.php:77
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:31
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:72
+#, fuzzy
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
-#: templates/lexi_manage.php:47
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:42
 msgid "Feed"
 msgstr ""
 
-#: templates/lexi_manage.php:59
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:54
+#, fuzzy
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
-#: templates/lexi_manage.php:60
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_manage.php:55
+#, fuzzy
 msgid "Delete this Feed?"
-msgstr ""
+msgstr "¿Eliminar este Comentario?"
 
-#: templates/lexi_widget.php:3 tinymce/mce_lexi.php:57
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_widget.php:3
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:57
+#, fuzzy
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
-#: templates/lexi_widget.php:9 tinymce/mce_lexi.php:83
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_widget.php:9
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:83
 msgid "Show feed title"
 msgstr ""
 
-#: templates/lexi_widget.php:14
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/templates/lexi_widget.php:14
 #, php-format
-msgid ""
-"You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
-"strong>"
+msgid "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</strong>"
 msgstr ""
 
-#: tinymce/mce_lexi.php:32
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:32
 msgid "Lexi Feed"
 msgstr ""
 
-#: tinymce/mce_lexi.php:45
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:45
 msgid "Feed:"
 msgstr ""
 
-#: tinymce/mce_lexi.php:47
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:47
+#, fuzzy
 msgid "All feeds"
-msgstr ""
+msgstr "Eliminar Spam"
 
-#: tinymce/mce_lexi.php:58
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:58
 msgid "Use the title from the feed"
 msgstr ""
 
-#: tinymce/mce_lexi.php:59
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:59
 msgid "Use a specific title"
 msgstr ""
 
-#: tinymce/mce_lexi.php:87
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:87
 msgid "Open links in new page"
 msgstr ""
 
-#: tinymce/mce_lexi.php:101
+#: /home/sebaxtian/Documentos/Websites/wordpress/wp-content/plugins/lexi/tinymce/mce_lexi.php:100
+#, fuzzy
 msgid "Insert"
-msgstr ""
+msgstr "Insertar"
+
