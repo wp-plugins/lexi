@@ -13,7 +13,7 @@
 							<div class="submitbox" id="submitcomment">
 								<table>
 									<tr>
-										<td width="20%"><?php _e("Name", 'lexi' ); ?>:</td>
+										<td width="150px"><?php _e("Name", 'lexi' ); ?>:</td>
 										<td colspan=2><input type="text" name="lexi_name" value="<?php echo $name; ?>" /></td>
 									</tr>
 									<tr>
@@ -34,7 +34,7 @@
 									</tr>
 									<tr>
 										<td><?php _e("Show contents", 'lexi' ); ?>:</td>
-										<td width="5%"><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
+										<td width="15px"><input type="checkbox" name="lexi_showcontent" <?php if($showcontent) echo "checked"; ?>/></td>
 										<td></td>
 									</tr>
 									<tr>

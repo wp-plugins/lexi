@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.98
+Version: 0.7.99
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -75,9 +75,12 @@ function lexi_header() {
 * @return The URL of the plugin concatenated with the string 
 */
 function lexi_plugin_url($str = '') {
-	$dir_name = '/wp-content/plugins/lexi';
-	$url=get_bloginfo('wpurl');
-	return $url . $dir_name . $str;
+
+	$aux = '/wp-content/plugins/lexi/'.$str;
+	$aux = str_replace('//', '/', $aux);
+	$url = get_bloginfo('wpurl');
+	return $url.$aux;
+
 }
 
 
@@ -108,6 +111,14 @@ function lexi_activate() {
 		dbDelta($sql);
 		add_option('lexi_db_version', 1);
 	}
+	
+	//Create the cache directory if it doesn't exist
+	$ans = parse_url(get_bloginfo('wpurl'));
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache';
+	
+	if(!file_exists($cache_dir)) mkdir($cache_dir);
+	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
+	
 }
 
 
@@ -133,6 +144,7 @@ function lexi_edit_feed($id, $name, $rss, $items=5, $showcontent=false, $cached=
 	$table_name = $wpdb->prefix . "lexi";
 	$query="UPDATE " . $table_name ." SET name='".$name."', rss='".$rss."', items='".$items."', showcontent='".$showcontent."', cached='".$cached."' WHERE id=".$id;
 	$wpdb->query($query);
+
 }
 
 
@@ -499,6 +511,10 @@ function lexi_read_feed($link, $name, $num, $config) {
 	include_once(ABSPATH . WPINC . '/rss.php');
 	@include_once(ABSPATH . WPINC . '/class-simplepie.php');
 	
+	//Get cache directory
+	$ans = parse_url(get_bloginfo('wpurl'));
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache/lexi/';
+	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);
 
@@ -510,13 +526,19 @@ function lexi_read_feed($link, $name, $num, $config) {
 	// Does simplepie library exists?
 	if(class_exists('SimplePie')) {
 		//Get the data from the rss
-		$rss = new SimplePie($link);
+		$rss = new SimplePie();
+		
+		//Set cache dirname
+		$rss->set_cache_location($cache_dir);
+		
+		//Set the feed url
+		$rss->set_feed_url($link);
 
 		//Do we have to disable cache?
-		if(!($config & CONF_CACHE)) {
-			$rss->enable_cache(false);
-			$rss->init();
-		}
+		if(!($config & CONF_CACHE)) $rss->enable_cache(false);
+		
+		//Get the feed
+		$rss->init();
 		
 		//Ǵet the link to the page (not to the RSS) from the feed
 		$channel_link = $rss->get_permalink();
@@ -545,15 +567,17 @@ function lexi_read_feed($link, $name, $num, $config) {
 		}
 		
 	} else { //We don't have simplepie, try with MAGPIE
-		//Do we need to save in cache?
-		$aux_cached = MAGPIE_CACHE_ON;
+		//Set the new cache dir
+		
+		define('MAGPIE_CACHE_DIR', $cache_dir);
+		
+		//Do we have to save in cache?
 		if(!($config & CONF_CACHE)) {
 			define('MAGPIE_CACHE_ON', 0);
 		}
 		
 		//Start the rss conection
 		$rss = fetch_rss($link);
-		define('MAGPIE_CACHE_ON', $aux_cached);
 		
 		//Ǵet the link to the page (not to the RSS) from the feed
 		$channel_link=htmlspecialchars($rss->channel['link']);
@@ -814,24 +838,33 @@ function lexi_widget_init() {
 		$options = get_option('widget_lexi');
 		if( !is_array($options) )
 			$options = array('title'=>'', 'show_feed_title'=>1);
-		if( $_POST['lexi-submit'] ) {
-			// Remember to sanitize and format use input appropriately.
-			$options['title'] = strip_tags(stripslashes($_POST['lexi_title']));
-			if($_POST['showfeedtitle']=='on')
-				$options['show_feed_title'] = true; 
-			else 
-				$options['show_feed_title'] = false;
-			update_option('widget_lexi', $options); 
+			
+		if(!function_exists('minimax')) { ?>
+		<p>
+			<label>
+				<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'sk'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
+			</label>
+		</p><?
+		} else {
+			if( $_POST['lexi-submit'] ) {
+				// Remember to sanitize and format use input appropriately.
+				$options['title'] = strip_tags(stripslashes($_POST['lexi_title']));
+				if($_POST['showfeedtitle']=='on')
+					$options['show_feed_title'] = true; 
+				else 
+					$options['show_feed_title'] = false;
+				update_option('widget_lexi', $options); 
+			}
+			
+			// Be sure you format your options to be valid HTML attributes.
+			$title = htmlspecialchars($options['title'], ENT_QUOTES);
+			$show_feed_title = $options['show_feed_title'];
+			
+			
+			// Here is our little form segment. Notice that we don't need a
+			// complete form. This will be embedded into the existing form.
+			require('templates/lexi_widget.php');
 		}
-		
-		// Be sure you format your options to be valid HTML attributes.
-		$title = htmlspecialchars($options['title'], ENT_QUOTES);
-		$show_feed_title = $options['show_feed_title'];
-		
-		
-		// Here is our little form segment. Notice that we don't need a
-		// complete form. This will be embedded into the existing form.
-		require('templates/lexi_widget.php');
 	}
 	
 	// This registers our widget so it appears with the other available
