@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.7.99
+Version: 0.8
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -279,7 +279,7 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	$answer="";
 	
 	// If we have minimax, go ahead
-	if(function_exists('minimax') && minimax_version()==0.2) {
+	if(function_exists('minimax_version') && minimax_version()>=0.3) {
 		$num = mt_rand();
 		$url=lexi_plugin_url('/ajax/content.php');
 		// Create the post to ask for the rss feeds
@@ -290,7 +290,7 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 		</script>";
 	} else { // If minimax isn't installed, ask for it to the user
 		$answer.= "<div id='lexi'><label>";
-		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
+		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
 		$answer.= "</label></div>";
 	}
 	return $answer;
@@ -328,7 +328,7 @@ function lexi_viewer_id($id) {
 		$feedlist = $wpdb->get_results("SELECT * FROM $table_name ORDER BY position ASC");
 
 	// If we have minimax installed, go ahead end create the script to get the feeds
-	if(function_exists('minimax') && minimax_version()==0.2) {
+	if(function_exists('minimax_version') && minimax_version()>=0.3) {
 		// We can have one feed or the list
 		foreach($feedlist as $feed) {
 			// Sets the configuration
@@ -342,7 +342,7 @@ function lexi_viewer_id($id) {
 		}
 	} else { // if we don't have minimax, ask the user for it
 		$answer.= "<div id='lexi'><label>";
-		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
+		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
 		$answer.= "</label></div>";
 	}
 	return $answer;
@@ -642,8 +642,8 @@ function lexi_manage_page() {
 	$messages=array();
 	
 	//If we don't have minimax, ask the user for it
-	if(!function_exists('minimax')) { 
-		array_push($messages, sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ));
+	if(!function_exists('minimax_version') || minimax_version()<0.3) { 
+		array_push($messages, sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ));
 	}
 
 	$mode_x=$_POST['mode_x']; // Something from POST
@@ -839,10 +839,10 @@ function lexi_widget_init() {
 		if( !is_array($options) )
 			$options = array('title'=>'', 'show_feed_title'=>1);
 			
-		if(!function_exists('minimax')) { ?>
+		if(!function_exists('minimax_version') || minimax_version()<0.3) { ?>
 		<p>
 			<label>
-				<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'sk'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
+				<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'sk'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
 			</label>
 		</p><?
 		} else {

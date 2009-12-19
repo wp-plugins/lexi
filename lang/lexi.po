@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-18 22:57-0500\n"
-"PO-Revision-Date: 2009-12-18 22:57-0500\n"
+"POT-Creation-Date: 2009-12-19 14:12-0500\n"
+"PO-Revision-Date: 2009-12-19 14:12-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,38 +23,39 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:276
+#: lexi.php:288
 msgid "Loading Feed..."
 msgstr ""
 
-#: lexi.php:281
-#: lexi.php:333
-#: lexi.php:622
+#: lexi.php:293
+#: lexi.php:345
+#: lexi.php:646
+#: lexi.php:845
 #: templates/lexi_widget.php:21
 #, fuzzy, php-format
-msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> in order for this plugin to work"
+msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:588
+#: lexi.php:612
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:669
+#: lexi.php:693
 #, fuzzy
 msgid "Feed added"
 msgstr "Se agregó la galería"
 
-#: lexi.php:687
+#: lexi.php:711
 #, fuzzy
 msgid "Feed modified"
 msgstr "Comentario modificado"
 
-#: lexi.php:708
-#: lexi.php:712
+#: lexi.php:732
+#: lexi.php:736
 msgid "Feed moved"
 msgstr ""
 
-#: lexi.php:716
+#: lexi.php:740
 #, fuzzy
 msgid "Feed deleted"
 msgstr "Se eliminó el comentario"

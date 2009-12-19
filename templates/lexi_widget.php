@@ -15,10 +15,10 @@
 	</label>
 </p>
 <?php
-if(!function_exists('minimax')) { ?>
+if(!function_exists('minimax_version') || minimax_version()<0.3) { ?>
 <p>
 	<label>
-		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.2</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
+		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
 	</label>
 </p><?
 } ?>
