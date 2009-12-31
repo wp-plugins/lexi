@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.8
+Version: 0.8.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -282,8 +282,9 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	if(function_exists('minimax_version') && minimax_version()>=0.3) {
 		$num = mt_rand();
 		$url=lexi_plugin_url('/ajax/content.php');
+		$nonce = wp_create_nonce('lexi');
 		// Create the post to ask for the rss feeds
-		$post="url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf";
+		$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf";
 		// Create the div where we want the feed to be shown, and the instance of minimax
 		$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
 		mx_lexi$num.post('$post');

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-19 14:11-0500\n"
-"PO-Revision-Date: 2009-12-19 14:12-0500\n"
+"POT-Creation-Date: 2009-12-30 08:42-0500\n"
+"PO-Revision-Date: 2009-12-30 08:42-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,37 +24,37 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:288
+#: lexi.php:289
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:293
-#: lexi.php:345
-#: lexi.php:646
-#: lexi.php:845
+#: lexi.php:294
+#: lexi.php:346
+#: lexi.php:647
+#: lexi.php:846
 #: templates/lexi_widget.php:21
 #, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> para que este plugin funcione."
 
-#: lexi.php:612
+#: lexi.php:613
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:693
+#: lexi.php:694
 msgid "Feed added"
 msgstr "Se agreg&oacute; el RSS"
 
-#: lexi.php:711
+#: lexi.php:712
 msgid "Feed modified"
 msgstr "Se modific&oacute; el RSS"
 
-#: lexi.php:732
-#: lexi.php:736
+#: lexi.php:733
+#: lexi.php:737
 msgid "Feed moved"
 msgstr "Se movi&oacute; el RSS"
 
-#: lexi.php:740
+#: lexi.php:741
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
 
@@ -164,6 +164,10 @@ msgstr "Mostrar el t&iacute;tulo de la fuente"
 #, php-format
 msgid "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</strong>"
 msgstr "Puede <a href=\"%s\">modificar</a> la lista de fuentes en el menú <strong>Herramientas/Lexi</strong>"
+
+#: ajax/content.php:16
+msgid "Only Lexi can use this link."
+msgstr "Solo Lexi puede consultar este enlace."
 
 #: tinymce/mce_lexi.php:32
 msgid "Lexi Feed"
