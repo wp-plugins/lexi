@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.8.1
+Version: 0.8.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -678,38 +678,33 @@ function lexi_manage_page() {
 			$mode='done';
 			break;
 		case 'add_x': //Add a feed
-			$mode='done';
-			if($_POST['submit']) {
-				//Get the data from the form
-				$name=$_POST['lexi_name'];
-				$rss=$_POST['lexi_rss'];
-				$items=$_POST['lexi_items'];
-				$showcontent=false;
-				if($_POST['lexi_showcontent']=='on') $showcontent=true;
-				$cached=false;
-				if($_POST['lexi_cached']=='on') $cached=true;
-				//Add the new feed
-				lexi_add_feed($name, $rss, $items, $showcontent, $cached);
-				//The message to say that we added a feed
-				array_push($messages, __( 'Feed added', 'lexi' ));
-			}
-			break;
 		case 'edit_x': //Edit a feed
 			$mode='done';
 			if($_POST['submit']) {
 				//Get the data from the form
-				$id=$_POST['lexi_id'];
 				$name=$_POST['lexi_name'];
 				$rss=$_POST['lexi_rss'];
 				$items=$_POST['lexi_items'];
+				if(!is_numeric($items)) $items=5;
 				$showcontent=false;
 				if($_POST['lexi_showcontent']=='on') $showcontent=true;
 				$cached=false;
 				if($_POST['lexi_cached']=='on') $cached=true;
-				//Edit the feed
-				lexi_edit_feed($id, $name, $rss, $items, $showcontent, $cached);
-				//The message to say that we edited a feed
-				array_push($messages, __( 'Feed modified', 'lexi' ));
+			
+				if($mode_x=='add_x') {
+					//Add the new feed
+					lexi_add_feed($name, $rss, $items, $showcontent, $cached);
+					//The message to say that we added a feed
+					array_push($messages, __( 'Feed added', 'lexi' ));
+				}
+				
+				if($mode_x=='edit_x') {
+					$id=$_POST['lexi_id'];
+					//Edit the feed
+					lexi_edit_feed($id, $name, $rss, $items, $showcontent, $cached);
+					//The message to say that we edited a feed
+					array_push($messages, __( 'Feed modified', 'lexi' ));
+				}
 			}
 			break;
 	}
@@ -718,7 +713,7 @@ function lexi_manage_page() {
 	switch($mode) {
 		case 'add': //If we are adding a new feed, show the respective form
 			break;
-		case 'edit': //If we are editing a, get the data and show the respective form
+		case 'edit': //If we are editing a feed, get the data and show the respective form
 			$id=$_GET['id'];
 			$table_name = $wpdb->prefix . "lexi";
 			$data = $wpdb->get_row("select name, rss, items, showcontent, cached from $table_name where id=$id");

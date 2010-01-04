@@ -61,13 +61,7 @@ if(!current_user_can('edit_posts')) die;
 				<tr>
 					<td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
 					<td colspan=2>
-						<select name="rssitems" id="rssitems" style="width: 200px"><?php
-							for($i=1; $i<11; $i++) {
-								echo "<option value=\"$i\"";
-								if ($items == $i) echo(' selected');
-								echo ">$i</option>";
-							} ?>
-						</select>
+						<input type="text" name="rssitems" id="rssitems" style="width: 30px" value="5">
 					</td>
 				</tr>
 				<tr>

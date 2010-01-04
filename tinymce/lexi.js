@@ -2,6 +2,15 @@ function init() {
 	tinyMCEPopup.resizeToInnerSize();
 }
 
+function is_numeric( cadena ) {
+		var answer=false;
+		var filter=/^([\d]+)$/;
+		if (filter.test(cadena)) {
+			answer=true;
+		}
+		return answer;
+	}
+
 function getCheckedValue(radioObj) {
 	if(!radioObj)
 		return "";
@@ -30,8 +39,9 @@ function insertLexiLink() {
 	// who is active ?
 	if(rss.className.indexOf('current') != -1) {
 		var rsslink = document.getElementById('rsslink').value;
-		var items = document.getElementById('rssitems')
-		var rssitems = items.options[items.selectedIndex].value;
+		var items = document.getElementById('rssitems').value;
+		if(!is_numeric(items)) items = 5;
+		//var rssitems = items.options[items.selectedIndex].value;
 		var title="";
 		if(getCheckedValue(document.Lexi.group1)==2) {
 			title = ","+document.getElementById('rssowntitle').value;
@@ -45,7 +55,7 @@ function insertLexiLink() {
 		if (document.getElementById('rsstb').checked) config = config + 8;
 
 
-		tagtext = "[lexi:" + config + "," + rsslink + title + "," + rssitems + "]";
+		tagtext = "[lexi:" + config + "," + rsslink + title + "," + items + "]";
 		add_text = true;
 	}
 

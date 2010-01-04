@@ -23,13 +23,7 @@
 									<tr>
 										<td><?php _e("Items", 'lexi' ); ?>:</td>
 										<td colspan=2>
-											<select name="lexi_items"><?php 
-													for($i=1; $i<11; $i++) {
-														echo "<option value=\"$i\"";
-														if ($items == $i) echo(' selected'); 
-															echo ">$i</option>";
-													} ?>
-											</select>
+											<input type="text" name="lexi_items" style="width: 30px;" value="<?php echo $items; ?>">
 										</td>
 									</tr>
 									<tr>

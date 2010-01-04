@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.9
-Stable tag: 0.8.1
+Stable tag: 0.8.2
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -78,6 +78,9 @@ Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 5. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.8.2 =
+* User interface modified to set more items per feed.
 
 = 0.8.1 =
 * Using nonce to not show data when someone call the ajax script outside the plugin.
