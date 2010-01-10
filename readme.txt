@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.9
-Stable tag: 0.8.2
+Stable tag: 0.8.3
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -21,8 +21,9 @@ To show a Feed that hasn't been declared in the list, use `[lexi: configuration,
 
 Add 1 if you want to save it in cache.
 Add 2 if you want to show the contents.
-Add 4 if you want to show the title.
+Add 4 if you want to show the title (this is the channel link too).
 Add 8 if you want to open it in a new page.
+Add 16 if you want to not show the RSS icon (this is the RSS link too).
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
@@ -78,6 +79,10 @@ Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 5. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.8.3 =
+* New configuration item - Not show icon (add 16 to configuration number).
+* Updated UI to use the new configuration number.
 
 = 0.8.2 =
 * User interface modified to set more items per feed.

@@ -33,7 +33,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 250px;">
+	<div class="panel_wrapper" style="height: 200px;">
 
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
@@ -51,35 +51,51 @@ if(!current_user_can('edit_posts')) die;
 	
 				<tr>
 					<td nowrap="nowrap"><label for="rsslink"><?php _e("RSS", 'lexi' ); ?>:</label></td>
-					<td colspan=2><input type="text" id="rsslink" name="rsslink" style="width: 200px"/></td>
+					<td colspan=3><input type="text" id="rsslink" name="rsslink" style="width: 100%"/></td>
 				</tr>
-				<tr>
+				<tr style="background: #F9F9F9;">
 					<td nowrap="nowrap" valign="top"><label><?php _e("Title", 'lexi' ); ?>:</label></td>
-					<td colspan=2><input type="radio" id="rsstitle" name="group1" value="1" checked/> <?php _e("Use the title from the feed", 'lexi'); ?>
-						<br><input type="radio" id="rsstitle" name="group1" value="2" onclick="document.getElementById('rssowntitle').value='';" /> <input type="text" id="rssowntitle" name="rssowntitle" style="width: 170px" value="<?php _e("Use a specific title", 'lexi'); ?>" /></td>
+					<td><input type="radio" id="rsstitle" name="group1" value="1" onclick="
+						if(this.checked) {
+							var aux = document.getElementById('rssowntitle');
+							aux.disabled = true;
+						}
+					" checked/></td>
+					<td colspan=2><?php _e("Use the title from the feed", 'lexi'); ?>
+				</tr>
+				<tr style="background: #F9F9F9;">
+					<td></td>
+					<td><input type="radio" id="rsstitle" name="group1" value="2" onclick="
+					if(this.checked) {
+						var aux = document.getElementById('rssowntitle');
+						aux.disabled = false;
+						aux.value='';
+					}
+					" /></td>
+					<td colspan=2><input type="text" id="rssowntitle" name="rssowntitle" style="width: 100%" disabled value="<?php _e("Use a specific title", 'lexi'); ?>" /></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
-					<td colspan=2>
+					<td colspan=3>
 						<input type="text" name="rssitems" id="rssitems" style="width: 30px" value="5">
 					</td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap" valign="top"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>: </label></td>
 					<td valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /></td>
-					<td><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
+					<td colspan="2"><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><label for="rsssc"><?php _e("Show contents", 'lexi' ); ?>:</label></td>
-					<td colspan=2><input type="checkbox" id="rsssc" name="rsssc" /></td>
-				</tr>
-				<tr>
-					<td nowrap="nowrap"><label for="rssst"><?php _e("Show feed title", 'lexi' ); ?>:</label></td>
-					<td colspan=2><input type="checkbox" id="rssst" name="rssst" checked /></td>
+					<td><input type="checkbox" id="rsssc" name="rsssc" /></td>
+					<td nowrap="nowrap"><label for="rssst"><?php _e("Show title", 'lexi' ); ?>:</label></td>
+					<td><input type="checkbox" id="rssst" name="rssst" checked /></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?>:</label></td>
-					<td colspan=2><input type="checkbox" id="rsstb" name="rsstb" checked /></td>
+					<td><input type="checkbox" id="rsstb" name="rsstb" checked /></td>
+					<td nowrap="nowrap"><label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?>:</label></td>
+					<td><input type="checkbox" id="rssimg" name="rssimg" checked /></td>
 				</tr>
 			</table>
 		</div>

@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.8.2
+Version: 0.8.3
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -29,6 +29,7 @@ define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
 define('CONF_SHOWHEADER', 4);
 define('CONF_TARGETBLANK', 8);
+define('CONF_NOTSHOWICON', 16);
 define('LEXI_LIST', -1);
 
 $db_version=get_option('lexi_db_version');
@@ -523,7 +524,7 @@ function lexi_read_feed($link, $name, $num, $config) {
 	if(($config & CONF_TARGETBLANK)) {
 		$target = " target='_blank'";
 	}
-	
+		
 	// Does simplepie library exists?
 	if(class_exists('SimplePie')) {
 		//Get the data from the rss
@@ -607,10 +608,18 @@ function lexi_read_feed($link, $name, $num, $config) {
 		}
 	}
 	
+	//The default image and its link
+	$img = "<a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img class='lexi' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> ";
+	//Show the image?
+	if($config & CONF_NOTSHOWICON) {
+		$img = ""; //We don't have to.
+	}
+
+	
 	$header="";
 	//If we need a title
 	if($config & CONF_SHOWHEADER) {
-		$header = "<h2 class='widgettitle'><a class='rsswidget' href='$link' title='" . __('Subscribe' , 'lexi')."'><img class='lexi' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> <a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
+		$header = "<h2 class='widgettitle'>$img<a class='rsswidget' href='$channel_link' title='$name'>$name</a></h2>";
 	}
 	
 	// Return the list of linked feeds

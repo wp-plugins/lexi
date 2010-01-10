@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-30 08:42-0500\n"
-"PO-Revision-Date: 2009-12-30 08:42-0500\n"
+"POT-Creation-Date: 2010-01-08 08:19-0500\n"
+"PO-Revision-Date: 2010-01-08 08:20-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,37 +24,37 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:289
+#: lexi.php:290
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:294
-#: lexi.php:346
-#: lexi.php:647
-#: lexi.php:846
+#: lexi.php:295
+#: lexi.php:347
+#: lexi.php:655
+#: lexi.php:849
 #: templates/lexi_widget.php:21
 #, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> para que este plugin funcione."
 
-#: lexi.php:613
+#: lexi.php:611
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:694
+#: lexi.php:706
 msgid "Feed added"
 msgstr "Se agreg&oacute; el RSS"
 
-#: lexi.php:712
+#: lexi.php:714
 msgid "Feed modified"
 msgstr "Se modific&oacute; el RSS"
 
-#: lexi.php:733
-#: lexi.php:737
+#: lexi.php:736
+#: lexi.php:740
 msgid "Feed moved"
 msgstr "Se movi&oacute; el RSS"
 
-#: lexi.php:741
+#: lexi.php:744
 msgid "Feed deleted"
 msgstr "Se elimin&oacute; el RSS"
 
@@ -80,37 +80,37 @@ msgid "Name"
 msgstr "Nombre"
 
 #: templates/lexi_feed.php:24
-#: tinymce/mce_lexi.php:62
+#: tinymce/mce_lexi.php:78
 msgid "Items"
 msgstr "Items"
 
-#: templates/lexi_feed.php:36
+#: templates/lexi_feed.php:30
 #: templates/lexi_manage.php:43
-#: tinymce/mce_lexi.php:79
+#: tinymce/mce_lexi.php:89
 msgid "Show contents"
 msgstr "Mostrar Contenido"
 
-#: templates/lexi_feed.php:41
+#: templates/lexi_feed.php:35
 #: templates/lexi_manage.php:44
-#: tinymce/mce_lexi.php:74
+#: tinymce/mce_lexi.php:84
 msgid "Save cache"
 msgstr "Almacenar en Cach&eacute;"
 
-#: templates/lexi_feed.php:43
-#: tinymce/mce_lexi.php:76
+#: templates/lexi_feed.php:37
+#: tinymce/mce_lexi.php:86
 msgid "Uncheck this option only in case the feed updates several times in an hour."
 msgstr "Solo quite esta marca si la fuente se actualiza varias veces en una misma hora."
 
-#: templates/lexi_feed.php:50
-#: tinymce/mce_lexi.php:96
+#: templates/lexi_feed.php:44
+#: tinymce/mce_lexi.php:106
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/lexi_feed.php:53
+#: templates/lexi_feed.php:47
 msgid "Add"
 msgstr "Agregar"
 
-#: templates/lexi_feed.php:53
+#: templates/lexi_feed.php:47
 msgid "Modify"
 msgstr "Modificar"
 
@@ -156,7 +156,6 @@ msgid "Title"
 msgstr "T&iacute;tulo"
 
 #: templates/lexi_widget.php:9
-#: tinymce/mce_lexi.php:83
 msgid "Show feed title"
 msgstr "Mostrar el t&iacute;tulo de la fuente"
 
@@ -181,19 +180,27 @@ msgstr "RSS:"
 msgid "All feeds"
 msgstr "Todos los RSS"
 
-#: tinymce/mce_lexi.php:58
+#: tinymce/mce_lexi.php:64
 msgid "Use the title from the feed"
 msgstr "Usar el t&iacute;tulo de la fuente"
 
-#: tinymce/mce_lexi.php:59
+#: tinymce/mce_lexi.php:75
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:87
+#: tinymce/mce_lexi.php:91
+msgid "Show title"
+msgstr "Mostrar t&iacute;tulo"
+
+#: tinymce/mce_lexi.php:95
 msgid "Open links in new page"
 msgstr "Abrir en nueva p&aacute;gina"
 
-#: tinymce/mce_lexi.php:100
+#: tinymce/mce_lexi.php:97
+msgid "Show RSS icon"
+msgstr "Mostrar icono RSS"
+
+#: tinymce/mce_lexi.php:110
 msgid "Insert"
 msgstr "Insertar"
 

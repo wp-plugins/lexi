@@ -53,6 +53,7 @@ function insertLexiLink() {
 		if (document.getElementById('rsssc').checked) config = config + 2;
 		if (document.getElementById('rssst').checked) config = config + 4;
 		if (document.getElementById('rsstb').checked) config = config + 8;
+		if (!(document.getElementById('rssimg').checked)) config = config + 16;
 
 
 		tagtext = "[lexi:" + config + "," + rsslink + title + "," + items + "]";
