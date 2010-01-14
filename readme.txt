@@ -70,6 +70,12 @@ This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A
 
 Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 
+= Lexi can't reed the xyz feed =
+
+First, try to open it with the RSS widget (the one from Wordpress). If you can read the feed, write a comment in my __[personal page](http://www.sebaxtian.com/acerca-de/lexi "Lexi's page")__ and add the RSS feed.
+
+If you can't open it with this widget, it means the problem is in the library. To solve this situation, use a Mashup engine like __[Yahoo Pipe](http://pipes.yahoo.com/pipes/ "A mashup editor")__ to create a new RSS feed using the original data, and use it instead the original one.
+
 == Screenshots ==
 
 1. Feeds administrator.
