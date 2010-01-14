@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.4
 Tested up to: 2.9.1
-Stable tag: 0.8.3
+Stable tag: 0.8.4
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -52,15 +52,12 @@ My page (I don't know if yours too) use to get blocked reading some RSS feeds. I
 = Lexi shows strange characters with some feeds =
 
 Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
+
 If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
-
-= There is a cached RSS that doesn't show anything =
-
-Yes, I noticed too. It happens with some feeds the first time they are readed, but ten minutes later they work! I think the problem is in `fetch_rss($url)`, the WordPress function Lexi uses to save cached Feeds. I'll try to fix it in a future version.
 
 = It says something about a write problem in cache =
 
-Sure you are using SimplePie. Check you have write permission in `wp-content/plugins/lexi/cache`.
+Sure you are using SimplePie. Check you have write permission in `wp-content/cache/lexi`.
 
 = It say something about minimax. What's this? =
 
@@ -72,19 +69,23 @@ Yes. Copy the file lexi.css to your theme folder. The plugin will check for it.
 
 = Lexi can't reed the xyz feed =
 
-First, try to open it with the RSS widget (the one from Wordpress). If you can read the feed, write a comment in my __[personal page](http://www.sebaxtian.com/acerca-de/lexi "Lexi's page")__ and add the RSS feed.
+First, use the __[simplepie validator](http://simplepie.org/demo/ "Simplepie Demo and Validator")__ to check the feed. If you get an error it means the problem is in the library. To solve this situation, use a Mashup engine like __[Yahoo Pipes](http://pipes.yahoo.com/pipes/ "A mashup editor")__ to create a new RSS feed from the original data.
 
-If you can't open it with this widget, it means the problem is in the library. To solve this situation, use a Mashup engine like __[Yahoo Pipe](http://pipes.yahoo.com/pipes/ "A mashup editor")__ to create a new RSS feed using the original data, and use it instead the original one.
+If the validator returns the feed data, maybe the library in your WP is older than the one in the validator. Use the RSS widget (the one from Wordpress) with the feed to check if the library can read it. If it works, is time to write a comment in my __[personal page](http://www.sebaxtian.com/acerca-de/lexi "Lexi's page")__ with the RSS feed on it. Else, use a mashup engine as described in the first step.
+
+In some cases it happens with some feeds the first time they are readed, but ten minutes later they work.
 
 == Screenshots ==
 
 1. Feeds administrator.
 2. Feed editor.
 3. Lexi widget.
-4. Box to add a Lexi feed.
-5. Box to add an RSS feed.
+4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.8.4 =
+* FAQ and screenshots updated.
 
 = 0.8.3 =
 * New configuration item - Not show icon (add 16 to configuration number).
