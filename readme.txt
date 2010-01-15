@@ -11,11 +11,7 @@ An RSS reader that can be placed in pages, posts and sidebar, using ajax to show
 
 Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress has to wait after those RSS feeds has been downloaded. This plugin allow the site to read the RSS _after_ the page was created, not _during_ the process.
 
-To modify or delete the list of RSS feeds go to Tools -> Lexi.
-
-You can add the Lexi widget to show the list, but you can also use the tag `[lexi]` in a page, or the function `lexi()` in a template.
-
-To show a Feed that hasn't been declared in the list, use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`.
+To show a Feed in a post use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`.
 
 The configuration number can be calculated as follow:
 
@@ -28,6 +24,8 @@ The configuration number can be calculated as follow:
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
 There is a button in the RichText editor created by the plugin to add a Feed.
+
+You can add a widget to the sidebar to show a list of feeds. To modify or delete any item of the list go to Tools -> Lexi. You can also use the tag `[lexi]` in a page, or the function `lexi()` in a template to show the entire list.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. 
 
