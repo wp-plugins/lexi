@@ -15,15 +15,15 @@ To modify or delete the list of RSS feeds go to Tools -> Lexi.
 
 You can add the Lexi widget to show the list, but you can also use the tag `[lexi]` in a page, or the function `lexi()` in a template.
 
-To show just one item from the list, use `[lexi:id]` or `lexi(id)`.
+To show a Feed that hasn't been declared in the list, use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`.
 
-To show a Feed that hasn't been declared in the list, use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`. The configuration number can be calculated as follow:
+The configuration number can be calculated as follow:
 
-Add 1 if you want to save it in cache.
-Add 2 if you want to show the contents.
-Add 4 if you want to show the title (this is the channel link too).
-Add 8 if you want to open it in a new page.
-Add 16 if you want to not show the RSS icon (this is the RSS link too).
+* Add 1 if you want to save it in cache.
+* Add 2 if you want to show the contents.
+* Add 4 if you want to show the title (this is the channel link too).
+* Add 8 if you want to open it in a new page.
+* Add 16 if you want to not show the RSS icon (this is the RSS link too).
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
