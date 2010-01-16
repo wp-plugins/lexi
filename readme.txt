@@ -9,7 +9,7 @@ An RSS reader that can be placed in pages, posts and sidebar, using ajax to show
 
 == Description ==
 
-Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress has to wait after those RSS feeds has been downloaded. This plugin allow the site to read the RSS _after_ the page was created, not _during_ the process.
+Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress has to wait after those RSS feeds had been downloaded. This plugin allows the site to read the RSS _after_ the page was created, not _during_ the process.
 
 To show a Feed in a post use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`.
 
@@ -25,11 +25,11 @@ If you want to use the title given by the RSS, use `[lexi: configuration, rss, m
 
 There is a button in the RichText editor created by the plugin to add a Feed.
 
-You can add a widget to the sidebar to show a list of feeds. To modify or delete any item of the list go to Tools -> Lexi. You can also use the tag `[lexi]` in a page, or the function `lexi()` in a template to show the entire list.
+You can add a widget to the sidebar to show a list of feeds. To modify or delete any item of the list go to __Tools > Lexi__. You can also use the tag `[lexi]` in a page, or the function `lexi()` in a template to show the entire list.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. 
 
-Lexi detects if your site has the __[SimplePie](http://simplepie.org/ "SimplePie: Super-fast, easy-to-use, RSS and Atom feed parsing in PHP.")__ library enabled. Since Wordpress 2.8 comes with it by default you don't need to activate anithing, but in earlier versions you have to install the __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ to use it instead MagpieRSS. I recomend to use SimplePie. Remember to uninstall SimplePieCore if you are using Worpress 2.8 or any latter version.
+Lexi detects if your site has the __[SimplePie](http://simplepie.org/ "SimplePie: Super-fast, easy-to-use, RSS and Atom feed parsing in PHP.")__ library enabled. Since Wordpress 2.8 comes with it by default you don't need to activate anything, but in earlier versions you have to install the __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ to use it instead MagpieRSS. I recomend to use SimplePie. Remember to uninstall SimplePieCore if you are using Worpress 2.8 or any latter version.
 
 Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it by default.
 
@@ -38,8 +38,8 @@ Screenshots are in spanish because it's my native language. As you should know y
 1. Install __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__.
 2. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the __Plugins__ menu in WordPress
-4. Add the Lexi widget into your side bar, or add [lexi] into your posts, or use `lexi()` into your templates.
-5. Use Tools -> Lexi to add, modify or delete your RSS feeds list.
+4. Add the Lexi widget into your side bar, or add `[lexi]` into your posts, or use `lexi()` into your templates.
+5. Use __Tools > Lexi__ to add, modify or delete your RSS feeds list.
 
 == Frequently Asked Questions ==
 
@@ -57,7 +57,7 @@ If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem per
 
 Sure you are using SimplePie. Check you have write permission in `wp-content/cache/lexi`.
 
-= It say something about minimax. What's this? =
+= It says something about minimax. What's this? =
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
@@ -71,7 +71,7 @@ First, use the __[simplepie validator](http://simplepie.org/demo/ "Simplepie Dem
 
 If the validator returns the feed data, maybe the library in your WP is older than the one in the validator. Use the RSS widget (the one from Wordpress) with the feed to check if the library can read it. If it works, is time to write a comment in my __[personal page](http://www.sebaxtian.com/acerca-de/lexi "Lexi's page")__ with the RSS feed on it. Else, use a mashup engine as described in the first step.
 
-In some cases it happens with some feeds the first time they are readed, but ten minutes later they work.
+Also, it happens with some feeds the first time they are readed, but ten minutes later they work.
 
 == Screenshots ==
 
