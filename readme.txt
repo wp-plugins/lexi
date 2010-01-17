@@ -13,7 +13,7 @@ Sometimes an RSS feed has a low bandwidth and during the page creation Wordpress
 
 To show a Feed in a post use `[lexi: configuration, rss, title, max_items]` or `lexiRSS($configuration, $rss, $title, $max_items)`.
 
-The configuration number can be calculated as follow:
+The configuration number can be calculated as follows:
 
 * Add 1 if you want to save it in cache.
 * Add 2 if you want to show the contents.
