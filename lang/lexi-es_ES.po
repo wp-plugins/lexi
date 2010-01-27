@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 08:19-0500\n"
-"PO-Revision-Date: 2010-01-08 08:20-0500\n"
+"POT-Creation-Date: 2010-01-27 08:28-0500\n"
+"PO-Revision-Date: 2010-01-27 08:30-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,145 +24,83 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:290
+#: lexi.php:49
+#, php-format
+msgid "Can't create the cache dir: %s<br>You have to create it manually."
+msgstr "No puedo crear el directorio del cache: %s<br>Tendrá que crearlo manualmente."
+
+#: lexi.php:57
+#, php-format
+msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
+msgstr "No puedo escribir en el directorio del cache: %s<br>Tendrá que modificar manualmente los permisos."
+
+#: lexi.php:174
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:295
-#: lexi.php:347
-#: lexi.php:655
-#: lexi.php:849
-#: templates/lexi_widget.php:21
+#: lexi.php:179
+#: templates/lexi_widget_manage.php:37
 #, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> para que este plugin funcione."
 
-#: lexi.php:611
+#: lexi.php:403
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:706
-msgid "Feed added"
-msgstr "Se agreg&oacute; el RSS"
+#: lexi.php:481
+msgid "Add an RSS feed to the sidebar using Lexi."
+msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
-#: lexi.php:714
-msgid "Feed modified"
-msgstr "Se modific&oacute; el RSS"
+#: legacy.php:175
+#, php-format
+msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
+msgstr "Este mensaje solo será presentado al propietario o editor de este post.<br>La etiqueta o función que está usando es obsoleta.<br>En el archivo <a href='%s'>léame</a> encontrará la información para hacer los cambios requeridos."
 
-#: lexi.php:736
-#: lexi.php:740
-msgid "Feed moved"
-msgstr "Se movi&oacute; el RSS"
-
-#: lexi.php:744
-msgid "Feed deleted"
-msgstr "Se elimin&oacute; el RSS"
-
-#: templates/lexi_feed.php:6
-#: templates/lexi_manage.php:23
-#: templates/lexi_manage.php:33
-#: templates/lexi_manage.php:74
-msgid "Add Feed"
-msgstr "Agregar RSS"
-
-#: templates/lexi_feed.php:6
-msgid "Edit Feed"
-msgstr "Editar RSS"
-
-#: templates/lexi_feed.php:11
-#: templates/lexi_feed.php:20
-#: tinymce/mce_lexi.php:53
+#: templates/lexi_widget_manage.php:9
+#: tinymce/mce_lexi.php:44
 msgid "RSS"
 msgstr "RSS"
 
-#: templates/lexi_feed.php:16
-msgid "Name"
-msgstr "Nombre"
-
-#: templates/lexi_feed.php:24
-#: tinymce/mce_lexi.php:78
-msgid "Items"
-msgstr "Items"
-
-#: templates/lexi_feed.php:30
-#: templates/lexi_manage.php:43
-#: tinymce/mce_lexi.php:89
-msgid "Show contents"
-msgstr "Mostrar Contenido"
-
-#: templates/lexi_feed.php:35
-#: templates/lexi_manage.php:44
-#: tinymce/mce_lexi.php:84
-msgid "Save cache"
-msgstr "Almacenar en Cach&eacute;"
-
-#: templates/lexi_feed.php:37
-#: tinymce/mce_lexi.php:86
-msgid "Uncheck this option only in case the feed updates several times in an hour."
-msgstr "Solo quite esta marca si la fuente se actualiza varias veces en una misma hora."
-
-#: templates/lexi_feed.php:44
-#: tinymce/mce_lexi.php:106
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: templates/lexi_feed.php:47
-msgid "Add"
-msgstr "Agregar"
-
-#: templates/lexi_feed.php:47
-msgid "Modify"
-msgstr "Modificar"
-
-#: templates/lexi_manage.php:16
-msgid "Lexi"
-msgstr "Lexi"
-
-#: templates/lexi_manage.php:23
-msgid "No feeds found"
-msgstr "No se encontraron resultados"
-
-#: templates/lexi_manage.php:28
-#: templates/lexi_manage.php:69
-msgid "Bulk Actions"
-msgstr "Acciones en bloque"
-
-#: templates/lexi_manage.php:29
-#: templates/lexi_manage.php:55
-#: templates/lexi_manage.php:70
-msgid "Delete"
-msgstr "Eliminar"
-
-#: templates/lexi_manage.php:31
-#: templates/lexi_manage.php:72
-msgid "Apply"
-msgstr "Aplicar"
-
-#: templates/lexi_manage.php:42
-msgid "Feed"
-msgstr "RSS"
-
-#: templates/lexi_manage.php:54
-msgid "Edit"
-msgstr "Editar"
-
-#: templates/lexi_manage.php:55
-msgid "Delete this Feed?"
-msgstr "&iquest;Eliminar este RSS?"
-
-#: templates/lexi_widget.php:3
-#: tinymce/mce_lexi.php:57
+#: templates/lexi_widget_manage.php:13
+#: tinymce/mce_lexi.php:48
 msgid "Title"
 msgstr "T&iacute;tulo"
 
-#: templates/lexi_widget.php:9
-msgid "Show feed title"
-msgstr "Mostrar el t&iacute;tulo de la fuente"
+#: templates/lexi_widget_manage.php:17
+#: tinymce/mce_lexi.php:67
+msgid "Items"
+msgstr "Items"
 
-#: templates/lexi_widget.php:14
-#, php-format
-msgid "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</strong>"
-msgstr "Puede <a href=\"%s\">modificar</a> la lista de fuentes en el menú <strong>Herramientas/Lexi</strong>"
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:76
+msgid "Save cache"
+msgstr "Almacenar en Cach&eacute;"
+
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:76
+msgid "Uncheck this option only in case the feed updates several times in an hour."
+msgstr "Solo quite esta marca si la fuente se actualiza varias veces en una misma hora."
+
+#: templates/lexi_widget_manage.php:26
+#: tinymce/mce_lexi.php:79
+msgid "Show contents"
+msgstr "Mostrar Contenido"
+
+#: templates/lexi_widget_manage.php:27
+#: tinymce/mce_lexi.php:80
+msgid "Show title"
+msgstr "Mostrar t&iacute;tulo"
+
+#: templates/lexi_widget_manage.php:30
+#: tinymce/mce_lexi.php:83
+msgid "Open links in new page"
+msgstr "Abrir en nueva p&aacute;gina"
+
+#: templates/lexi_widget_manage.php:31
+#: tinymce/mce_lexi.php:84
+msgid "Show RSS icon"
+msgstr "Mostrar icono RSS"
 
 #: ajax/content.php:16
 msgid "Only Lexi can use this link."
@@ -172,35 +110,66 @@ msgstr "Solo Lexi puede consultar este enlace."
 msgid "Lexi Feed"
 msgstr "Fuente RSS"
 
-#: tinymce/mce_lexi.php:45
-msgid "Feed:"
-msgstr "RSS:"
-
-#: tinymce/mce_lexi.php:47
-msgid "All feeds"
-msgstr "Todos los RSS"
-
-#: tinymce/mce_lexi.php:64
+#: tinymce/mce_lexi.php:54
 msgid "Use the title from the feed"
 msgstr "Usar el t&iacute;tulo de la fuente"
 
-#: tinymce/mce_lexi.php:75
+#: tinymce/mce_lexi.php:64
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:91
-msgid "Show title"
-msgstr "Mostrar t&iacute;tulo"
+#: tinymce/mce_lexi.php:92
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:95
-msgid "Open links in new page"
-msgstr "Abrir en nueva p&aacute;gina"
-
-#: tinymce/mce_lexi.php:97
-msgid "Show RSS icon"
-msgstr "Mostrar icono RSS"
-
-#: tinymce/mce_lexi.php:110
+#: tinymce/mce_lexi.php:96
 msgid "Insert"
 msgstr "Insertar"
+
+#~ msgid "Feed added"
+#~ msgstr "Se agreg&oacute; el RSS"
+#~ msgid "Feed modified"
+#~ msgstr "Se modific&oacute; el RSS"
+#~ msgid "Feed moved"
+#~ msgstr "Se movi&oacute; el RSS"
+#~ msgid "Feed deleted"
+#~ msgstr "Se elimin&oacute; el RSS"
+#~ msgid "Add Feed"
+#~ msgstr "Agregar RSS"
+#~ msgid "Edit Feed"
+#~ msgstr "Editar RSS"
+#~ msgid "Name"
+#~ msgstr "Nombre"
+#~ msgid "Add"
+#~ msgstr "Agregar"
+#~ msgid "Modify"
+#~ msgstr "Modificar"
+#~ msgid "Lexi"
+#~ msgstr "Lexi"
+#~ msgid "No feeds found"
+#~ msgstr "No se encontraron resultados"
+#~ msgid "Bulk Actions"
+#~ msgstr "Acciones en bloque"
+#~ msgid "Delete"
+#~ msgstr "Eliminar"
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+#~ msgid "Feed"
+#~ msgstr "RSS"
+#~ msgid "Edit"
+#~ msgstr "Editar"
+#~ msgid "Delete this Feed?"
+#~ msgstr "&iquest;Eliminar este RSS?"
+#~ msgid "Show feed title"
+#~ msgstr "Mostrar el t&iacute;tulo de la fuente"
+#~ msgid ""
+#~ "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
+#~ "strong>"
+#~ msgstr ""
+#~ "Puede <a href=\"%s\">modificar</a> la lista de fuentes en el menú "
+#~ "<strong>Herramientas/Lexi</strong>"
+#~ msgid "Feed:"
+#~ msgstr "RSS:"
+#~ msgid "All feeds"
+#~ msgstr "Todos los RSS"
 

@@ -3,12 +3,12 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.8.4
+Version: 0.9
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
 
-/* Copyright 2007-2009 Juan Sebastián Echeverry (email : sebaxtian@gawab.com)
+/* Copyright 2007-2010 Juan Sebastián Echeverry (email : sebaxtian@gawab.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -25,21 +25,42 @@ Author URI: http://www.sebaxtian.com
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
+require_once("legacy.php");
+
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
 define('CONF_SHOWHEADER', 4);
 define('CONF_TARGETBLANK', 8);
 define('CONF_NOTSHOWICON', 16);
-define('LEXI_LIST', -1);
-
-$db_version=get_option('lexi_db_version');
 
 add_action('init', 'lexi_add_buttons');
-add_action('init', 'lexi_text_domain');
+add_action('init', 'lexi_text_domain', 1);
 add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
-add_action('admin_menu', 'lexi_manage');
-add_action('activate_lexi/lexi.php', 'lexi_activate');
+add_action('activate_plugin', 'lexi_activate');
+
+//The activation error routine
+if ($_GET['action'] == 'error_scrape') {
+	//Activate the i18n
+	lexi_text_domain();
+	
+	//Get the cache directory path
+	$ans = parse_url(get_bloginfo('wpurl'));
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache';
+	
+	//Error 1: we can't create the cache directory
+	if(!file_exists($cache_dir.'/lexi')) {
+		die(sprintf(__("Can't create the cache dir: %s<br>You have to create it manually.", 'lexi'), $cache_dir.'/lexi/'));
+	}
+	
+	//Error 2: we can't write in the cache directory
+	if($handle = @fopen($cache_dir.'/lexi/test.txt','w')) {
+		fclose($handle);
+		unlink($cache_dir.'/lexi/test.txt');
+	} else {
+		die(sprintf(__("Can't write in the cache dir: %s<br>You have to modify the permissions manually.", 'lexi'), $cache_dir.'/lexi/'));
+	}
+}
 
 /**
 * To declare where are the mo files (i18n).
@@ -92,27 +113,9 @@ function lexi_plugin_url($str = '') {
 * @access public
 */
 function lexi_activate() {
+
 	global $wpdb;
-	global $db_version;
-
-	$table_name = $wpdb->prefix . "lexi";
-	if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
-		$sql = "CREATE TABLE $table_name(
-			id bigint(1) NOT NULL AUTO_INCREMENT,
-			name tinytext NOT NULL,
-			position int,
-			rss text NOT NULL,
-			items int NOT NULL,
-			showcontent tinyint NOT NULL,
-			cached tinyint NOT NULL,
-			PRIMARY KEY (id)
-			);";
-
-		require_once(ABSPATH . 'wp-admin/upgrade-functions.php');
-		dbDelta($sql);
-		add_option('lexi_db_version', 1);
-	}
-	
+		
 	//Create the cache directory if it doesn't exist
 	$ans = parse_url(get_bloginfo('wpurl'));
 	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache';
@@ -120,148 +123,29 @@ function lexi_activate() {
 	if(!file_exists($cache_dir)) mkdir($cache_dir);
 	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
 	
-}
-
-
-/**
-* Function to edit feed's data.
-*
-* @param int id Feed's id
-* @param string name Feed's name
-* @param string rss Feed's URL
-* @param int items Items to show
-* @param bool showcontent Show contents in Widget?
-* @param bool cache Record Rss content in cache?
-* @access public
-*/
-function lexi_edit_feed($id, $name, $rss, $items=5, $showcontent=false, $cached=true) {
-	global $wpdb;
-
-	// To send numbers instead of booleans in the SQL query
-	if($showcontent) $showcontent=1; else $showcontent=0;
-	if($cached) $cached=1; else $cached=0;
-
-	// Set the new data in the database
-	$table_name = $wpdb->prefix . "lexi";
-	$query="UPDATE " . $table_name ." SET name='".$name."', rss='".$rss."', items='".$items."', showcontent='".$showcontent."', cached='".$cached."' WHERE id=".$id;
-	$wpdb->query($query);
-
-}
-
-
-/**
-* Function to add a feed.
-*
-* @param string name Feed's name
-* @param string rss Feed's URL
-* @param int items Items to show
-* @param bool showcontent Show contents in Widget?
-* @param bool cache Record Rss content in cache?
-* @return bool
-* @access public
-*/
-function lexi_add_feed($name, $rss, $items=5, $showcontent=false, $cached=true) {
-	global $wpdb;
-
-	// To send numbers instead of booleans in the SQL query
-	if($showcontent) $showcontent=1; else $showcontent=0;
-	if($cached) $cached=1; else $cached=0;
-
-	// Add the new feed to the database
-	$table_name = $wpdb->prefix . "lexi";
-	$insert = "INSERT INTO " . $table_name .
-		" (name, rss, items, showcontent, cached)" .
-		" VALUES ('" . $wpdb->escape($name) . "', '" . 
-		$wpdb->escape($rss) . "', '$items', '$showcontent', '$cached')";
-
-	$results = $wpdb->query( $insert );
-
-	// Get the id assigned to the feed.
-	$id = $wpdb->get_var("select last_insert_id()");
-	
-	// Get the last position
-	$position = $wpdb->get_var("SELECT MAX(position) FROM $table_name");
-	$position++;
-
-	// Set the feed to the end of the list
-	$wpdb->query("UPDATE " . $table_name ." SET position='$position' WHERE id=".$id);
-
-	return true;
-}
-
-
-/**
-* Function to delete a feed.
-*
-* @param int id Feed to delete
-* @return bool
-* @access public
-*/
-function lexi_delete_feed($id) {
-	global $wpdb;
-	$table_name = $wpdb->prefix . "lexi";
-	
-	// Get the position of the feed to be deleted
-	$position = $wpdb->get_var("SELECT position FROM $table_name WHERE id=$id");
-	
-	// Delete the feed
-	$query = "DELETE FROM " . $table_name ." WHERE id=" . $id;
-	$answer1=$wpdb->query( $query );
-
-	// Move up all the feeds after the deleted one 
-	$wpdb->query("UPDATE " . $table_name ." SET position=position-1 WHERE position > $position");
-
-	return $answer1;
-}
-
-
-/**
-* Move feed one row up
-*
-* @param int id Feed to move
-* @return bool
-* @access public
-*/
-function lexi_up_feed($id) {
-	global $wpdb;
-	$table_name = $wpdb->prefix . "lexi";
-	
-	// Get the position
-	$position = $wpdb->get_var("SELECT position FROM $table_name WHERE id=$id");
-	
-	// If the position is greater than 1 (it is not the first in the list), move the feed
-	if($position>1) {
-		// Change positions with the feed to move up and the feed that is one row over.
-		$position_aux=$position-1;
-		$answer1 = $wpdb->query("UPDATE " . $table_name ." SET position = $position WHERE position = $position_aux");
-		$answer2 = $wpdb->query("UPDATE " . $table_name ." SET position = $position_aux WHERE id = $id");
+	//Error 1: we can't find or create the cache directory.
+	if(!file_exists($cache_dir.'/lexi')) {
+		trigger_error('Lexi-error: #1', E_USER_ERROR);
 	}
-	return $answer1 && $answer2;
-}
-
-
-/**
-* Move feed one row down
-*
-* @param int id Feed to move
-* @return bool
-* @access public
-*/
-function lexi_down_feed($id) {
-	global $wpdb;
-	$table_name = $wpdb->prefix . "lexi";
 	
-	// Get the position and the bigest position we have
-	$position = $wpdb->get_var("SELECT position FROM $table_name WHERE id=$id");
-	$max_position = $wpdb->get_var("SELECT MAX(position) FROM $table_name");
-	// If the position we have to move is lesser than the last position, move the feed
-	if($position<$max_position) {
-		// Change positions with the feed to move down and the feed that is in the next row .
-		$position_aux=$position+1;
-		$answer1 = $wpdb->query("UPDATE " . $table_name ." SET position = $position WHERE position = $position_aux");
-		$answer2 = $wpdb->query("UPDATE " . $table_name ." SET position = $position_aux WHERE id = $id");
+	//Error 2: we can't write in the cache directory
+	if($handle = fopen($cache_dir.'/lexi/test.txt','w')) {
+		fclose($handle);
+		unlink($cache_dir.'/lexi/test.txt');
+	} else {
+		trigger_error('Lexi-error: #2', E_USER_ERROR);
 	}
-	return $answer1 && $answer2;
+	
+	//Have we updated or no?
+	//Is this widget a multiwidget?
+	$options = get_option('widget_lexi');
+	if ( !array_key_exists('_multiwidget', $options) ) {
+		// old format, conver if single widget
+		$settings = wp_convert_widget_settings('lexi', 'widget_lexi', $options);
+		//Update the widget into multiple widgets, create the 'legacy' descriptor
+		lexiLegacy_updateWidget();
+	}
+
 }
 
 
@@ -298,59 +182,6 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	return $answer;
 }
 
-
-/**
-* Returns the html code with 'minimax' script and div, to show one feed from the internal list.
-* Add this code into the html page to create the RSS reader.
-*
-* @param int id The feed Id into lexi list.
-* @return string
-* @access public
-*/
-function lexi_viewer_id($id) {
-	global $wpdb;
-
-	// Suppose we have to show the title from the feed
-	$show_feed_title = true;
-
-	// If we have to show the entire list (maybe the widget) use the options in the widget
-	if($id==LEXI_LIST) {
-		$options = get_option('widget_lexi');
-		$show_feed_title = $options['show_feed_title'];
-		$id=0;
-	}
-
-	$answer="";
-	$table_name = $wpdb->prefix . "lexi";
-
-	// If we have to show one feed, get it
-	if($id)
-		$feedlist = $wpdb->get_results("SELECT * FROM $table_name WHERE id = $id");
-	else // Else, get all the feeds order by position
-		$feedlist = $wpdb->get_results("SELECT * FROM $table_name ORDER BY position ASC");
-
-	// If we have minimax installed, go ahead end create the script to get the feeds
-	if(function_exists('minimax_version') && minimax_version()>=0.3) {
-		// We can have one feed or the list
-		foreach($feedlist as $feed) {
-			// Sets the configuration
-			$conf = CONF_TARGETBLANK;
-			if($feed->showcontent) $conf += CONF_SHOWCONTENT;
-			if($feed->cached) $conf += CONF_CACHE;
-			if($show_feed_title) $conf += CONF_SHOWHEADER;
-
-			// Show the feed, using the data and configuration
-			$answer.= lexi_viewer_rss($feed->rss,$feed->name,$feed->items,$conf);
-		}
-	} else { // if we don't have minimax, ask the user for it
-		$answer.= "<div id='lexi'><label>";
-		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
-		$answer.= "</label></div>";
-	}
-	return $answer;
-}
-
-
 /**
 * Filter to manage contents. Check for [lexi] tags.
 * This function should be called by a filter.
@@ -360,26 +191,9 @@ function lexi_viewer_id($id) {
 * @return The content with the changes the plugin have to do.
 */
 function lexi_content($content) {
-	//Show a feed from the internal list
-	$search = "@(?:<p>)*\s*\[lexi\s*(:\s*\d+)?\]\s*(?:</p>)*@i";
-	if(preg_match_all($search, $content, $matches)) {
-		if(is_array($matches)) {
-			foreach($matches[1] as $key =>$v0) {
-				// Get the data from the tag
-				$v1=$matches[1][$key];
-				$id=false;
-				if($v1) {
-					$v1=substr($v1,1);
-					$id=$v1*1;
-				}
-				
-				$search = $matches[0][$key];
-				// Create the scripts to show the feed
-				$replace=lexi_viewer_id($id);
-				$content = str_replace ($search, $replace, $content);
-			}
-		}
-	}
+
+	//The legacy content
+	$content = lexiLegacy_content($content);
 	
 	//Show a specific feed (Lexi 1)
 	$search = "@(?:<p>)*\s*\[lexi\s*:([^,]+),(\d+),(true|false),(true|false)?\]\s*(?:</p>)*@i";
@@ -394,10 +208,8 @@ function lexi_content($content) {
 				if($cache=='true') $cache=1; else $cache=0;
 	
 				// Calculate the configuration number from the tag data
-				$conf = CONF_SHOWHEADER + CONF_TARGETBLANK;
-				if($sc) $conf += CONF_SHOWCONTENT;
-				if($cache) $conf += CONF_CACHE;
-	
+				$conf =  lexi_calculateConf($cache, $sc);
+				
 				$search = $matches[0][$key];
 				// Create the script to show the feed
 				$replace=lexi_viewer_rss($rss,"",$items,$conf);
@@ -445,28 +257,43 @@ function lexi_content($content) {
 }
 
 /**
+* Function to calculate the conf number
+* @param int use_cache Use the cache system, default true
+* @param int show_content Show content, default false
+* @param int show_title Show title, default true
+* @param int target_blank Opemn feed in a new page, default true
+* @param int icon Show RSS icon, default true
+* @acces public
+* @return int The conf number
+*/
+function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true ) {	
+	//Calculate the conf number
+	$config = 0;
+	if($use_cache) $config = $config + CONF_CACHE;  //Cache
+	if($show_content) $config = $config + CONF_SHOWCONTENT;  //Show contents
+	if($show_title)  $config = $config + CONF_SHOWHEADER;  //Show title
+	if($target_blank)  $config = $config + CONF_TARGETBLANK;  //Target in new page (blank)
+	if(!$icon) $config = $config + CONF_NOTSHOWICON; //Don't show icon
+	return $config;
+}
+
+/**
 * Function to be called in templates. Returns the html code
 * with 'minimax' script and div. Add this function into the html
 * page to create the RSS reader.
-* If the id is numeric, the function returns the code for the
-* corresponding feed in the lexi list, and forget the other
-* parameters. If its a string, the function would use it as the URL,
-* and would use the other parameters.
-* If you call the function without parameters, it returns the code
-* for the entire lexi list.
 *
-* @param string id Would be the URL or the lexi id. See function description.
+* @param string rss The URL from the feed.
 * @param string num Max number of feeds to show
 * @param string sc Show feed contents?
 * @param string cached Save feeds in cache?
 * @access public
 */
-function lexi($id=0, $num=0, $sc=false, $cached=false, $sh=true) {
-	// If it is just the id, call with the default values
-	if(is_numeric($id)) {
-		echo lexi_viewer_id($id);
-	} else { // else, call with the specific values
-		echo lexi_viewer_rss($id, "", $num, $sc, $cached, $sh);
+function lexi($rss, $num=0, $sc=false, $cached=true, $sh=true) {
+	if(!is_numeric($rss)) {
+		$conf = lexi_calculateConf($cached, $sc, $sh );
+		echo lexi_viewer_rss($rss, "", $num, $conf); 
+	} else { //From the old API... call the legacy function
+		echo lexiLegacy_lexi($rss);
 	}
 }
 
@@ -479,6 +306,7 @@ function lexi($id=0, $num=0, $sc=false, $cached=false, $sh=true) {
 *		add 2 if lexi has to show the content
 *		add 4 if you want to show the title at thee begin of the list
 *		add 8 if you want the link for each feed to open in a new window.
+*		add 16 to not show the icon.
 *
 * @param int conf The configuration number, see function description.
 * @param string rss The URL of the feed to show
@@ -488,7 +316,7 @@ function lexi($id=0, $num=0, $sc=false, $cached=false, $sh=true) {
 */
 function lexiRss($conf, $rss, $title, $max_items) {
 	if(!$title) $title="";
-	echo lexi_viewer_rss($rss, $title, $max_items, $conf); 
+		echo lexi_viewer_rss($rss, $title, $max_items, $conf); 
 }
 
 
@@ -499,6 +327,7 @@ function lexiRss($conf, $rss, $title, $max_items) {
 *		add 2 if lexi has to show the content
 *		add 4 if you want to show the title at thee begin of the list
 *		add 8 if you want the link for each feed to open in a new window.
+*		add 16 to not show the icon.
 *
 * @param string link The URL of the rss.
 * @param string name Name to be shown at the top of the list. If empty would use
@@ -568,44 +397,6 @@ function lexi_read_feed($link, $name, $num, $config) {
 			}
 		}
 		
-	} else { //We don't have simplepie, try with MAGPIE
-		//Set the new cache dir
-		
-		define('MAGPIE_CACHE_DIR', $cache_dir);
-		
-		//Do we have to save in cache?
-		if(!($config & CONF_CACHE)) {
-			define('MAGPIE_CACHE_ON', 0);
-		}
-		
-		//Start the rss conection
-		$rss = fetch_rss($link);
-		
-		//Ǵet the link to the page (not to the RSS) from the feed
-		$channel_link=htmlspecialchars($rss->channel['link']);
-		
-		//If we don't have a title, use the name from the feed
-		if($name=="") {
-			$name=htmlspecialchars($rss->channel['title']);
-		}
-		
-		//Get the items to show
-		$items = array_slice($rss->items, 0, $num);
-		
-		//If we have something to show, show the items
-		if($items) {
-			foreach($items as $item) {
-				//Every feed is an item in the list.
-				//In this link we use:
-				//		link to the feed
-				//		target to define if we need to open the link in a ned window
-				//		title of the feed
-				//		the content and the variable to know if we have to show it
-				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item['link'])."'".$target.">".$item['title']."</a>";
-				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item['atom_content'].$item['summary'];
-				$answer.="</li>";
-			}
-		}
 	}
 	
 	//The default image and its link
@@ -626,132 +417,6 @@ function lexi_read_feed($link, $name, $num, $config) {
 	return "$header<ul>$answer</ul>";
 }
 
-
-/**
-* Enable menu to manage Feeds.
-* This function should be called by an action.
-*
-* @access public
-*/
-
-function lexi_manage() {
-	add_management_page('Lexi', 'Lexi', 10, 'leximanage', 'lexi_manage_page');
-}
-
-
-/**
-* Page to manage feeds.
-*
-* @access public
-*/
-
-function lexi_manage_page() {
-	global $wpdb;
-
-	$table_name = $wpdb->prefix . "lexi";
-	$messages=array();
-	
-	//If we don't have minimax, ask the user for it
-	if(!function_exists('minimax_version') || minimax_version()<0.3) { 
-		array_push($messages, sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" ));
-	}
-
-	$mode_x=$_POST['mode_x']; // Something from POST
-	$mode=$_GET['mode']; // Something from GET?
-
-	//if pressed addfeed, mode must be add feed
-	if($_POST['addfeed']) {
-		$mode='add';
-		$mode_x='done';
-	}
-
-	// Assume we don't have to do any action, but ask if we have
-	$doaction=false;
-	if($_POST['doaction']!="") $doaction=$_POST['action'];
-	if($_POST['doaction2']!="") $doaction=$_POST['action2'];
-	
-	//In case we have to do something previous
-	if($doaction) {
-		switch($doaction) {
-			case 'delete': //if the action ask to delete a feed from the list
-				foreach($_POST['checked_feeds'] as $checked_id) {
-					lexi_delete_feed($checked_id);
-				}
-				break;
-		}
-	}
-	
-	//if we are going to execute a command
-	switch($mode_x) {
-		case 'manage_x': //Just show the internal list and the items to manage it
-			$mode='done';
-			break;
-		case 'add_x': //Add a feed
-		case 'edit_x': //Edit a feed
-			$mode='done';
-			if($_POST['submit']) {
-				//Get the data from the form
-				$name=$_POST['lexi_name'];
-				$rss=$_POST['lexi_rss'];
-				$items=$_POST['lexi_items'];
-				if(!is_numeric($items)) $items=5;
-				$showcontent=false;
-				if($_POST['lexi_showcontent']=='on') $showcontent=true;
-				$cached=false;
-				if($_POST['lexi_cached']=='on') $cached=true;
-			
-				if($mode_x=='add_x') {
-					//Add the new feed
-					lexi_add_feed($name, $rss, $items, $showcontent, $cached);
-					//The message to say that we added a feed
-					array_push($messages, __( 'Feed added', 'lexi' ));
-				}
-				
-				if($mode_x=='edit_x') {
-					$id=$_POST['lexi_id'];
-					//Edit the feed
-					lexi_edit_feed($id, $name, $rss, $items, $showcontent, $cached);
-					//The message to say that we edited a feed
-					array_push($messages, __( 'Feed modified', 'lexi' ));
-				}
-			}
-			break;
-	}
-
-	//wath we have to show?
-	switch($mode) {
-		case 'add': //If we are adding a new feed, show the respective form
-			break;
-		case 'edit': //If we are editing a feed, get the data and show the respective form
-			$id=$_GET['id'];
-			$table_name = $wpdb->prefix . "lexi";
-			$data = $wpdb->get_row("select name, rss, items, showcontent, cached from $table_name where id=$id");
-			$name=$data->name;
-			$rss=$data->rss;
-			$items=$data->items;
-			$cached=$data->cached;
-			$showcontent=$data->showcontent;
-			break;
-		case 'up': //If we are moving a feed, get the id and ask to move it
-			$id=$_GET['id'];
-			if(lexi_up_feed($id)) array_push($messages, __("Feed moved", 'lexi'));
-			break;
-		case 'down': //If we are moving a feed, get the id and ask to move it
-			$id=$_GET['id'];
-			if(lexi_down_feed($id)) array_push($messages, __("Feed moved", 'lexi'));
-			break;
-		case 'delete': //If we are deleting a feed, get the id and ask to delete it
-			$id=$_GET['id'];
-			if(lexi_delete_feed($id)) array_push($messages, __("Feed deleted", 'lexi'));
-			break;
-	}
-
-	if($mode=='edit' || $mode=='add') { //if we are editing or adding, we show its respective forms
-		include('templates/lexi_feed.php');
-	} else { //else show the manage page
-		include('templates/lexi_manage.php');
-	}
-}
 
 /**
 * Enable buttons in tinymce.
@@ -797,92 +462,84 @@ function add_lexi_script($plugins) {
 	return $plugins;
 }
 
-
 /**
-* Lexi widget stuff.
+* Lexi widget stuff (New MultiWidget )
 *
-* @access public
 */
-function lexi_widget_init() {
+	
+// check version. only 2.8 WP support class multi widget system
+global $wp_version;
+if((float)$wp_version >= 2.8) { //The new widget system
+	
+	class LexiWidget extends WP_Widget {
+	
+	/**
+		 * constructor
+		 */	 
+		function LexiWidget() {
+			$control_ops = array( 'width' => 420, 'height' => 280 );
+			parent::WP_Widget('lexi', 'Lexi', array('description' => __('Add an RSS feed to the sidebar using Lexi.', 'lexi') ), $control_ops);
+			
+		}
+		
+		/**
+		 * display widget
+		 */	 
+		function widget($args, $instance) {
+			extract($args, EXTR_SKIP);
+			
+			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'] );
+			
+			$rss = $instance['rss'];
+			$title = $instance['title'];
+			$max_items = $instance['items'];
+			
+			/*$icon = "";
+			if($instance['icon']) $icon = "<a class='rsswidget' href='$rss' title='" . __('Subscribe' , 'lexi')."'><img class='lexi' src='".get_bloginfo('wpurl')."/wp-includes/images/rss.png' alt='RSS' border='0' /></a> ";
+			$title = empty($instance['title']) ? '&nbsp;' : apply_filters('widget_title', $instance['title']);*/
+			
+			echo $before_widget;
+			//if ( !empty( $title ) && !$instance['show_title'] ) { echo $before_title . $icon . $title . $after_title; };
+			echo lexiRss($config, $rss, $title, $max_items);
+			echo $after_widget;
+			
+		}
+		
+		/**
+		 *	update/save function
+		 */	 	
+		function update($new_instance, $old_instance) {
+			
+			$instance = $new_instance;
+			
+			if($new_instance['use_cache']) $instance['use_cache'] = 1; else $instance['use_cache'] = 0;
+			if($new_instance['show_content']) $instance['show_content'] = 1; else $instance['show_content'] = 0;
+			if($new_instance['show_title']) $instance['show_title'] = 1; else $instance['show_title'] = 0;
+			if($new_instance['icon']) $instance['icon'] = 1; else $instance['icon'] = 0;
+			if($new_instance['target_blank']) $instance['target_blank'] = 1; else $instance['target_blank'] = 0;
+			
+			return $instance;
+		}
+		
+		/**
+		 *	admin control form
+		 */	 	
+		function form($instance) {
+			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'target_blank'=>'1', 'use_cache'=>'1');
+			$instance = wp_parse_args( (array) $instance, $default );
+			
+			//Show the widget control.
+			include('templates/lexi_widget_manage.php');
+		}
+	}
 
-	if( !function_exists('register_sidebar_widget') ) {
-		return;
+	/* register widget when loading the WP core */
+	add_action('widgets_init', lexi_register_widgets);
+
+	function lexi_register_widgets() {
+		register_widget('LexiWidget');
 	}
-	
-	function lexi_widget($args) {
-	
-		global $wpdb;
-		
-		// $args is an array of strings that help widgets to conform to
-		// the active theme: before_widget, before_title, after_widget,
-		// and after_title are the array keys. Default tags: li and h2.
-		extract($args);
-		
-		//$table_name = $wpdb->prefix . "lexi";
-		//$feedlist = $wpdb->get_results("SELECT id FROM $table_name ORDER BY position ASC");
-		
-		$options = get_option('widget_lexi');
-		$title = $options['title'];
-		$show_feed_title = $options['show_feed_title'];
-	
-		// These lines generate our output. Widgets can be very complex
-		// but as you can see here, they can also be very, very simple.
-		echo $before_widget;
-		if(strlen($title)>0) {
-			echo $before_title . $title . $after_title;
-		}
-		lexi(LEXI_LIST);
-		echo $after_widget;
-	}
-	
-	// This is the function that outputs the form to let the users edit
-	// the widget's title. It's an optional feature that users cry for.
-	function lexi_widget_control() {
-	
-		// Get our options and see if we're handling a form submission.
-		$options = get_option('widget_lexi');
-		if( !is_array($options) )
-			$options = array('title'=>'', 'show_feed_title'=>1);
-			
-		if(!function_exists('minimax_version') || minimax_version()<0.3) { ?>
-		<p>
-			<label>
-				<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'sk'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
-			</label>
-		</p><?
-		} else {
-			if( $_POST['lexi-submit'] ) {
-				// Remember to sanitize and format use input appropriately.
-				$options['title'] = strip_tags(stripslashes($_POST['lexi_title']));
-				if($_POST['showfeedtitle']=='on')
-					$options['show_feed_title'] = true; 
-				else 
-					$options['show_feed_title'] = false;
-				update_option('widget_lexi', $options); 
-			}
-			
-			// Be sure you format your options to be valid HTML attributes.
-			$title = htmlspecialchars($options['title'], ENT_QUOTES);
-			$show_feed_title = $options['show_feed_title'];
-			
-			
-			// Here is our little form segment. Notice that we don't need a
-			// complete form. This will be embedded into the existing form.
-			require('templates/lexi_widget.php');
-		}
-	}
-	
-	// This registers our widget so it appears with the other available
-	// widgets and can be dragged and dropped into any active sidebars.
-	register_sidebar_widget(array('Lexi RSS Widget', 'widgets'), 'lexi_widget');
-	
-	// This registers our optional widget control form. Because of this
-	// our widget will have a button that reveals a 300x100 pixel form.
-	register_widget_control(array('Lexi RSS Widget', 'widgets'), 'lexi_widget_control');
 
 }
-
-// Run our code later in case this loads prior to any required plugins.
-add_action('widgets_init', 'lexi_widget_init');
 
 ?>

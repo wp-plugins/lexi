@@ -1,9 +1,9 @@
 === Lexi ===
 Contributors: sebaxtian
 Tags: rss
-Requires at least: 2.4
+Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 0.8.4
+Stable tag: 0.9
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -24,8 +24,6 @@ The configuration number can be calculated as follows:
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
 There is a button in the RichText editor created by the plugin to add a Feed.
-
-You can add a widget to the sidebar to show a list of feeds. To modify or delete any item of the list go to __Tools > Lexi__. You can also use the tag `[lexi]` in a page, or the function `lexi()` in a template to show the entire list.
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. 
 
@@ -75,12 +73,17 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 
 == Screenshots ==
 
-1. Feeds administrator.
-2. Feed editor.
-3. Lexi widget.
+1. Add one feed in the sidebar.
+2. Feeds in the sidebar.
+3. Lexi button in the editor.
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9 =
+* Multiple widget.
+* Manage activation errors.
+* New API without numbered list. See all your posts, pages and sidebar with lexi for changes.
 
 = 0.8.4 =
 * FAQ and screenshots updated.

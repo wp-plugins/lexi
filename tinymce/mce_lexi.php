@@ -38,20 +38,11 @@ if(!current_user_can('edit_posts')) die;
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
 		<br />
-			<table border="0" cellpadding="4" cellspacing="0">
-	
-	
-				<!--<tr>
-				<td nowrap="nowrap"><label for="feedid"><?php _e("Feed:", 'lexi'); ?>:</label></td>
-				<td><select id="feedtag" name="feedtag" style="width: 200px">
-					<option value="0"><?php _e("All feeds", 'lexi'); ?></option>
-				</td>
-				</tr>-->
-	
+			<table border="0" cellpadding="3" cellspacing="0" width="100%">
 	
 				<tr>
 					<td nowrap="nowrap"><label for="rsslink"><?php _e("RSS", 'lexi' ); ?>:</label></td>
-					<td colspan=3><input type="text" id="rsslink" name="rsslink" style="width: 100%"/></td>
+					<td><input type="text" id="rsslink" name="rsslink" style="width: 100%"/></td>
 				</tr>
 				<tr style="background: #F9F9F9;">
 					<td nowrap="nowrap" valign="top"><label><?php _e("Title", 'lexi' ); ?>:</label></td>
@@ -60,8 +51,7 @@ if(!current_user_can('edit_posts')) die;
 							var aux = document.getElementById('rssowntitle');
 							aux.disabled = true;
 						}
-					" checked/></td>
-					<td colspan=2><?php _e("Use the title from the feed", 'lexi'); ?>
+					" checked/> <?php _e("Use the title from the feed", 'lexi'); ?>
 				</tr>
 				<tr style="background: #F9F9F9;">
 					<td></td>
@@ -71,31 +61,27 @@ if(!current_user_can('edit_posts')) die;
 						aux.disabled = false;
 						aux.value='';
 					}
-					" /></td>
-					<td colspan=2><input type="text" id="rssowntitle" name="rssowntitle" style="width: 100%" disabled value="<?php _e("Use a specific title", 'lexi'); ?>" /></td>
+					" /> <input type="text" id="rssowntitle" name="rssowntitle" style="width: 80%" disabled value="<?php _e("Use a specific title", 'lexi'); ?>" /></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
-					<td colspan=3>
+					<td>
 						<input type="text" name="rssitems" id="rssitems" style="width: 30px" value="5">
 					</td>
 				</tr>
+			</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			
 				<tr>
-					<td nowrap="nowrap" valign="top"><label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>: </label></td>
-					<td valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /></td>
-					<td colspan="2"><?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></td>
+					<td colspan="2" valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /> <label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>. <?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></lavel></td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap"><label for="rsssc"><?php _e("Show contents", 'lexi' ); ?>:</label></td>
-					<td><input type="checkbox" id="rsssc" name="rsssc" /></td>
-					<td nowrap="nowrap"><label for="rssst"><?php _e("Show title", 'lexi' ); ?>:</label></td>
-					<td><input type="checkbox" id="rssst" name="rssst" checked /></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show title", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap"><label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?>:</label></td>
-					<td><input type="checkbox" id="rsstb" name="rsstb" checked /></td>
-					<td nowrap="nowrap"><label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?>:</label></td>
-					<td><input type="checkbox" id="rssimg" name="rssimg" checked /></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rsstb" name="rsstb" checked /> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
 				</tr>
 			</table>
 		</div>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 08:19-0500\n"
-"PO-Revision-Date: 2010-01-08 08:19-0500\n"
+"POT-Creation-Date: 2010-01-27 08:27-0500\n"
+"PO-Revision-Date: 2010-01-27 08:27-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,163 +23,88 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:290
+#: lexi.php:49
+#, php-format
+msgid "Can't create the cache dir: %s<br>You have to create it manually."
+msgstr ""
+
+#: lexi.php:57
+#, php-format
+msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
+msgstr ""
+
+#: lexi.php:174
 msgid "Loading Feed..."
 msgstr ""
 
-#: lexi.php:295
-#: lexi.php:347
-#: lexi.php:655
-#: lexi.php:849
-#: templates/lexi_widget.php:21
+#: lexi.php:179
+#: templates/lexi_widget_manage.php:37
 #, fuzzy, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:611
+#: lexi.php:403
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:706
-#, fuzzy
-msgid "Feed added"
-msgstr "Se agregó la galería"
-
-#: lexi.php:714
-#, fuzzy
-msgid "Feed modified"
-msgstr "Comentario modificado"
-
-#: lexi.php:736
-#: lexi.php:740
-msgid "Feed moved"
+#: lexi.php:481
+msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
-#: lexi.php:744
-#, fuzzy
-msgid "Feed deleted"
-msgstr "Se eliminó el comentario"
+#: legacy.php:175
+#, php-format
+msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
+msgstr ""
 
-#: templates/lexi_feed.php:6
-#: templates/lexi_manage.php:23
-#: templates/lexi_manage.php:33
-#: templates/lexi_manage.php:74
-#, fuzzy
-msgid "Add Feed"
-msgstr "Agregar Galería"
-
-#: templates/lexi_feed.php:6
-#, fuzzy
-msgid "Edit Feed"
-msgstr "Editar comentario"
-
-#: templates/lexi_feed.php:11
-#: templates/lexi_feed.php:20
-#: tinymce/mce_lexi.php:53
+#: templates/lexi_widget_manage.php:9
+#: tinymce/mce_lexi.php:44
 msgid "RSS"
 msgstr ""
 
-#: templates/lexi_feed.php:16
-#, fuzzy
-msgid "Name"
-msgstr "T&iacute;­tulo del Cap&iacute;­tulo:"
-
-#: templates/lexi_feed.php:24
-#: tinymce/mce_lexi.php:78
-#, fuzzy
-msgid "Items"
-msgstr "Items por página"
-
-#: templates/lexi_feed.php:30
-#: templates/lexi_manage.php:43
-#: tinymce/mce_lexi.php:89
-#, fuzzy
-msgid "Show contents"
-msgstr "Mostrar Avatar"
-
-#: templates/lexi_feed.php:35
-#: templates/lexi_manage.php:44
-#: tinymce/mce_lexi.php:84
-msgid "Save cache"
-msgstr ""
-
-#: templates/lexi_feed.php:37
-#: tinymce/mce_lexi.php:86
-msgid "Uncheck this option only in case the feed updates several times in an hour."
-msgstr ""
-
-#: templates/lexi_feed.php:44
-#: tinymce/mce_lexi.php:106
-#, fuzzy
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: templates/lexi_feed.php:47
-#, fuzzy
-msgid "Add"
-msgstr "Agregar"
-
-#: templates/lexi_feed.php:47
-#, fuzzy
-msgid "Modify"
-msgstr "Modificar"
-
-#: templates/lexi_manage.php:16
-msgid "Lexi"
-msgstr ""
-
-#: templates/lexi_manage.php:23
-#, fuzzy
-msgid "No feeds found"
-msgstr "No se encontraron comentarios"
-
-#: templates/lexi_manage.php:28
-#: templates/lexi_manage.php:69
-#, fuzzy
-msgid "Bulk Actions"
-msgstr "Acciones en bloque"
-
-#: templates/lexi_manage.php:29
-#: templates/lexi_manage.php:55
-#: templates/lexi_manage.php:70
-#, fuzzy
-msgid "Delete"
-msgstr "Eliminar"
-
-#: templates/lexi_manage.php:31
-#: templates/lexi_manage.php:72
-#, fuzzy
-msgid "Apply"
-msgstr "Aplicar"
-
-#: templates/lexi_manage.php:42
-msgid "Feed"
-msgstr ""
-
-#: templates/lexi_manage.php:54
-#, fuzzy
-msgid "Edit"
-msgstr "Editar"
-
-#: templates/lexi_manage.php:55
-#, fuzzy
-msgid "Delete this Feed?"
-msgstr "¿Eliminar este Comentario?"
-
-#: templates/lexi_widget.php:3
-#: tinymce/mce_lexi.php:57
+#: templates/lexi_widget_manage.php:13
+#: tinymce/mce_lexi.php:48
 #, fuzzy
 msgid "Title"
 msgstr "Título"
 
-#: templates/lexi_widget.php:9
-msgid "Show feed title"
+#: templates/lexi_widget_manage.php:17
+#: tinymce/mce_lexi.php:67
+#, fuzzy
+msgid "Items"
+msgstr "Items por página"
+
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:76
+msgid "Save cache"
 msgstr ""
 
-#: templates/lexi_widget.php:14
-#, php-format
-msgid "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</strong>"
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:76
+msgid "Uncheck this option only in case the feed updates several times in an hour."
 msgstr ""
+
+#: templates/lexi_widget_manage.php:26
+#: tinymce/mce_lexi.php:79
+#, fuzzy
+msgid "Show contents"
+msgstr "Mostrar Avatar"
+
+#: templates/lexi_widget_manage.php:27
+#: tinymce/mce_lexi.php:80
+#, fuzzy
+msgid "Show title"
+msgstr "T&iacute;tulo del prefacio:"
+
+#: templates/lexi_widget_manage.php:30
+#: tinymce/mce_lexi.php:83
+msgid "Open links in new page"
+msgstr ""
+
+#: templates/lexi_widget_manage.php:31
+#: tinymce/mce_lexi.php:84
+#, fuzzy
+msgid "Show RSS icon"
+msgstr "No existe el RSS"
 
 #: ajax/content.php:16
 msgid "Only Lexi can use this link."
@@ -189,39 +114,81 @@ msgstr ""
 msgid "Lexi Feed"
 msgstr ""
 
-#: tinymce/mce_lexi.php:45
-msgid "Feed:"
-msgstr ""
-
-#: tinymce/mce_lexi.php:47
-#, fuzzy
-msgid "All feeds"
-msgstr "Eliminar Spam"
-
-#: tinymce/mce_lexi.php:64
+#: tinymce/mce_lexi.php:54
 msgid "Use the title from the feed"
 msgstr ""
 
-#: tinymce/mce_lexi.php:75
+#: tinymce/mce_lexi.php:64
 msgid "Use a specific title"
 msgstr ""
 
-#: tinymce/mce_lexi.php:91
+#: tinymce/mce_lexi.php:92
 #, fuzzy
-msgid "Show title"
-msgstr "T&iacute;tulo del prefacio:"
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:95
-msgid "Open links in new page"
-msgstr ""
-
-#: tinymce/mce_lexi.php:97
-#, fuzzy
-msgid "Show RSS icon"
-msgstr "No existe el RSS"
-
-#: tinymce/mce_lexi.php:110
+#: tinymce/mce_lexi.php:96
 #, fuzzy
 msgid "Insert"
 msgstr "Insertar"
+
+#, fuzzy
+#~ msgid "Feed added"
+#~ msgstr "Se agregó la galería"
+
+#, fuzzy
+#~ msgid "Feed modified"
+#~ msgstr "Comentario modificado"
+
+#, fuzzy
+#~ msgid "Feed deleted"
+#~ msgstr "Se eliminó el comentario"
+
+#, fuzzy
+#~ msgid "Add Feed"
+#~ msgstr "Agregar Galería"
+
+#, fuzzy
+#~ msgid "Edit Feed"
+#~ msgstr "Editar comentario"
+
+#, fuzzy
+#~ msgid "Name"
+#~ msgstr "T&iacute;­tulo del Cap&iacute;­tulo:"
+
+#, fuzzy
+#~ msgid "Add"
+#~ msgstr "Agregar"
+
+#, fuzzy
+#~ msgid "Modify"
+#~ msgstr "Modificar"
+
+#, fuzzy
+#~ msgid "No feeds found"
+#~ msgstr "No se encontraron comentarios"
+
+#, fuzzy
+#~ msgid "Bulk Actions"
+#~ msgstr "Acciones en bloque"
+
+#, fuzzy
+#~ msgid "Delete"
+#~ msgstr "Eliminar"
+
+#, fuzzy
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#, fuzzy
+#~ msgid "Delete this Feed?"
+#~ msgstr "¿Eliminar este Comentario?"
+
+#, fuzzy
+#~ msgid "All feeds"
+#~ msgstr "Eliminar Spam"
 
