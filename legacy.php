@@ -164,7 +164,8 @@ function lexiLegacy_lexi($id) {
 	if($data = mnmx_readfile($url)) { //We have a legacy file
 		$data = new SimpleXMLElement($data);
 		foreach($data->feed as $feed) {
-			if($id == -1 || $id == $feed->attributes()->id) { //Show the entyre list or this is what we have to show?
+			$attr = $feed->attributes();
+			if($id == -1 || $id == $attr->id) { //Show the entyre list or this is what we have to show?
 				$answer.= lexi_viewer_rss($feed->rss, $feed->title, $feed->items, $feed->conf);
 			}
 		}
