@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -20,6 +20,8 @@ The configuration number can be calculated as follows:
 * Add 4 if you want to show the title (this is the channel link too).
 * Add 8 if you want to open it in a new page.
 * Add 16 if you want to not show the RSS icon (this is the RSS link too).
+* Add 32 if you want to show the author.
+* Add 64 if you want to show the date.
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
@@ -79,6 +81,10 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.2 =
+* Option added to show the author.
+* Option added to show the date.
 
 = 0.9.1 =
 * Solved a bug with old PHP versions.

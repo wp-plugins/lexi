@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.1
+Version: 0.9.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -32,6 +32,8 @@ define('CONF_SHOWCONTENT', 2);
 define('CONF_SHOWHEADER', 4);
 define('CONF_TARGETBLANK', 8);
 define('CONF_NOTSHOWICON', 16);
+define('CONF_SHOWAUTHOR', 32);
+define('CONF_SHOWDATE', 64);
 
 add_action('init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
@@ -266,7 +268,7 @@ function lexi_content($content) {
 * @acces public
 * @return int The conf number
 */
-function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true ) {	
+function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false ) {	
 	//Calculate the conf number
 	$config = 0;
 	if($use_cache) $config = $config + CONF_CACHE;  //Cache
@@ -274,6 +276,8 @@ function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=tr
 	if($show_title)  $config = $config + CONF_SHOWHEADER;  //Show title
 	if($target_blank)  $config = $config + CONF_TARGETBLANK;  //Target in new page (blank)
 	if(!$icon) $config = $config + CONF_NOTSHOWICON; //Don't show icon
+	if($show_author)  $config = $config + CONF_SHOWAUTHOR;  //Show author
+	if($show_date)  $config = $config + CONF_SHOWDATE;  //Show date
 	return $config;
 }
 
@@ -392,7 +396,29 @@ function lexi_read_feed($link, $name, $num, $config) {
 				//		title of the feed
 				//		the content and the variable to know if we have to show it
 				$answer.="<li><a class='rsswidget' href='".htmlspecialchars($item->get_permalink())."'".$target.">".$item->get_title()."</a>";
+				
+				if($config & CONF_SHOWDATE) {
+					$date = $item->get_date();
+					if ( $date ) {
+						if ( $date_stamp = strtotime( $date ) )
+							$date = ' <span class="rss-date">' . date_i18n( get_option( 'date_format' ), $date_stamp ) . '</span>';
+						else
+							$date = '';
+					}
+					$answer.="<br/>".$date;
+				}
+				
 				if($config & CONF_SHOWCONTENT) $answer.="<br/>".$item->get_content();
+				
+				if($config & CONF_SHOWAUTHOR) {
+					$author = $item->get_author();
+					if ( is_object($author) ) {
+						$author = $author->get_name();
+						$author = ' <cite>(' . esc_html( strip_tags( $author ) ) . ')</cite>';
+					}
+					$answer.=$author;	
+				}
+				
 				$answer.="</li>";
 			}
 		}
@@ -488,7 +514,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		function widget($args, $instance) {
 			extract($args, EXTR_SKIP);
 			
-			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'] );
+			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'] );
 			
 			$rss = $instance['rss'];
 			$title = $instance['title'];
@@ -517,6 +543,8 @@ if((float)$wp_version >= 2.8) { //The new widget system
 			if($new_instance['show_title']) $instance['show_title'] = 1; else $instance['show_title'] = 0;
 			if($new_instance['icon']) $instance['icon'] = 1; else $instance['icon'] = 0;
 			if($new_instance['target_blank']) $instance['target_blank'] = 1; else $instance['target_blank'] = 0;
+			if($new_instance['show_author']) $instance['show_author'] = 1; else $instance['show_author'] = 0;
+			if($new_instance['show_date']) $instance['show_date'] = 1; else $instance['show_date'] = 0;
 			
 			return $instance;
 		}
@@ -525,7 +553,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		 *	admin control form
 		 */	 	
 		function form($instance) {
-			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'target_blank'=>'1', 'use_cache'=>'1');
+			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0',);
 			$instance = wp_parse_args( (array) $instance, $default );
 			
 			//Show the widget control.

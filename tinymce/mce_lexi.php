@@ -33,7 +33,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 200px;">
+	<div class="panel_wrapper" style="height: 210px;">
 
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
@@ -76,12 +76,16 @@ if(!current_user_can('edit_posts')) die;
 					<td colspan="2" valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /> <label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>. <?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></lavel></td>
 				</tr>
 				<tr>
+					<td nowrap="nowrap"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show feed title", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show title", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsstb" name="rsstb" checked /> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><input type="checkbox" id="rsssa" name="rsssa" /> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rsssd" name="rsssd" /> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 				</tr>
 			</table>
 		</div>

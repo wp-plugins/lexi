@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-27 08:27-0500\n"
-"PO-Revision-Date: 2010-01-27 08:27-0500\n"
+"POT-Creation-Date: 2010-02-07 20:24-0500\n"
+"PO-Revision-Date: 2010-02-07 20:24-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,35 +23,35 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:49
+#: lexi.php:55
 #, php-format
 msgid "Can't create the cache dir: %s<br>You have to create it manually."
 msgstr ""
 
-#: lexi.php:57
+#: lexi.php:63
 #, php-format
 msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
 msgstr ""
 
-#: lexi.php:174
+#: lexi.php:176
 msgid "Loading Feed..."
 msgstr ""
 
-#: lexi.php:179
-#: templates/lexi_widget_manage.php:37
+#: lexi.php:181
+#: templates/lexi_widget_manage.php:41
 #, fuzzy, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:403
+#: lexi.php:429
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:481
+#: lexi.php:507
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
-#: legacy.php:175
+#: legacy.php:176
 #, php-format
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr ""
@@ -86,14 +86,14 @@ msgstr ""
 #: templates/lexi_widget_manage.php:26
 #: tinymce/mce_lexi.php:79
 #, fuzzy
-msgid "Show contents"
-msgstr "Mostrar Avatar"
+msgid "Show feed title"
+msgstr "T&iacute;tulo del prefacio:"
 
 #: templates/lexi_widget_manage.php:27
 #: tinymce/mce_lexi.php:80
 #, fuzzy
-msgid "Show title"
-msgstr "T&iacute;tulo del prefacio:"
+msgid "Show contents"
+msgstr "Mostrar Avatar"
 
 #: templates/lexi_widget_manage.php:30
 #: tinymce/mce_lexi.php:83
@@ -105,6 +105,18 @@ msgstr ""
 #, fuzzy
 msgid "Show RSS icon"
 msgstr "No existe el RSS"
+
+#: templates/lexi_widget_manage.php:34
+#: tinymce/mce_lexi.php:87
+#, fuzzy
+msgid "Show author"
+msgstr "Autor: %1$s (IP: %2$s)"
+
+#: templates/lexi_widget_manage.php:35
+#: tinymce/mce_lexi.php:88
+#, fuzzy
+msgid "Show date"
+msgstr "Mostrar Avatar"
 
 #: ajax/content.php:16
 msgid "Only Lexi can use this link."
@@ -122,12 +134,12 @@ msgstr ""
 msgid "Use a specific title"
 msgstr ""
 
-#: tinymce/mce_lexi.php:92
+#: tinymce/mce_lexi.php:96
 #, fuzzy
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:96
+#: tinymce/mce_lexi.php:100
 #, fuzzy
 msgid "Insert"
 msgstr "Insertar"
