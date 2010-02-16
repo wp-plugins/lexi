@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.1
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -47,6 +47,10 @@ Screenshots are in spanish because it's my native language. As you should know y
 
 My page (I don't know if yours too) use to get blocked reading some RSS feeds. I created Lexi to read the RSS _after_ the page was created, not during the process.
 
+= It doesn't work! =
+
+If you use a cache plugin, write ___define ('MNMX_CACHE', 'mnmx');___ at the end of your `wp_config.php` file and reactivate Lexi (and MudslideShow if you have it) to create the new cache directory.
+
 = Lexi shows strange characters with some feeds =
 
 Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
@@ -81,6 +85,10 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.3 =
+* Solved a strange bug in the editor.
+* New cache system to solve a bug with cache plugins.
 
 = 0.9.2 =
 * Option added to show the author.

@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.2
+Version: 0.9.3
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -46,16 +46,21 @@ if ($_GET['action'] == 'error_scrape') {
 	//Activate the i18n
 	lexi_text_domain();
 	
+	//Error 1: you don't have minimax installed
+	if(!function_exists('minimax') || minimax_version()<0.3) {
+		die(sprintf( __('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/"));
+	}
+	
 	//Get the cache directory path
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache';
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/' . MNMX_CACHE;
 	
-	//Error 1: we can't create the cache directory
+	//Error 2: we can't create the cache directory
 	if(!file_exists($cache_dir.'/lexi')) {
 		die(sprintf(__("Can't create the cache dir: %s<br>You have to create it manually.", 'lexi'), $cache_dir.'/lexi/'));
 	}
 	
-	//Error 2: we can't write in the cache directory
+	//Error 3: we can't write in the cache directory
 	if($handle = @fopen($cache_dir.'/lexi/test.txt','w')) {
 		fclose($handle);
 		unlink($cache_dir.'/lexi/test.txt');
@@ -117,25 +122,30 @@ function lexi_plugin_url($str = '') {
 function lexi_activate() {
 
 	global $wpdb;
+	
+	//Error 1: you don't have minimax installed
+	if(!function_exists('minimax') || minimax_version()<0.3) {
+		trigger_error('Lexi-error: #1', E_USER_ERROR);
+	}
 		
 	//Create the cache directory if it doesn't exist
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache';
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/'. MNMX_CACHE;
 	
 	if(!file_exists($cache_dir)) mkdir($cache_dir);
 	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
 	
-	//Error 1: we can't find or create the cache directory.
+	//Error 2: we can't find or create the cache directory.
 	if(!file_exists($cache_dir.'/lexi')) {
-		trigger_error('Lexi-error: #1', E_USER_ERROR);
+		trigger_error('Lexi-error: #2', E_USER_ERROR);
 	}
 	
-	//Error 2: we can't write in the cache directory
+	//Error 3: we can't write in the cache directory
 	if($handle = fopen($cache_dir.'/lexi/test.txt','w')) {
 		fclose($handle);
 		unlink($cache_dir.'/lexi/test.txt');
 	} else {
-		trigger_error('Lexi-error: #2', E_USER_ERROR);
+		trigger_error('Lexi-error: #3', E_USER_ERROR);
 	}
 	
 	//Have we updated or no?
@@ -348,7 +358,7 @@ function lexi_read_feed($link, $name, $num, $config) {
 	
 	//Get cache directory
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache/lexi/';
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/'. MNMX_CACHE . '/lexi/';
 	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);
