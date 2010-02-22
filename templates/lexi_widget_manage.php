@@ -35,10 +35,10 @@
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>"<?php if((int)$instance['show_date']) echo " checked"; ?>/> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 	</tr>
 </table><?php
-if(!function_exists('minimax_version') || minimax_version()<0.3) { ?>
+if(!function_exists('minimax_version') || minimax_version()<LEXI_MNMX_V) { ?>
 <p>
 	<label>
-		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'sk'), "http://wordpress.org/extend/plugins/minimax/" ); ?>
+		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V) ?>
 	</label>
 </p><?php
 }

@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.3
+Version: 0.9.4
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -27,6 +27,8 @@ Author URI: http://www.sebaxtian.com
 
 require_once("legacy.php");
 
+define('LEXI_MNMX_V', 0.3);
+
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
 define('CONF_SHOWHEADER', 4);
@@ -46,14 +48,9 @@ if ($_GET['action'] == 'error_scrape') {
 	//Activate the i18n
 	lexi_text_domain();
 	
-	//Error 1: you don't have minimax installed
-	if(!function_exists('minimax') || minimax_version()<0.3) {
-		die(sprintf( __('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/"));
-	}
-	
 	//Get the cache directory path
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/' . MNMX_CACHE;
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx';
 	
 	//Error 2: we can't create the cache directory
 	if(!file_exists($cache_dir.'/lexi')) {
@@ -122,15 +119,10 @@ function lexi_plugin_url($str = '') {
 function lexi_activate() {
 
 	global $wpdb;
-	
-	//Error 1: you don't have minimax installed
-	if(!function_exists('minimax') || minimax_version()<0.3) {
-		trigger_error('Lexi-error: #1', E_USER_ERROR);
-	}
 		
 	//Create the cache directory if it doesn't exist
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/'. MNMX_CACHE;
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx/';
 	
 	if(!file_exists($cache_dir)) mkdir($cache_dir);
 	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
@@ -176,7 +168,7 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	$answer="";
 	
 	// If we have minimax, go ahead
-	if(function_exists('minimax_version') && minimax_version()>=0.3) {
+	if(function_exists('minimax_version') && minimax_version()>=LEXI_MNMX_V) {
 		$num = mt_rand();
 		$url=lexi_plugin_url('/ajax/content.php');
 		$nonce = wp_create_nonce('lexi');
@@ -188,7 +180,7 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 		</script>";
 	} else { // If minimax isn't installed, ask for it to the user
 		$answer.= "<div id='lexi'><label>";
-		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax 0.3</a> in order for this plugin to work', 'lexi'), "http://wordpress.org/extend/plugins/minimax/" );
+		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V);
 		$answer.= "</label></div>";
 	}
 	return $answer;
@@ -358,7 +350,7 @@ function lexi_read_feed($link, $name, $num, $config) {
 	
 	//Get cache directory
 	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/'. MNMX_CACHE . '/lexi/';
+	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx/lexi/';
 	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);

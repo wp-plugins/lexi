@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-07 20:24-0500\n"
-"PO-Revision-Date: 2010-02-07 20:26-0500\n"
+"POT-Creation-Date: 2010-02-22 16:49-0500\n"
+"PO-Revision-Date: 2010-02-22 16:49-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,31 +24,32 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:55
+#: lexi.php:53
+#: lexi.php:193
+#: templates/lexi_widget_manage.php:41
+#, php-format
+msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
+msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> para que este plugin funcione."
+
+#: lexi.php:62
 #, php-format
 msgid "Can't create the cache dir: %s<br>You have to create it manually."
 msgstr "No puedo crear el directorio del cache: %s<br>Tendrá que crearlo manualmente."
 
-#: lexi.php:63
+#: lexi.php:70
 #, php-format
 msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
 msgstr "No puedo escribir en el directorio del cache: %s<br>Tendrá que modificar manualmente los permisos."
 
-#: lexi.php:176
+#: lexi.php:188
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:181
-#: templates/lexi_widget_manage.php:41
-#, php-format
-msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> in order for this plugin to work"
-msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.3</a> para que este plugin funcione."
-
-#: lexi.php:429
+#: lexi.php:441
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:507
+#: lexi.php:519
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
@@ -58,57 +59,57 @@ msgid "This message should be viewed only by the post owner or editor.<br>The ta
 msgstr "Este mensaje solo será presentado al propietario o editor de este post.<br>La etiqueta o función que está usando es obsoleta.<br>En el archivo <a href='%s'>léame</a> encontrará la información para hacer los cambios requeridos."
 
 #: templates/lexi_widget_manage.php:9
-#: tinymce/mce_lexi.php:44
+#: tinymce/mce_lexi.php:43
 msgid "RSS"
 msgstr "RSS"
 
 #: templates/lexi_widget_manage.php:13
-#: tinymce/mce_lexi.php:48
+#: tinymce/mce_lexi.php:47
 msgid "Title"
 msgstr "T&iacute;tulo"
 
 #: templates/lexi_widget_manage.php:17
-#: tinymce/mce_lexi.php:67
+#: tinymce/mce_lexi.php:66
 msgid "Items"
 msgstr "Items"
 
 #: templates/lexi_widget_manage.php:23
-#: tinymce/mce_lexi.php:76
+#: tinymce/mce_lexi.php:75
 msgid "Save cache"
 msgstr "Almacenar en Cach&eacute;"
 
 #: templates/lexi_widget_manage.php:23
-#: tinymce/mce_lexi.php:76
+#: tinymce/mce_lexi.php:75
 msgid "Uncheck this option only in case the feed updates several times in an hour."
 msgstr "Solo quite esta marca si la fuente se actualiza varias veces en una misma hora."
 
 #: templates/lexi_widget_manage.php:26
-#: tinymce/mce_lexi.php:79
+#: tinymce/mce_lexi.php:78
 msgid "Show feed title"
 msgstr "Mostrar el t&iacute;tulo de la fuente"
 
 #: templates/lexi_widget_manage.php:27
-#: tinymce/mce_lexi.php:80
+#: tinymce/mce_lexi.php:79
 msgid "Show contents"
 msgstr "Mostrar Contenido"
 
 #: templates/lexi_widget_manage.php:30
-#: tinymce/mce_lexi.php:83
+#: tinymce/mce_lexi.php:82
 msgid "Open links in new page"
 msgstr "Abrir en nueva p&aacute;gina"
 
 #: templates/lexi_widget_manage.php:31
-#: tinymce/mce_lexi.php:84
+#: tinymce/mce_lexi.php:83
 msgid "Show RSS icon"
 msgstr "Mostrar icono RSS"
 
 #: templates/lexi_widget_manage.php:34
-#: tinymce/mce_lexi.php:87
+#: tinymce/mce_lexi.php:86
 msgid "Show author"
 msgstr "Mostrar el autor"
 
 #: templates/lexi_widget_manage.php:35
-#: tinymce/mce_lexi.php:88
+#: tinymce/mce_lexi.php:87
 msgid "Show date"
 msgstr "Mostrar la fecha"
 
@@ -116,23 +117,23 @@ msgstr "Mostrar la fecha"
 msgid "Only Lexi can use this link."
 msgstr "Solo Lexi puede consultar este enlace."
 
-#: tinymce/mce_lexi.php:32
+#: tinymce/mce_lexi.php:31
 msgid "Lexi Feed"
 msgstr "Fuente RSS"
 
-#: tinymce/mce_lexi.php:54
+#: tinymce/mce_lexi.php:53
 msgid "Use the title from the feed"
 msgstr "Usar el t&iacute;tulo de la fuente"
 
-#: tinymce/mce_lexi.php:64
+#: tinymce/mce_lexi.php:63
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:96
+#: tinymce/mce_lexi.php:95
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:100
+#: tinymce/mce_lexi.php:99
 msgid "Insert"
 msgstr "Insertar"
 
