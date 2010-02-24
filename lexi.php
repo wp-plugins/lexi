@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.4
+Version: 0.9.5
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -45,12 +45,14 @@ add_action('activate_plugin', 'lexi_activate');
 
 //The activation error routine
 if ($_GET['action'] == 'error_scrape') {
+
+	require_once('../wp-config.php');
+
 	//Activate the i18n
 	lexi_text_domain();
 	
 	//Get the cache directory path
-	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx';
+	$cache_dir = ABSPATH.'wp-content/mnmx';
 	
 	//Error 2: we can't create the cache directory
 	if(!file_exists($cache_dir.'/lexi')) {
@@ -120,9 +122,7 @@ function lexi_activate() {
 
 	global $wpdb;
 		
-	//Create the cache directory if it doesn't exist
-	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx/';
+	$cache_dir = ABSPATH.'wp-content/mnmx';
 	
 	if(!file_exists($cache_dir)) mkdir($cache_dir);
 	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
@@ -349,8 +349,7 @@ function lexi_read_feed($link, $name, $num, $config) {
 	@include_once(ABSPATH . WPINC . '/class-simplepie.php');
 	
 	//Get cache directory
-	$ans = parse_url(get_bloginfo('wpurl'));
-	$cache_dir = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/mnmx/lexi/';
+	$cache_dir = ABSPATH.'wp-content/mnmx/lexi/';
 	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);

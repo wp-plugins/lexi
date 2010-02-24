@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.2
-Stable tag: 0.9.4
+Stable tag: 0.9.5
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -53,7 +53,7 @@ Lexi encodes the feed list in UTF-8. If your site uses another character encodin
 
 If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
 
-= It says something about a write problem in cache =
+= It says something about a write problem in cache / It doesn't work! =
 
 Sure you are using SimplePie. Check you have write permission in `wp-content/cache/lexi`.
 
@@ -81,6 +81,9 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.5 =
+* Solved a bug with current path.
 
 = 0.9.4 =
 * New cache system fixed.
