@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.5
+Version: 0.9.6
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -43,30 +43,6 @@ add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
 add_action('activate_plugin', 'lexi_activate');
 
-//The activation error routine
-if ($_GET['action'] == 'error_scrape') {
-
-	require_once('../wp-config.php');
-
-	//Activate the i18n
-	lexi_text_domain();
-	
-	//Get the cache directory path
-	$cache_dir = ABSPATH.'wp-content/mnmx';
-	
-	//Error 2: we can't create the cache directory
-	if(!file_exists($cache_dir.'/lexi')) {
-		die(sprintf(__("Can't create the cache dir: %s<br>You have to create it manually.", 'lexi'), $cache_dir.'/lexi/'));
-	}
-	
-	//Error 3: we can't write in the cache directory
-	if($handle = @fopen($cache_dir.'/lexi/test.txt','w')) {
-		fclose($handle);
-		unlink($cache_dir.'/lexi/test.txt');
-	} else {
-		die(sprintf(__("Can't write in the cache dir: %s<br>You have to modify the permissions manually.", 'lexi'), $cache_dir.'/lexi/'));
-	}
-}
 
 /**
 * To declare where are the mo files (i18n).
@@ -121,24 +97,6 @@ function lexi_plugin_url($str = '') {
 function lexi_activate() {
 
 	global $wpdb;
-		
-	$cache_dir = ABSPATH.'wp-content/mnmx';
-	
-	if(!file_exists($cache_dir)) mkdir($cache_dir);
-	if(!file_exists($cache_dir.'/lexi')) mkdir($cache_dir.'/lexi');
-	
-	//Error 2: we can't find or create the cache directory.
-	if(!file_exists($cache_dir.'/lexi')) {
-		trigger_error('Lexi-error: #2', E_USER_ERROR);
-	}
-	
-	//Error 3: we can't write in the cache directory
-	if($handle = fopen($cache_dir.'/lexi/test.txt','w')) {
-		fclose($handle);
-		unlink($cache_dir.'/lexi/test.txt');
-	} else {
-		trigger_error('Lexi-error: #3', E_USER_ERROR);
-	}
 	
 	//Have we updated or no?
 	//Is this widget a multiwidget?
@@ -345,11 +303,9 @@ function lexiRss($conf, $rss, $title, $max_items) {
 */
 function lexi_read_feed($link, $name, $num, $config) {
 	//Use the rss libraries in WP.
-	include_once(ABSPATH . WPINC . '/rss.php');
-	@include_once(ABSPATH . WPINC . '/class-simplepie.php');
-	
-	//Get cache directory
-	$cache_dir = ABSPATH.'wp-content/mnmx/lexi/';
+	require_once (ABSPATH . WPINC . '/class-feed.php');
+	require_once (ABSPATH . WPINC . '/rss.php');
+	require_once (ABSPATH . WPINC . '/class-simplepie.php');
 	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);
@@ -364,14 +320,18 @@ function lexi_read_feed($link, $name, $num, $config) {
 		//Get the data from the rss
 		$rss = new SimplePie();
 		
-		//Set cache dirname
-		$rss->set_cache_location($cache_dir);
-		
 		//Set the feed url
 		$rss->set_feed_url($link);
 
 		//Do we have to disable cache?
-		if(!($config & CONF_CACHE)) $rss->enable_cache(false);
+		if(!($config & CONF_CACHE)) {
+			$rss->enable_cache(false);
+		} else {
+			//Set cache dirname
+			$rss->set_cache_class('WP_Feed_Cache');
+			$rss->set_file_class('WP_SimplePie_File');
+			$rss->set_cache_duration(3600); //One hour
+		}
 		
 		//Get the feed
 		$rss->init();
