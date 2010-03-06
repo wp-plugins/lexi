@@ -53,10 +53,6 @@ Lexi encodes the feed list in UTF-8. If your site uses another character encodin
 
 If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
 
-= It says something about a write problem in cache / It doesn't work! =
-
-Sure you are using SimplePie. Check you have write permission in `wp-content/cache/lexi`.
-
 = It says something about minimax. What's this? =
 
 This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
