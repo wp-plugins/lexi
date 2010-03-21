@@ -68,6 +68,13 @@ function lexi_header() {
 	} else {
 		echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."' type='text/css' media='screen' />";
 	}
+	$img = "<script language='javascript' type='text/javascript'>
+		/* <![CDATA[ */
+		
+		var sk_img = new Image(); 
+		sk_img.src = '".lexi_plugin_url('/img/loading-page.gif')."';
+		</script>";
+	echo $img;
 }
 
 
