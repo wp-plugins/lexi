@@ -5,13 +5,17 @@
 		<title></title>
 	</head>
 <body><?php
-if(wp_verify_nonce($_POST['nonce'], 'lexi')) {
+$nonce = $_POST['nonce'];
+$nonce_title = 'lexi'.$_POST['url'];
+if(wp_verify_nonce($nonce, $nonce_title)) {
 	$url   = $_POST['url'];
 	$title = $_POST['title']; 
 	$num   = $_POST['num'];
 	$conf  = $_POST['conf'];
+	$rand  = $_POST['rand'];
+	$page  = $_POST['page'];
 
-	echo lexi_read_feed($url, $title, $num, $conf);
+	echo lexi_read_feed($url, $title, $num, $conf, $rand, $page);
 } else {
 	_e('Only Lexi can use this link.', 'lexi');
 }

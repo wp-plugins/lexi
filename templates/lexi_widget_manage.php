@@ -16,7 +16,7 @@
 	<tr>
 		<td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
 		<td colspan=3>
-			<input type="text" name="<?php echo $this->get_field_name('items'); ?>" id="<?php echo $this->get_field_id('items'); ?>" style="width: 30px" value="<?php echo $instance['items']; ?>">
+			<input type="text" name="<?php echo $this->get_field_name('items'); ?>" id="<?php echo $this->get_field_id('items'); ?>" style="width: 30px" value="<?php echo $instance['items']; ?>"> <?php _e('Max number of items to show, or number of items per page when using pagination system.', 'lexi'); ?>
 		</td>
 	</tr>
 	<tr>
@@ -33,6 +33,10 @@
 	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_author'); ?>" name="<?php echo $this->get_field_name('show_author'); ?>"<?php if((int)$instance['show_author']) echo " checked"; ?>/> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>"<?php if((int)$instance['show_date']) echo " checked"; ?>/> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('paginate'); ?>" name="<?php echo $this->get_field_name('paginate'); ?>"<?php if((int)$instance['paginate']) echo " checked"; ?>/> <label for="rsspaginate"><?php _e("Paginate", 'lexi' ); ?></label></td>
+		<td colspan="2"></td>
 	</tr>
 </table><?php
 if(!function_exists('minimax_version') || minimax_version()<LEXI_MNMX_V) { ?>

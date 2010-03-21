@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.6
+Version: 0.9.7
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -36,6 +36,7 @@ define('CONF_TARGETBLANK', 8);
 define('CONF_NOTSHOWICON', 16);
 define('CONF_SHOWAUTHOR', 32);
 define('CONF_SHOWDATE', 64);
+define('CONF_PAGINATE', 128);
 
 add_action('init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
@@ -129,13 +130,14 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	if(function_exists('minimax_version') && minimax_version()>=LEXI_MNMX_V) {
 		$num = mt_rand();
 		$url=lexi_plugin_url('/ajax/content.php');
-		$nonce = wp_create_nonce('lexi');
+		$nonce = wp_create_nonce('lexi'.$link);
+		$throbber = "";
+		
 		// Create the post to ask for the rss feeds
-		$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf";
+		$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf&amp;rand=$num&amp;page=1";
 		// Create the div where we want the feed to be shown, and the instance of minimax
 		$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
-		mx_lexi$num.post('$post');
-		</script>";
+		mx_lexi$num.post('$post');</script>";
 	} else { // If minimax isn't installed, ask for it to the user
 		$answer.= "<div id='lexi'><label>";
 		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V);
@@ -228,7 +230,7 @@ function lexi_content($content) {
 * @acces public
 * @return int The conf number
 */
-function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false ) {	
+function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false, $paginate=false ) {	
 	//Calculate the conf number
 	$config = 0;
 	if($use_cache) $config = $config + CONF_CACHE;  //Cache
@@ -238,6 +240,7 @@ function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=tr
 	if(!$icon) $config = $config + CONF_NOTSHOWICON; //Don't show icon
 	if($show_author)  $config = $config + CONF_SHOWAUTHOR;  //Show author
 	if($show_date)  $config = $config + CONF_SHOWDATE;  //Show date
+	if($paginate)  $config = $config + CONF_PAGINATE;  //Show date
 	return $config;
 }
 
@@ -301,7 +304,7 @@ function lexiRss($conf, $rss, $title, $max_items) {
 * @return string
 * @access public
 */
-function lexi_read_feed($link, $name, $num, $config) {
+function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 	//Use the rss libraries in WP.
 	require_once (ABSPATH . WPINC . '/class-feed.php');
 	require_once (ABSPATH . WPINC . '/rss.php');
@@ -314,6 +317,9 @@ function lexi_read_feed($link, $name, $num, $config) {
 	if(($config & CONF_TARGETBLANK)) {
 		$target = " target='_blank'";
 	}
+	
+	//This will change if we need a numbered footer
+	$footer="";
 		
 	// Does simplepie library exists?
 	if(class_exists('SimplePie')) {
@@ -345,7 +351,13 @@ function lexi_read_feed($link, $name, $num, $config) {
 		}
 		
 		//Get the items to show
-		$items = $rss->get_items(0, $num);
+		$start = ($group-1)*$num;
+		$items = $rss->get_items($start, $num);
+		
+		//If we need a footer
+		if($config & CONF_PAGINATE) {
+			$footer = "<div>".lexi_page_selector($rss, $link, $name, $num, $config, $rand, $group)."</div>";
+		}
 		
 		//If we have something to show, show the items
 		if($items) {
@@ -401,7 +413,106 @@ function lexi_read_feed($link, $name, $num, $config) {
 	}
 	
 	// Return the list of linked feeds
-	return "$header<ul>$answer</ul>";
+	return "$header<ul>$answer</ul>$footer";
+}
+
+/**
+* Returns HTML for 'page selector' footer
+*
+* @param rss The RSS object from simplepie
+* @param int group Which group are we showing?
+* @param int size Items per group
+* @param rand The group identifier (random)
+* @return string
+* @access public
+*/
+function lexi_page_selector($rss, $link, $name, $num, $config, $rand=false, $group=1) {
+	global $wpdb;
+	
+	if(!$rand) $rand = mt_rand(111111,999999);
+	
+	$uri_lexi=lexi_plugin_url('/content.php?page');
+	$answer="";
+	$total_groups=10; //We will show only 3 groups
+	$style_actual_group="";
+	$style_no_actual_group="";
+	$first_item= "&#171;";
+	$last_item= "&#187;";
+	
+	//Create nonce
+	$nonce = wp_create_nonce('lexi'.$link);
+	
+	// Get the number of comments we have
+	$total = count($rss->get_items());
+	
+	//Get the number of groups we have
+	$size = $num;
+	$groups=ceil($total/$size);
+	
+	//By default we start with the first group and end with the number of groups
+	//With this we define the interval to show
+	$group_start=1;
+	$group_end=$total_groups;
+	
+	//A number to determine thye groups to show
+	$group_limit=ceil($total_groups/2)-1;
+
+	//If the number of groups is lesser or equar than the number of groups to show
+	if($groups<=$total_groups) {
+		$group_end=$groups; //The start group is 1,and the end group is the number of groups
+	} else {
+		if($groups-$group<=$group_limit) {	// If the difference between the total groups 
+														// to show and the group we are showing is 
+														// lesser or equal to the group limit.
+														// It means we are so close to the end so we have to 
+														// show the total number of groups at the end and
+														// calculate the begin 
+			$group_start=$groups-$total_groups+1; //The start group is the groups minus the total groups to show pluss 1 
+			$group_end=$groups; // The end group is the number of groups
+		} else {
+			if($group>$group_limit) { 	// If the group to show is greater than the group limit. 
+												// It means we are far away from the begin so we can 
+												// show calculate the list and set the group in the middle.
+				$group_start=$group-$group_limit; //The start is the group to show minus the group limit
+				$group_end=$group+$group_limit; //The end is the group to show plus the group limit
+			}
+		}
+	}
+
+	//If the list doesn't start from 1, create a link to go to the benginig
+	$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $name))."&amp;num=$num&amp;conf=$config&amp;rand=$rand&amp";
+	if($group_start!=1) {
+		$answer.="<a class='lexi-page-other' onclick=\"
+				document.getElementById('lexi$rand').value=1;
+				mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
+				mx_lexi$rand.post('$post;page=1');\">$first_item</a> &#183; ";
+	}
+	
+	//Create the page list and the links
+	for($group_id=$group_start; $group_id<=$group_end; $group_id++) {
+		$style=$style_no_actual_group;
+		if($group_id==$group) {
+			$answer.="<span class='lexi-page-actual'>$group_id</span> &#183; ";
+		} else {
+			$answer.="<a class='lexi-page-other' onclick=\"
+				document.getElementById('lexi$rand').value=$group_id;
+				mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
+				mx_lexi$rand.post('$post;page=$group_id');\">$group_id</a> &#183; ";
+		}
+	}
+
+	//If the list doesn't finish with the last group, create a link to the end
+	if($group_end!=$groups) {
+	$answer.="<a class='lexi-page-other'
+			 onclick=\"
+			document.getElementById('lexi$rand').value=$groups;
+			mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
+			mx_lexi$rand.post('$post;page=$groups');\">$last_item</a> &#183; ";
+	}
+
+	//As every link ends with a line, delete the last one as we don't need it
+	$answer = substr($answer,0,-8);
+	return "<br/><div id='lexi-page$rand' class='lexi-page-off'><small>$answer</small></div>";
 }
 
 
@@ -475,7 +586,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		function widget($args, $instance) {
 			extract($args, EXTR_SKIP);
 			
-			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'] );
+			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'], $instance['paginate'] );
 			
 			$rss = $instance['rss'];
 			$title = $instance['title'];
@@ -506,6 +617,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 			if($new_instance['target_blank']) $instance['target_blank'] = 1; else $instance['target_blank'] = 0;
 			if($new_instance['show_author']) $instance['show_author'] = 1; else $instance['show_author'] = 0;
 			if($new_instance['show_date']) $instance['show_date'] = 1; else $instance['show_date'] = 0;
+			if($new_instance['paginate']) $instance['paginate'] = 1; else $instance['paginate'] = 0;
 			
 			return $instance;
 		}
@@ -514,7 +626,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		 *	admin control form
 		 */	 	
 		function form($instance) {
-			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0',);
+			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0', 'paginate'=>'0');
 			$instance = wp_parse_args( (array) $instance, $default );
 			
 			//Show the widget control.

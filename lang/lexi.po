@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 16:49-0500\n"
-"PO-Revision-Date: 2010-02-22 16:49-0500\n"
+"POT-Creation-Date: 2010-03-21 10:59-0500\n"
+"PO-Revision-Date: 2010-03-21 10:59-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,32 +23,21 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:53
-#: lexi.php:193
-#: templates/lexi_widget_manage.php:41
+#: lexi.php:139
+msgid "Loading Feed..."
+msgstr ""
+
+#: lexi.php:143
+#: templates/lexi_widget_manage.php:45
 #, fuzzy, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:62
-#, php-format
-msgid "Can't create the cache dir: %s<br>You have to create it manually."
-msgstr ""
-
-#: lexi.php:70
-#, php-format
-msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
-msgstr ""
-
-#: lexi.php:188
-msgid "Loading Feed..."
-msgstr ""
-
-#: lexi.php:441
+#: lexi.php:402
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:519
+#: lexi.php:579
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
@@ -73,6 +62,11 @@ msgstr "Título"
 #, fuzzy
 msgid "Items"
 msgstr "Items por página"
+
+#: templates/lexi_widget_manage.php:19
+#: tinymce/mce_lexi.php:68
+msgid "Max number of items to show, or number of items per page when using pagination system."
+msgstr ""
 
 #: templates/lexi_widget_manage.php:23
 #: tinymce/mce_lexi.php:75
@@ -119,7 +113,12 @@ msgstr "Autor: %1$s (IP: %2$s)"
 msgid "Show date"
 msgstr "Mostrar Avatar"
 
-#: ajax/content.php:16
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
+msgid "Paginate"
+msgstr ""
+
+#: ajax/content.php:18
 msgid "Only Lexi can use this link."
 msgstr ""
 
@@ -135,73 +134,13 @@ msgstr ""
 msgid "Use a specific title"
 msgstr ""
 
-#: tinymce/mce_lexi.php:95
+#: tinymce/mce_lexi.php:99
 #, fuzzy
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:99
+#: tinymce/mce_lexi.php:103
 #, fuzzy
 msgid "Insert"
 msgstr "Insertar"
-
-#, fuzzy
-#~ msgid "Feed added"
-#~ msgstr "Se agregó la galería"
-
-#, fuzzy
-#~ msgid "Feed modified"
-#~ msgstr "Comentario modificado"
-
-#, fuzzy
-#~ msgid "Feed deleted"
-#~ msgstr "Se eliminó el comentario"
-
-#, fuzzy
-#~ msgid "Add Feed"
-#~ msgstr "Agregar Galería"
-
-#, fuzzy
-#~ msgid "Edit Feed"
-#~ msgstr "Editar comentario"
-
-#, fuzzy
-#~ msgid "Name"
-#~ msgstr "T&iacute;­tulo del Cap&iacute;­tulo:"
-
-#, fuzzy
-#~ msgid "Add"
-#~ msgstr "Agregar"
-
-#, fuzzy
-#~ msgid "Modify"
-#~ msgstr "Modificar"
-
-#, fuzzy
-#~ msgid "No feeds found"
-#~ msgstr "No se encontraron comentarios"
-
-#, fuzzy
-#~ msgid "Bulk Actions"
-#~ msgstr "Acciones en bloque"
-
-#, fuzzy
-#~ msgid "Delete"
-#~ msgstr "Eliminar"
-
-#, fuzzy
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-
-#, fuzzy
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#, fuzzy
-#~ msgid "Delete this Feed?"
-#~ msgstr "¿Eliminar este Comentario?"
-
-#, fuzzy
-#~ msgid "All feeds"
-#~ msgstr "Eliminar Spam"
 

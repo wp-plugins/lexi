@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-22 16:49-0500\n"
-"PO-Revision-Date: 2010-02-22 16:49-0500\n"
+"POT-Creation-Date: 2010-03-21 10:59-0500\n"
+"PO-Revision-Date: 2010-03-21 11:00-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,32 +24,21 @@ msgstr ""
 "X-Poedit-SearchPath-1: templates\n"
 "X-Poedit-SearchPath-2: tinymce\n"
 
-#: lexi.php:53
-#: lexi.php:193
-#: templates/lexi_widget_manage.php:41
+#: lexi.php:139
+msgid "Loading Feed..."
+msgstr "Cargando Fuente..."
+
+#: lexi.php:143
+#: templates/lexi_widget_manage.php:45
 #, php-format
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> para que este plugin funcione."
 
-#: lexi.php:62
-#, php-format
-msgid "Can't create the cache dir: %s<br>You have to create it manually."
-msgstr "No puedo crear el directorio del cache: %s<br>Tendrá que crearlo manualmente."
-
-#: lexi.php:70
-#, php-format
-msgid "Can't write in the cache dir: %s<br>You have to modify the permissions manually."
-msgstr "No puedo escribir en el directorio del cache: %s<br>Tendrá que modificar manualmente los permisos."
-
-#: lexi.php:188
-msgid "Loading Feed..."
-msgstr "Cargando Fuente..."
-
-#: lexi.php:441
+#: lexi.php:402
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:519
+#: lexi.php:579
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
@@ -72,6 +61,11 @@ msgstr "T&iacute;tulo"
 #: tinymce/mce_lexi.php:66
 msgid "Items"
 msgstr "Items"
+
+#: templates/lexi_widget_manage.php:19
+#: tinymce/mce_lexi.php:68
+msgid "Max number of items to show, or number of items per page when using pagination system."
+msgstr "Máximo número de items a mostrar, o número de items por página cuando se usa el sistema de paginación."
 
 #: templates/lexi_widget_manage.php:23
 #: tinymce/mce_lexi.php:75
@@ -113,7 +107,12 @@ msgstr "Mostrar el autor"
 msgid "Show date"
 msgstr "Mostrar la fecha"
 
-#: ajax/content.php:16
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
+msgid "Paginate"
+msgstr "Paginar"
+
+#: ajax/content.php:18
 msgid "Only Lexi can use this link."
 msgstr "Solo Lexi puede consultar este enlace."
 
@@ -129,56 +128,11 @@ msgstr "Usar el t&iacute;tulo de la fuente"
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:95
+#: tinymce/mce_lexi.php:99
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:99
+#: tinymce/mce_lexi.php:103
 msgid "Insert"
 msgstr "Insertar"
-
-#~ msgid "Feed added"
-#~ msgstr "Se agreg&oacute; el RSS"
-#~ msgid "Feed modified"
-#~ msgstr "Se modific&oacute; el RSS"
-#~ msgid "Feed moved"
-#~ msgstr "Se movi&oacute; el RSS"
-#~ msgid "Feed deleted"
-#~ msgstr "Se elimin&oacute; el RSS"
-#~ msgid "Add Feed"
-#~ msgstr "Agregar RSS"
-#~ msgid "Edit Feed"
-#~ msgstr "Editar RSS"
-#~ msgid "Name"
-#~ msgstr "Nombre"
-#~ msgid "Add"
-#~ msgstr "Agregar"
-#~ msgid "Modify"
-#~ msgstr "Modificar"
-#~ msgid "Lexi"
-#~ msgstr "Lexi"
-#~ msgid "No feeds found"
-#~ msgstr "No se encontraron resultados"
-#~ msgid "Bulk Actions"
-#~ msgstr "Acciones en bloque"
-#~ msgid "Delete"
-#~ msgstr "Eliminar"
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-#~ msgid "Feed"
-#~ msgstr "RSS"
-#~ msgid "Edit"
-#~ msgstr "Editar"
-#~ msgid "Delete this Feed?"
-#~ msgstr "&iquest;Eliminar este RSS?"
-#~ msgid ""
-#~ "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
-#~ "strong>"
-#~ msgstr ""
-#~ "Puede <a href=\"%s\">modificar</a> la lista de fuentes en el menú "
-#~ "<strong>Herramientas/Lexi</strong>"
-#~ msgid "Feed:"
-#~ msgstr "RSS:"
-#~ msgid "All feeds"
-#~ msgstr "Todos los RSS"
 

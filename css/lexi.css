@@ -13,4 +13,28 @@ img.lexi {
     margin : 0px;
     border-width : 0px;
   }
+  
+div.lexi-page-on {		
+	width: 100%;
+	text-align: center;
+	background: url(../img/loading-page.gif) no-repeat center;
+	filter: alpha(opacity= 10);
+	-moz-opacity: .10;
+	opacity: .10;
+}
+
+div.lexi-page-off {	
+	width: 100%;
+	text-align: center;
+	background: none;
+}
+
+.lexi-page-actual {
+	font-size : 90%;
+}
+
+.lexi-page-other {
+	cursor : pointer;
+	font-size : 125%;
+}
 

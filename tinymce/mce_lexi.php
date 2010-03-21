@@ -32,7 +32,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 210px;">
+	<div class="panel_wrapper" style="height: 260px;">
 
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
@@ -65,7 +65,7 @@ if(!current_user_can('edit_posts')) die;
 				<tr>
 					<td nowrap="nowrap" valign="top"><label for="rssitems"><?php _e("Items", 'lexi' ); ?>:</label></td>
 					<td>
-						<input type="text" name="rssitems" id="rssitems" style="width: 30px" value="5">
+						<input type="text" name="rssitems" id="rssitems" style="width: 30px" value="5"> <?php _e('Max number of items to show, or number of items per page when using pagination system.', 'lexi'); ?>
 					</td>
 				</tr>
 			</table>
@@ -85,6 +85,10 @@ if(!current_user_can('edit_posts')) die;
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssa" name="rsssa" /> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssd" name="rsssd" /> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><input type="checkbox" id="rsspaginate" name="rsspaginate" /> <label for="rsspaginate"><?php _e("Paginate", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"></td>
 				</tr>
 			</table>
 		</div>
