@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.7
+Version: 0.9.7.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -62,19 +62,11 @@ function lexi_text_domain() {
 * @access public
 */
 function lexi_header() {
+	echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."' type='text/css' media='screen' />";
 	$css = get_theme_root()."/".get_template()."/lexi.css";
 	if(file_exists($css)) {
 		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css' type='text/css' media='screen' />";
-	} else {
-		echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."' type='text/css' media='screen' />";
 	}
-	$img = "<script language='javascript' type='text/javascript'>
-		/* <![CDATA[ */
-		
-		var sk_img = new Image(); 
-		sk_img.src = '".lexi_plugin_url('/img/loading-page.gif')."';
-		</script>";
-	echo $img;
 }
 
 
@@ -440,7 +432,7 @@ function lexi_page_selector($rss, $link, $name, $num, $config, $rand=false, $gro
 	
 	$uri_lexi=lexi_plugin_url('/content.php?page');
 	$answer="";
-	$total_groups=10; //We will show only 3 groups
+	$total_groups=5; //We will show only 3 groups
 	$style_actual_group="";
 	$style_no_actual_group="";
 	$first_item= "&#171;";
