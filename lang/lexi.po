@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-21 10:59-0500\n"
-"PO-Revision-Date: 2010-03-21 10:59-0500\n"
+"POT-Creation-Date: 2010-04-12 10:04-0500\n"
+"PO-Revision-Date: 2010-04-12 10:04-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: sebaxtian <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax 0.2</a> para que este plugin funcione."
 
-#: lexi.php:402
+#: lexi.php:409
 msgid "Subscribe"
 msgstr ""
 
-#: lexi.php:579
+#: lexi.php:591
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
@@ -87,19 +87,20 @@ msgstr "T&iacute;tulo del prefacio:"
 #: templates/lexi_widget_manage.php:27
 #: tinymce/mce_lexi.php:79
 #, fuzzy
-msgid "Show contents"
-msgstr "Mostrar Avatar"
+msgid "Show RSS icon"
+msgstr "No existe el RSS"
 
 #: templates/lexi_widget_manage.php:30
 #: tinymce/mce_lexi.php:82
-msgid "Open links in new page"
-msgstr ""
+#, fuzzy
+msgid "Show items title"
+msgstr "Items por página"
 
 #: templates/lexi_widget_manage.php:31
 #: tinymce/mce_lexi.php:83
 #, fuzzy
-msgid "Show RSS icon"
-msgstr "No existe el RSS"
+msgid "Show contents"
+msgstr "Mostrar Avatar"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
@@ -115,10 +116,15 @@ msgstr "Mostrar Avatar"
 
 #: templates/lexi_widget_manage.php:38
 #: tinymce/mce_lexi.php:90
+msgid "Open links in new page"
+msgstr ""
+
+#: templates/lexi_widget_manage.php:39
+#: tinymce/mce_lexi.php:91
 msgid "Paginate"
 msgstr ""
 
-#: ajax/content.php:18
+#: ajax/content.php:20
 msgid "Only Lexi can use this link."
 msgstr ""
 

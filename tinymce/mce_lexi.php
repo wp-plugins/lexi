@@ -76,19 +76,19 @@ if(!current_user_can('edit_posts')) die;
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show feed title", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap"><input type="checkbox" id="rsstb" name="rsstb" checked /> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rsssit" name="rsssit" checked /> <label for="rsssit"><?php _e("Show items title", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssa" name="rsssa" /> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssd" name="rsssd" /> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
+					<td nowrap="nowrap"><input type="checkbox" id="rsstb" name="rsstb" checked /> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsspaginate" name="rsspaginate" /> <label for="rsspaginate"><?php _e("Paginate", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"></td>
 				</tr>
 			</table>
 		</div>

@@ -24,19 +24,19 @@
 	</tr>
 	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>"<?php if((int)$instance['show_title']) echo " checked"; ?>/> <label for="rssst"><?php _e("Show feed title", 'lexi' ); ?></label></td>
-		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>"<?php if((int)$instance['show_content']) echo " checked"; ?>/> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
+		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('icon'); ?>" name="<?php echo $this->get_field_name('icon'); ?>"<?php if((int)$instance['icon']) echo " checked"; ?>/> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('target_blank'); ?>" name="<?php echo $this->get_field_name('target_blank'); ?>"<?php if((int)$instance['target_blank']) echo " checked"; ?>/> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
-		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('icon'); ?>" name="<?php echo $this->get_field_name('icon'); ?>"<?php if((int)$instance['icon']) echo " checked"; ?>/> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
+		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('not_show_item_title'); ?>" name="<?php echo $this->get_field_name('not_show_item_title'); ?>"<?php if(!((int)$instance['not_show_item_title'])) echo " checked"; ?>/> <label for="rsstb"><?php _e("Show items title", 'lexi' ); ?></label></td>
+		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>"<?php if((int)$instance['show_content']) echo " checked"; ?>/> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_author'); ?>" name="<?php echo $this->get_field_name('show_author'); ?>"<?php if((int)$instance['show_author']) echo " checked"; ?>/> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>"<?php if((int)$instance['show_date']) echo " checked"; ?>/> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 	</tr>
 	<tr>
+		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('target_blank'); ?>" name="<?php echo $this->get_field_name('target_blank'); ?>"<?php if((int)$instance['target_blank']) echo " checked"; ?>/> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('paginate'); ?>" name="<?php echo $this->get_field_name('paginate'); ?>"<?php if((int)$instance['paginate']) echo " checked"; ?>/> <label for="rsspaginate"><?php _e("Paginate", 'lexi' ); ?></label></td>
-		<td colspan="2"></td>
 	</tr>
 </table><?php
 if(!function_exists('minimax_version') || minimax_version()<LEXI_MNMX_V) { ?>

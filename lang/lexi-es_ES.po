@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-21 10:59-0500\n"
-"PO-Revision-Date: 2010-03-21 11:00-0500\n"
+"POT-Creation-Date: 2010-04-12 10:05-0500\n"
+"PO-Revision-Date: 2010-04-12 10:06-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -34,11 +34,11 @@ msgstr "Cargando Fuente..."
 msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
 msgstr "Deber&aacute; instalar <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> para que este plugin funcione."
 
-#: lexi.php:402
+#: lexi.php:409
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:579
+#: lexi.php:591
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
@@ -80,22 +80,22 @@ msgstr "Solo quite esta marca si la fuente se actualiza varias veces en una mism
 #: templates/lexi_widget_manage.php:26
 #: tinymce/mce_lexi.php:78
 msgid "Show feed title"
-msgstr "Mostrar el t&iacute;tulo de la fuente"
+msgstr "Mostrar t&iacute;tulo de la fuente"
 
 #: templates/lexi_widget_manage.php:27
 #: tinymce/mce_lexi.php:79
-msgid "Show contents"
-msgstr "Mostrar Contenido"
+msgid "Show RSS icon"
+msgstr "Mostrar icono RSS"
 
 #: templates/lexi_widget_manage.php:30
 #: tinymce/mce_lexi.php:82
-msgid "Open links in new page"
-msgstr "Abrir en nueva p&aacute;gina"
+msgid "Show items title"
+msgstr "Mostrar título de los items"
 
 #: templates/lexi_widget_manage.php:31
 #: tinymce/mce_lexi.php:83
-msgid "Show RSS icon"
-msgstr "Mostrar icono RSS"
+msgid "Show contents"
+msgstr "Mostrar Contenido"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
@@ -109,10 +109,15 @@ msgstr "Mostrar la fecha"
 
 #: templates/lexi_widget_manage.php:38
 #: tinymce/mce_lexi.php:90
+msgid "Open links in new page"
+msgstr "Abrir en nueva p&aacute;gina"
+
+#: templates/lexi_widget_manage.php:39
+#: tinymce/mce_lexi.php:91
 msgid "Paginate"
 msgstr "Paginar"
 
-#: ajax/content.php:18
+#: ajax/content.php:20
 msgid "Only Lexi can use this link."
 msgstr "Solo Lexi puede consultar este enlace."
 
