@@ -23,6 +23,7 @@ The configuration number can be calculated as follows:
 * Add 32 if you want to show the author.
 * Add 64 if you want to show the date.
 * Add 128 if you want to paginate the results.
+* Add 256 to not show items title.
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
