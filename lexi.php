@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.9
+Version: 0.9.9.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -130,6 +130,9 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	$answer="";
 	$num = mt_rand(111111,999999);
 	$link = str_replace("&amp;", "&", $link);
+	$url=lexi_plugin_url('/ajax/content.php');
+	$nonce = wp_create_nonce('lexi'.$link);
+	$throbber = "";
 	$next_cache_time = 0;
 	
 	// If we have minimax, go ahead
@@ -142,12 +145,8 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 		
 		//if we have a cache file and it is not update time, show it
 		if(($conf & CONF_CACHE) && $next_cache_time>time()) { //If we use cache and it is new
-			$answer.= lexi_read_feed($link, $title, $items, $conf, $num, 1);
-		} else { //Use minimax
-			$url=lexi_plugin_url('/ajax/content.php');
-			$nonce = wp_create_nonce('lexi'.$link);
-			$throbber = "";
-			
+			$answer.="\n<div id='lexi$num' class='lexi'>".lexi_read_feed($link, $title, $items, $conf, $num, 1)."</div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');</script>";
+		} else { //Use minimax			
 			// Create the post to ask for the rss feeds
 			$post="nonce=$nonce&amp;url=".urlencode($link)."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf&amp;rand=$num&amp;page=1";
 			// Create the div where we want the feed to be shown, and the instance of minimax
