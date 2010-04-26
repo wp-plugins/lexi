@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.2
-Stable tag: 0.9.8
+Stable tag: 0.9.9
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -79,6 +79,10 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.9 =
+* Use the cache file if the feed requires it and has a new timestamp. Else, use 
+minimax. This speeds the rendering of the page.
 
 = 0.9.8 =
 * Don't use a list when we show only one item (or only one item per page)

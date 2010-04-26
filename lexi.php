@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.8
+Version: 0.9.9
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -38,6 +38,8 @@ define('CONF_SHOWAUTHOR', 32);
 define('CONF_SHOWDATE', 64);
 define('CONF_PAGINATE', 128);
 define('CONF_NOTITEMTITLE', 256);
+
+define('LEXI_CACHE_TIME', 3600); //One hour
 
 add_action('init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
@@ -124,20 +126,34 @@ function lexi_activate() {
 * @access public
 */
 function lexi_viewer_rss($link, $title, $items, $conf) {
+	require_once (ABSPATH . WPINC . '/class-feed.php');
 	$answer="";
+	$num = mt_rand(111111,999999);
+	$link = str_replace("&amp;", "&", $link);
+	$next_cache_time = 0;
 	
 	// If we have minimax, go ahead
 	if(function_exists('minimax_version') && minimax_version()>=LEXI_MNMX_V) {
-		$num = mt_rand();
-		$url=lexi_plugin_url('/ajax/content.php');
-		$nonce = wp_create_nonce('lexi'.$link);
-		$throbber = "";
+		//if we have to use cache, ask for the next cache time
+		if($conf & CONF_CACHE) {
+			$cache = new WP_Feed_Cache_Transient('./cache', md5($link), 'spc');
+			$next_cache_time = $cache->mtime()+LEXI_CACHE_TIME;
+		}
 		
-		// Create the post to ask for the rss feeds
-		$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf&amp;rand=$num&amp;page=1";
-		// Create the div where we want the feed to be shown, and the instance of minimax
-		$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
-		mx_lexi$num.post('$post');</script>";
+		//if we have a cache file and it is not update time, show it
+		if(($conf & CONF_CACHE) && $next_cache_time>time()) { //If we use cache and it is new
+			$answer.= lexi_read_feed($link, $title, $items, $conf, $num, 1);
+		} else { //Use minimax
+			$url=lexi_plugin_url('/ajax/content.php');
+			$nonce = wp_create_nonce('lexi'.$link);
+			$throbber = "";
+			
+			// Create the post to ask for the rss feeds
+			$post="nonce=$nonce&amp;url=".urlencode($link)."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf&amp;rand=$num&amp;page=1";
+			// Create the div where we want the feed to be shown, and the instance of minimax
+			$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
+			mx_lexi$num.post('$post');</script>";
+		}
 	} else { // If minimax isn't installed, ask for it to the user
 		$answer.= "<div id='lexi'><label>";
 		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V);
@@ -337,7 +353,7 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 			//Set cache dirname
 			$rss->set_cache_class('WP_Feed_Cache');
 			$rss->set_file_class('WP_SimplePie_File');
-			$rss->set_cache_duration(3600); //One hour
+			$rss->set_cache_duration(LEXI_CACHE_TIME); 
 		}
 		
 		//Get the feed

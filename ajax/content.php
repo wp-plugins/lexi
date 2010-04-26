@@ -6,9 +6,10 @@
 	</head>
 <body><?php
 $nonce = $_POST['nonce'];
-$nonce_title = 'lexi'.$_POST['url'];
+$url   = urldecode($_POST['url']);
+$nonce_title = 'lexi'.$url;
 if(wp_verify_nonce($nonce, $nonce_title)) {
-	$url   = $_POST['url'];
+	
 	$title = $_POST['title']; 
 	$num   = $_POST['num'];
 	$conf  = $_POST['conf'];
