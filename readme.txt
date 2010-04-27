@@ -84,8 +84,7 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 * Solved bug in multipage system with new check cache function.
 
 = 0.9.9 =
-* Use the cache file if the feed requires it and has a new timestamp. Else, use 
-minimax. This speeds the rendering of the page.
+* Modified to use ajax only when the cache is old.
 
 = 0.9.8 =
 * Don't use a list when we show only one item (or only one item per page)
