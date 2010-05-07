@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.9.1
+Version: 0.9.9.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -28,6 +28,7 @@ Author URI: http://www.sebaxtian.com
 require_once("legacy.php");
 
 define('LEXI_MNMX_V', 0.3);
+define('LEXI_HEADER_V', 1.0);
 
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
@@ -65,10 +66,10 @@ function lexi_text_domain() {
 * @access public
 */
 function lexi_header() {
-	echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."' type='text/css' media='screen' />";
+	echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
 	$css = get_theme_root()."/".get_template()."/lexi.css";
 	if(file_exists($css)) {
-		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css' type='text/css' media='screen' />";
+		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
 	}
 }
 
@@ -386,7 +387,14 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 				//		the content and the variable to know if we have to show it
 				$aux="";
 				if(!($config & CONF_NOTITEMTITLE)) {
-					$aux="<a class='rsswidget' href='".htmlspecialchars($item->get_permalink())."'".$target.">".$item->get_title()."</a>";
+					$link = $item->get_link();
+					while ( stristr($link, 'http') != $link )
+						$link = substr($link, 1);
+					$link = esc_url(strip_tags($link));
+					$title = esc_attr(strip_tags($item->get_title()));
+					if ( empty($title) )
+					$title = __('Untitled');
+					$aux="<a class='rsswidget' href='$link' $target>$title</a>";
 				}
 				
 				if($config & CONF_SHOWDATE) {
