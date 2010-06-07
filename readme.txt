@@ -33,7 +33,7 @@ This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A
 
 Lexi detects if your site has the __[SimplePie](http://simplepie.org/ "SimplePie: Super-fast, easy-to-use, RSS and Atom feed parsing in PHP.")__ library enabled. Since Wordpress 2.8 comes with it by default you don't need to activate anything, but in earlier versions you have to install the __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ to use it instead MagpieRSS. I recomend to use SimplePie. Remember to uninstall SimplePieCore if you are using Worpress 2.8 or any latter version.
 
-Lexi has been translated to greek by the __[HyperCom Team](http://www.hypercom.gr/ "IT and WebSite Design")__. Thanks for your time guys!
+Lexi has been translated to greek by the __[HyperCom Team](http://www.hypercom.gr/ "IT and WebSite Design")__ and russian by the __[Fatcow Team](http://www.fatcow.com/ "Web Hosting &amp; Domain Names by FatCow.com")__. Thanks for your time guys!
 
 Screenshots are in spanish because it's my native language. As you should know yet I __spe'k__ english, and the plugin use it by default.
 
@@ -85,6 +85,7 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 = 0.9.9.3 =
 * Using WP comment format functions (request by Hypercom Team) to use capabilities added with third party plugins.
 * Greek translation thanks to __[HyperCom Team](http://www.hypercom.gr/ "IT and WebSite Design")__.
+* Russian translation thanks to __[Fatcow Team](http://www.fatcow.com/ "Web Hosting &amp; Domain Names by FatCow.com")__.
 
 = 0.9.9.2 =
 * Solved bug with item link when it has special characters.  
