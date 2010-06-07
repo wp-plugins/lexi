@@ -1,0 +1,190 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lexi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-06 21:43-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
+"Language-Team: Fat Cow <zhr@tut.by>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: /var/www/wordpress/wp-content/plugins/lexi/\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: templates\n"
+"X-Poedit-SearchPath-2: tinymce\n"
+
+#: legacy.php:176
+#, php-format
+msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
+msgstr ""
+
+#: lexi.php:154
+msgid "Loading Feed..."
+msgstr "Загрузка ленты..."
+
+#: lexi.php:159
+#: templates/lexi_widget_manage.php:45
+#, fuzzy, php-format
+msgid "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in order for this plugin to work."
+msgstr "Вы установили <a href=\"%s\"  target=\"_BLANK\">minimax 0.2</a> в порядке для работы этого плагина"
+
+#: lexi.php:396
+#, fuzzy
+msgid "Untitled"
+msgstr "Заглавие"
+
+#: lexi.php:432
+msgid "Subscribe"
+msgstr "Подписка"
+
+#: lexi.php:614
+msgid "Add an RSS feed to the sidebar using Lexi."
+msgstr ""
+
+#: templates/lexi_widget_manage.php:9
+#: tinymce/mce_lexi.php:43
+msgid "RSS"
+msgstr "RSS"
+
+#: templates/lexi_widget_manage.php:13
+#: tinymce/mce_lexi.php:47
+msgid "Title"
+msgstr "Заглавие"
+
+#: templates/lexi_widget_manage.php:17
+#: tinymce/mce_lexi.php:66
+msgid "Items"
+msgstr "Элементы"
+
+#: templates/lexi_widget_manage.php:19
+#: tinymce/mce_lexi.php:68
+msgid "Max number of items to show, or number of items per page when using pagination system."
+msgstr ""
+
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:75
+msgid "Save cache"
+msgstr "Сохранить кэш"
+
+#: templates/lexi_widget_manage.php:23
+#: tinymce/mce_lexi.php:75
+msgid "Uncheck this option only in case the feed updates several times in an hour."
+msgstr "Снимите флажок с этой опции в случае, если обновления ленты происходят несколько раз в час "
+
+#: templates/lexi_widget_manage.php:26
+#: tinymce/mce_lexi.php:78
+msgid "Show feed title"
+msgstr "Показывать заглавие ленты"
+
+#: templates/lexi_widget_manage.php:27
+#: tinymce/mce_lexi.php:79
+#, fuzzy
+msgid "Show RSS icon"
+msgstr "Показзать содержание"
+
+#: templates/lexi_widget_manage.php:30
+#: tinymce/mce_lexi.php:82
+#, fuzzy
+msgid "Show items title"
+msgstr "Показывать заглавие ленты"
+
+#: templates/lexi_widget_manage.php:31
+#: tinymce/mce_lexi.php:83
+msgid "Show contents"
+msgstr "Показзать содержание"
+
+#: templates/lexi_widget_manage.php:34
+#: tinymce/mce_lexi.php:86
+msgid "Show author"
+msgstr ""
+
+#: templates/lexi_widget_manage.php:35
+#: tinymce/mce_lexi.php:87
+#, fuzzy
+msgid "Show date"
+msgstr "Показывать заглавие ленты"
+
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
+msgid "Open links in new page"
+msgstr "Открывать ссылки ва новом окне"
+
+#: templates/lexi_widget_manage.php:39
+#: tinymce/mce_lexi.php:91
+msgid "Paginate"
+msgstr ""
+
+#: ajax/content.php:21
+msgid "Only Lexi can use this link."
+msgstr ""
+
+#: tinymce/mce_lexi.php:31
+msgid "Lexi Feed"
+msgstr "Lexi лента"
+
+#: tinymce/mce_lexi.php:53
+msgid "Use the title from the feed"
+msgstr "Использовать заглавие из ленты"
+
+#: tinymce/mce_lexi.php:63
+msgid "Use a specific title"
+msgstr "Использовать специфический заголовок"
+
+#: tinymce/mce_lexi.php:99
+msgid "Cancel"
+msgstr "Отмена"
+
+#: tinymce/mce_lexi.php:103
+msgid "Insert"
+msgstr "Вставить"
+
+#~ msgid "Feed added"
+#~ msgstr "Лента добавлена"
+#~ msgid "Feed modified"
+#~ msgstr "Лента изменена"
+#~ msgid "Feed moved"
+#~ msgstr "Лента смещена"
+#~ msgid "Feed deleted"
+#~ msgstr "Лента удалена"
+#~ msgid "Add Feed"
+#~ msgstr "Лента добавлена"
+#~ msgid "Edit Feed"
+#~ msgstr "Редактировать ленту"
+#~ msgid "Name"
+#~ msgstr "Имя"
+#~ msgid "Add"
+#~ msgstr "Добавить"
+#~ msgid "Modify"
+#~ msgstr "Модифицировать"
+#~ msgid "Lexi"
+#~ msgstr "Lexi"
+#~ msgid "No feeds found"
+#~ msgstr "Не найдено лент"
+#~ msgid "Bulk Actions"
+#~ msgstr "Bulk  действия"
+#~ msgid "Delete"
+#~ msgstr "Удалить"
+#~ msgid "Apply"
+#~ msgstr "Применить"
+#~ msgid "Feed"
+#~ msgstr "Лента"
+#~ msgid "Edit"
+#~ msgstr "Редактировать"
+#~ msgid "Delete this Feed?"
+#~ msgstr "Удалить эту ленту?"
+#~ msgid ""
+#~ "You can <a href=\"%s\">modify</a> the feeds list in <strong>Tools/Lexi</"
+#~ "strong>"
+#~ msgstr ""
+#~ "Вы можете <a href=\"%s\">изменить </a>список лент <strong>Tools/Lexi</"
+#~ "strong>"
+#~ msgid "Feed:"
+#~ msgstr "Лента:"
+#~ msgid "All feeds"
+#~ msgstr "Все ленты"
+
