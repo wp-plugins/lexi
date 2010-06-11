@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.9.3
+Version: 0.9.99
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -27,7 +27,6 @@ Author URI: http://www.sebaxtian.com
 
 require_once("legacy.php");
 
-define('LEXI_MNMX_V', 0.3);
 define('LEXI_HEADER_V', 1.0);
 
 define('CONF_CACHE', 1);
@@ -47,7 +46,8 @@ add_action('init', 'lexi_text_domain', 1);
 add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
 add_action('activate_plugin', 'lexi_activate');
-
+add_action('wp_ajax_lexi_ajax', 'lexi_ajax');
+add_action('wp_ajax_nopriv_lexi_ajax', 'lexi_ajax');
 
 /**
 * To declare where are the mo files (i18n).
@@ -67,12 +67,81 @@ function lexi_text_domain() {
 */
 function lexi_header() {
 	echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
+	//This is the default style feed
 	$css = get_theme_root()."/".get_template()."/lexi.css";
-	if(file_exists($css)) {
+	if(file_exists($css)) { //If we found the style file in the theme use it insetad
 		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
 	}
+	
+	// Declare we use JavaScript SACK library for Ajax
+	wp_print_scripts( array( 'sack' ));
+
+	// Define custom JavaScript function
+	echo "
+	<script type='text/javascript'>
+	//<![CDATA[
+	
+	var loading_lexi_img = new Image(); 
+	loading_lexi_img.src = '".lexi_plugin_url('/img/loading-page.gif')."';
+	
+	function lexi_feed( url, title, num, conf, rand, page )
+	{
+		var lexi_sack = new sack('".get_bloginfo( 'wpurl' )."/wp-admin/admin-ajax.php' );
+		
+		//Our plugin sack configuration
+		lexi_sack.execute = 0;
+		lexi_sack.method = 'POST';
+		lexi_sack.setVar( 'action', 'lexi_ajax' );
+		lexi_sack.element = 'lexi'+rand;
+		
+		//The ajax call data
+		lexi_sack.setVar( 'url', url );
+		lexi_sack.setVar( 'title', title );
+		lexi_sack.setVar( 'num', num );
+		lexi_sack.setVar( 'conf', conf );
+		lexi_sack.setVar( 'rand', rand );
+		lexi_sack.setVar( 'page', page );
+		
+		//What to do on error?
+		lexi_sack.onError = function() {
+			var aux = document.getElementById(lexi_sack.element);
+			aux.innerHTMLsetAttribute='".__("Can't read Lexi Feed", 'lexi')."';
+			//alert( '".__("Can't read Lexi Feed", 'lexi')."' );
+		};
+		
+		lexi_sack.runAJAX();
+		
+		return true;
+
+	} // end of JavaScript function lexi_feed
+	//]]>
+	</script>";
 }
 
+/**
+* Function to answer the ajax call.
+* This function should be called by an action.
+*
+* @access public
+*/
+function lexi_ajax() {
+	//Get the data from the post call
+	$url   = urldecode($_POST['url']);
+	$title = $_POST['title']; 
+	$num   = $_POST['num'];
+	$conf  = $_POST['conf'];
+	$rand  = $_POST['rand'];
+	$page  = $_POST['page'];
+	
+	//Get the div id where we want to show the data
+	$results_id = $_POST['results_div_id'];
+	
+	//Get the new data.
+	$results = lexi_read_feed($url, $title, $num, $conf, $rand, $page); 
+
+	// Compose JavaScript for return
+	die( $results );
+}
 
 /**
 * Function to return the url of the plugin concatenated to a string. The idea is to
@@ -116,7 +185,7 @@ function lexi_activate() {
 
 
 /**
-* Returns the html code with 'minimax' script and div.
+* Returns the html code with 'sack' script and div.
 * Add this code into the html page to create the RSS reader.
 *
 * @param string link The RSS URL
@@ -136,28 +205,19 @@ function lexi_viewer_rss($link, $title, $items, $conf) {
 	$throbber = "";
 	$next_cache_time = 0;
 	
-	// If we have minimax, go ahead
-	if(function_exists('minimax_version') && minimax_version()>=LEXI_MNMX_V) {
-		//if we have to use cache, ask for the next cache time
-		if($conf & CONF_CACHE) {
-			$cache = new WP_Feed_Cache_Transient('./cache', md5($link), 'spc');
-			$next_cache_time = $cache->mtime()+LEXI_CACHE_TIME;
-		}
-		
-		//if we have a cache file and it is not update time, show it
-		if(($conf & CONF_CACHE) && $next_cache_time>time()) { //If we use cache and it is new
-			$answer.="\n<div id='lexi$num' class='lexi'>".lexi_read_feed($link, $title, $items, $conf, $num, 1)."</div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');</script>";
-		} else { //Use minimax			
-			// Create the post to ask for the rss feeds
-			$post="nonce=$nonce&amp;url=".urlencode($link)."&amp;title=".urlencode(str_replace("&amp;", "&", $title))."&amp;num=$items&amp;conf=$conf&amp;rand=$num&amp;page=1";
-			// Create the div where we want the feed to be shown, and the instance of minimax
-			$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>mx_lexi$num = new minimax('$url', 'lexi$num');
-			mx_lexi$num.post('$post');</script>";
-		}
-	} else { // If minimax isn't installed, ask for it to the user
-		$answer.= "<div id='lexi'><label>";
-		$answer.= sprintf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V);
-		$answer.= "</label></div>";
+	//if we have to use cache, ask for the next cache time
+	if($conf & CONF_CACHE) {
+		$cache = new WP_Feed_Cache_Transient('./cache', md5($link), 'spc');
+		$next_cache_time = $cache->mtime()+LEXI_CACHE_TIME;
+	}
+
+	//if we have a cache file and it is not update time, show it
+	if(($conf & CONF_CACHE) && $next_cache_time>time()) { //If we use cache and it is new
+		$answer.="\n<div id='lexi$num' class='lexi'>".lexi_read_feed($link, $title, $items, $conf, $num, 1)."</div>";
+	} else { //Use sack
+		// Create the post to ask for the rss feeds
+		// Create the div where we want the feed to be shown, and the instance of sack
+		$answer.="\n<div id='lexi$num' class='lexi'><table><tr><td><img class='lexi' src='".get_bloginfo('wpurl')."/wp-content/plugins/lexi/img/loading.gif' alt='RSS' border='0' /></td><td>".__('Loading Feed...','lexi')."</td></tr></table></div><script type='text/javascript'>lexi_feed( '$link', '$title', $items, $conf, $num, 1 );</script>";
 	}
 	return $answer;
 }
@@ -263,7 +323,7 @@ function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=tr
 
 /**
 * Function to be called in templates. Returns the html code
-* with 'minimax' script and div. Add this function into the html
+* with 'sack' script and div. Add this function into the html
 * page to create the RSS reader.
 *
 * @param string rss The URL from the feed.
@@ -283,7 +343,7 @@ function lexi($rss, $num=0, $sc=false, $cached=true, $sh=true) {
 
 /**
 * Function to be called in templates. Returns the html code
-* with 'minimax' script and div. Add this function into the html
+* with 'sack' script and div. Add this function into the html
 * page to create the RSS reader.
 * The configuration number can be calculated:
 *		add 1 if the feed will be saved in cache 
@@ -387,14 +447,14 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 				//		the content and the variable to know if we have to show it
 				$aux="";
 				if(!($config & CONF_NOTITEMTITLE)) {
-					$link = $item->get_link();
-					while ( stristr($link, 'http') != $link )
-						$link = substr($link, 1);
-					$link = esc_url(strip_tags($link));
+					$item_link = $item->get_link();
+					while ( stristr($item_link, 'http') != $item_link )
+						$item_link = substr($item_link, 1);
+					$item_link = esc_url(strip_tags($item_link));
 					$title = esc_attr(strip_tags($item->get_title()));
 					if ( empty($title) )
 					$title = __('Untitled');
-					$aux="<a class='rsswidget' href='$link' $target>$title</a>";
+					$aux="<a class='rsswidget' href='$item_link' $target>$title</a>";
 				}
 				
 				if($config & CONF_SHOWDATE) {
@@ -515,12 +575,15 @@ function lexi_page_selector($rss, $link, $name, $num, $config, $rand=false, $gro
 	}
 
 	//If the list doesn't start from 1, create a link to go to the benginig
-	$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=".urlencode(str_replace("&amp;", "&", $name))."&amp;num=$num&amp;conf=$config&amp;rand=$rand&amp";
+	$post="nonce=$nonce&amp;url=".urlencode(str_replace("&amp;", "&", $link))."&amp;title=$name&amp;num=$num&amp;conf=$config&amp;rand=$rand&amp";
 	if($group_start!=1) {
 		$answer.="<a class='lexi-page-other' onclick=\"
+				var aux = document.getElementById('lexi-page$rand');
+				aux.setAttribute('class', 'lexi-page-on');
+				aux.setAttribute('className', 'lexi-page-on'); //IE sucks
+				lexi_feed( '$link', '$name', $num, $config, $rand, 1 );
 				document.getElementById('lexi$rand').value=1;
-				mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
-				mx_lexi$rand.post('$post;page=1');\">$first_item</a> &#183; ";
+				\">$first_item</a> &#183; ";
 	}
 	
 	//Create the page list and the links
@@ -530,19 +593,25 @@ function lexi_page_selector($rss, $link, $name, $num, $config, $rand=false, $gro
 			$answer.="<span class='lexi-page-actual'>$group_id</span> &#183; ";
 		} else {
 			$answer.="<a class='lexi-page-other' onclick=\"
+				var aux = document.getElementById('lexi-page$rand');
+				aux.setAttribute('class', 'lexi-page-on');
+				aux.setAttribute('className', 'lexi-page-on'); //IE sucks
+				lexi_feed( '$link', '$name', $num, $config, $rand, $group_id );
 				document.getElementById('lexi$rand').value=$group_id;
-				mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
-				mx_lexi$rand.post('$post;page=$group_id');\">$group_id</a> &#183; ";
+				\">$group_id</a> &#183; ";
 		}
 	}
 
 	//If the list doesn't finish with the last group, create a link to the end
 	if($group_end!=$groups) {
 	$answer.="<a class='lexi-page-other'
-			 onclick=\"
+			onclick=\"
+			var aux = document.getElementById('lexi-page$rand');
+			aux.setAttribute('class', 'lexi-page-on');
+			aux.setAttribute('className', 'lexi-page-on'); //IE sucks
+			lexi_feed( '$link', '$name', $num, $config, $rand, $groups );
 			document.getElementById('lexi$rand').value=$groups;
-			mx_lexi$rand.setThrobber('lexi-page$rand', 'lexi-page-on', 'lexi-page-off');
-			mx_lexi$rand.post('$post;page=$groups');\">$last_item</a> &#183; ";
+			\">$last_item</a> &#183; ";
 	}
 
 	//As every link ends with a line, delete the last one as we don't need it

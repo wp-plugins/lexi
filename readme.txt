@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.2
-Stable tag: 0.9.9.3
+Stable tag: 0.9.99
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -27,9 +27,7 @@ The configuration number can be calculated as follows:
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
-There is a button in the RichText editor created by the plugin to add a Feed.
-
-This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work. 
+There is a button in the editor (the one with the RSS icon) created by the plugin to help you to add feeds in posts or pages.
 
 Lexi detects if your site has the __[SimplePie](http://simplepie.org/ "SimplePie: Super-fast, easy-to-use, RSS and Atom feed parsing in PHP.")__ library enabled. Since Wordpress 2.8 comes with it by default you don't need to activate anything, but in earlier versions you have to install the __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__ to use it instead MagpieRSS. I recomend to use SimplePie. Remember to uninstall SimplePieCore if you are using Worpress 2.8 or any latter version.
 
@@ -39,11 +37,10 @@ Screenshots are in spanish because it's my native language. As you should know y
 
 == Installation ==
 
-1. Install __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__.
-2. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
-3. Activate the plugin through the __Plugins__ menu in WordPress
-4. Add the Lexi widget into your side bar, or add `[lexi]` into your posts, or use `lexi()` into your templates.
-5. Use __Tools > Lexi__ to add, modify or delete your RSS feeds list.
+1. Decompress lexi.zip and upload `/lexi/` to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the __Plugins__ menu in WordPress
+3. Add Lexi widgets into your side bar (if required).
+4. Add tags into your posts or pages using the lexi button in the editor, the one with the RSS icon.
 
 == Frequently Asked Questions ==
 
@@ -56,10 +53,6 @@ My page (I don't know if yours too) use to get blocked reading some RSS feeds. I
 Lexi encodes the feed list in UTF-8. If your site uses another character encoding you can change `wp-content/plugins/lexi/lexi.php`, but I suggest you to use UTF-8.
 
 If your site is in UTF-8, uses WP 2.7.x or an older release, and the problem persists, install __[SimplePieCore Plugin](http://wordpress.org/extend/plugins/simplepie-core/ "Does little else but load the core SimplePie API library for any extension that wants to utilize it.")__.
-
-= It says something about minimax. What's this? =
-
-This plugin requires __[minimax](http://wordpress.org/extend/plugins/minimax/ "A minimal Ajax library")__ in order to work.
 
 = Can I set my own CSS? =
 
@@ -81,6 +74,15 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.99 =
+* Solved a bug with Chanel link.
+* Updated sack function to show the error message in the div if something goes wrong.
+* Updated sack function to display the data instead execute a function.
+
+= 0.9.98 =
+* First release that doesn't require Minimax.
+* Now Lexi uses WP's internal Ajax routines.
 
 = 0.9.9.3 =
 * Using WP comment format functions (request by Hypercom Team) to use capabilities added with third party plugins.

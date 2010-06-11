@@ -38,11 +38,4 @@
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('target_blank'); ?>" name="<?php echo $this->get_field_name('target_blank'); ?>"<?php if((int)$instance['target_blank']) echo " checked"; ?>/> <label for="rsstb"><?php _e("Open links in new page", 'lexi' ); ?></label></td>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('paginate'); ?>" name="<?php echo $this->get_field_name('paginate'); ?>"<?php if((int)$instance['paginate']) echo " checked"; ?>/> <label for="rsspaginate"><?php _e("Paginate", 'lexi' ); ?></label></td>
 	</tr>
-</table><?php
-if(!function_exists('minimax_version') || minimax_version()<LEXI_MNMX_V) { ?>
-<p>
-	<label>
-		<?php printf(__('You have to install <a href="%s" target="_BLANK">minimax %1.1f</a> in order for this plugin to work.', 'lexi'), "http://wordpress.org/extend/plugins/minimax/", LEXI_MNMX_V) ?>
-	</label>
-</p><?php
-}
+</table>
