@@ -79,8 +79,6 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 * Solved a bug with Chanel link.
 * Updated sack function to show the error message in the div if something goes wrong.
 * Updated sack function to display the data instead execute a function.
-
-= 0.9.98 =
 * First release that doesn't require Minimax.
 * Now Lexi uses WP's internal Ajax routines.
 
