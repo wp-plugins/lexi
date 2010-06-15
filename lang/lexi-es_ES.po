@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 12:36-0500\n"
-"PO-Revision-Date: 2010-06-15 12:36-0500\n"
+"POT-Creation-Date: 2010-06-15 13:37-0500\n"
+"PO-Revision-Date: 2010-06-15 13:37-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,7 @@ msgstr "Este mensaje solo será presentado al propietario o editor de este post.
 
 #: lexi.php:108
 #: lexi.php:109
-#, fuzzy
-msgid "Can/'t read Lexi Feed"
+msgid "Can\\'t read Lexi Feed"
 msgstr "No se pudo leer la fuente Lexi"
 
 #: lexi.php:220

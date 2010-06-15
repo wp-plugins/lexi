@@ -105,8 +105,8 @@ function lexi_header() {
 		//What to do on error?
 		lexi_sack.onError = function() {
 			var aux = document.getElementById(lexi_sack.element);
-			aux.innerHTMLsetAttribute='".__("Can/'t read Lexi Feed", 'lexi')."';
-			//alert( '".__("Can/'t read Lexi Feed", 'lexi')."' );
+			aux.innerHTMLsetAttribute='".__("Can\'t read Lexi Feed", 'lexi')."';
+			//alert( '".__("Can\'t read Lexi Feed", 'lexi')."' );
 		};
 		
 		lexi_sack.runAJAX();
