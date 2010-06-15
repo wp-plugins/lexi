@@ -161,7 +161,7 @@ function lexiLegacy_lexi($id) {
 	$answer = ""; 
 	$ans = parse_url(get_bloginfo('wpurl'));
 	$url = $_SERVER['DOCUMENT_ROOT'].$ans['path'].'/wp-content/cache/lexi/legacy.xml';
-	if($data = mnmx_readfile($url)) { //We have a legacy file
+	if($data = lexi_readfile($url)) { //We have a legacy file
 		$data = new SimpleXMLElement($data);
 		foreach($data->feed as $feed) {
 			$attr = $feed->attributes();
@@ -177,6 +177,82 @@ function lexiLegacy_lexi($id) {
 	}
 	
 	return $answer;
+}
+
+/**
+* A kind of readfile function to determine if use Curmnmx_readfilel or fopen.
+*
+* @access public
+* @param string filename URI of the File to open
+* @return The content of the file
+*/
+function lexi_readfile($filename)
+{
+	//Just to declare the variables
+	$data = false;
+	$have_curl = false;
+	$local_file = false;
+	
+	if(function_exists(curl_init)) { //do we have curl installed?
+		$have_curl = true;
+	}
+	
+	$search = "@([\w]*)://@i"; //is the file to read a local file?
+	if (!preg_match_all($search, $filename, $matches)) {
+		$local_file = true;
+	}
+	
+	if($local_file) { //A local file can be handle by fopen
+		if($fop = @fopen($filename, 'r')) {
+			$data = null;
+			while(!feof($fop))
+				$data .= fread($fop, 1024);
+			fclose($fop);
+		}
+	} else { //Oops, an external file
+		if($have_curl) { //Try with curl
+			if($ch = curl_init($filename)) {
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_HEADER, 0);
+				$data=curl_exec($ch);
+				curl_close($ch);
+			}
+		} else { //Try with fsockopen
+			$url = parse_url($filename);
+			if($fp = fsockopen($url['host'], 80)) {
+				//Enviar datos POST
+				fputs($fp, "POST " . $url['path'] . " HTTP/1.0\r\n");
+				fputs($fp, "Content-Type: application/x-www-form-urlencoded\r\n");
+				fputs($fp, "Content-Length: " . strlen($url['query']) . "\r\n");
+				fputs($fp, "Connection: close \r\r\n\n");
+				fputs($fp, $url['query'] . "\r\n");
+				 
+				//Obtener datos
+				while(!feof($fp))
+				    $data .= fgets($fp, 1024);
+				fclose($fp);
+				
+				$chunked = false;
+				$http_status = trim(substr($data, 0, strpos($data, "\n")));
+				if ( $http_status != 'HTTP/1.1 200 OK' ) {
+					die('The web service endpoint returned a "' . $http_status . '" response');
+				}
+				if ( strpos($data, 'Transfer-Encoding: chunked') !== false ) {
+					$temp = trim(strstr($data, "\r\n\r\n"));
+					$data = '';
+					$length = trim(substr($temp, 0, strpos($temp, "\r")));
+					while ( trim($temp) != "0" && ($length = trim(substr($temp, 0, strpos($temp, "\r")))) != "0" ) {
+						$data .= trim(substr($temp, strlen($length)+2, hexdec($length)));
+						$temp = trim(substr($temp, strlen($length) + 2 + hexdec($length)));
+					}
+				} elseif ( strpos($data, 'HTTP/1.1 200 OK') !== false ) {
+					$data = trim(strstr($data, "\r\n\r\n"));
+				}
+			}
+		}
+	}
+
+	return $data;
 }
 
 ?>
