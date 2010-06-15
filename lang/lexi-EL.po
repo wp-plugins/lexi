@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-08 11:41-0500\n"
-"PO-Revision-Date: 2010-06-08 11:41-0500\n"
+"POT-Creation-Date: 2010-06-15 12:35-0500\n"
+"PO-Revision-Date: 2010-06-15 12:36-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Greek by HyperCom Team <thanos@terentes.com; webmaster@hypercom.gr>\n"
 "MIME-Version: 1.0\n"
@@ -30,25 +30,24 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr "Το μήνυμα αυτό πρέπει να εμφανίζεται μόνο στον συντάκτη ή ιδιοκτήτη του άρθρου.<br>Η ετικέτα ή η λειτουργία που χρησιμοποιείται είναι παρωχημένη.<br>Δείτε το αρχείο <a href='%s'>readme</a> για το πως πρέπει να αλλαχθεί."
 
-#: lexi.php:98
-#, fuzzy
-msgid "Can't read Lexi Feed"
-msgstr "Ροή ειδήσεων RSS"
+#: lexi.php:108
+#: lexi.php:109
+msgid "Can/'t read Lexi Feed"
+msgstr "Αδυναμία ανάγνωσης της ροής του Lexi"
 
-#: lexi.php:211
+#: lexi.php:220
 msgid "Loading Feed..."
 msgstr "Φόρτωση Ροής..."
 
-#: lexi.php:447
-#, fuzzy
+#: lexi.php:456
 msgid "Untitled"
-msgstr "Τίτλος"
+msgstr "Χωρίς Τίτλο"
 
-#: lexi.php:483
+#: lexi.php:492
 msgid "Subscribe"
 msgstr "Εγγραφή"
 
-#: lexi.php:674
+#: lexi.php:683
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Προσθήκη RSS ροής στο πλευρικό πάνελ χρησιμοποιώντας το Lexi."
 
@@ -141,13 +140,4 @@ msgstr "Ακύρωση"
 #: tinymce/mce_lexi.php:103
 msgid "Insert"
 msgstr "Εισαγωγή"
-
-#~ msgid ""
-#~ "You have to install <a href=\"%s\" target=\"_BLANK\">minimax %1.1f</a> in "
-#~ "order for this plugin to work."
-#~ msgstr ""
-#~ "Απαιτείται η εγκατάσταση του <a href=\"%s\" target=\"_BLANK\">minimax %"
-#~ "1.1f</a> για την ορθή λειτουργία του πρόσθετου."
-#~ msgid "Only Lexi can use this link."
-#~ msgstr "Μόνο το Lexi μπορεί να χρησιμοποιήσει αυτό το σύνδεσμο."
 

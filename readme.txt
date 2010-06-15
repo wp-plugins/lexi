@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 2.9.2
-Stable tag: 0.9.99
+Stable tag: 0.9.100
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -74,6 +74,9 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.100 =
+* Solved a bug in English version.
 
 = 0.9.99 =
 * Solved a bug with Chanel link.

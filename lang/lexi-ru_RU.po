@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-08 11:42-0500\n"
+"POT-Creation-Date: 2010-06-15 12:36-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Fat Cow <zhr@tut.by>\n"
@@ -23,25 +23,26 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr ""
 
-#: lexi.php:98
+#: lexi.php:108
+#: lexi.php:109
 #, fuzzy
-msgid "Can't read Lexi Feed"
+msgid "Can/'t read Lexi Feed"
 msgstr "Lexi лента"
 
-#: lexi.php:211
+#: lexi.php:220
 msgid "Loading Feed..."
 msgstr "Загрузка ленты..."
 
-#: lexi.php:447
+#: lexi.php:456
 #, fuzzy
 msgid "Untitled"
 msgstr "Заглавие"
 
-#: lexi.php:483
+#: lexi.php:492
 msgid "Subscribe"
 msgstr "Подписка"
 
-#: lexi.php:674
+#: lexi.php:683
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
