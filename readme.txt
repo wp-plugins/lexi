@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.9.102
+Stable tag: 0.9.103
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -74,6 +74,9 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.103 =
+* Solved a bug with masqued domains and subdomains.
 
 = 0.9.102 =
 * Added capability to use qtip-for-wordpress when in pagination mode.

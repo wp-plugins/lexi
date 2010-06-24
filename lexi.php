@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.102
+Version: 0.9.103
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -76,6 +76,13 @@ function lexi_header() {
 	// Declare we use JavaScript SACK library for Ajax
 	wp_print_scripts( array( 'sack' ));
 	
+	//Local URL
+	$url = get_bloginfo( 'wpurl' );
+	$local_url = parse_url( $url );
+	$aux_url   = parse_url(wp_guess_url());
+	$url = str_replace($local_url['host'], $aux_url['host'], $url);
+
+	
 	$lexi_tooltip="";
 	if(function_exists('jr_qtip_for_wordpress')) {
 		$jr = get_option('jr_qtip_for_wordpress');
@@ -106,7 +113,7 @@ function lexi_header() {
 	
 	function lexi_feed( url, title, num, conf, rand, page )
 	{
-		var lexi_sack = new sack('".get_bloginfo( 'wpurl' )."/wp-admin/admin-ajax.php' );
+		var lexi_sack = new sack('".$url."/wp-admin/admin-ajax.php' );
 		
 		//Our plugin sack configuration
 		lexi_sack.execute = 0;
@@ -477,7 +484,7 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 					if ( empty($title) )
 					$title = __('Untitled');
 					$aux="<a class='rsswidget' href='$item_link' ";
-					if(!($config & CONF_SHOWCONTENT) && (function_exists('jr_qtip_for_wordpress'))) $aux.="title='".str_replace("'", "\'", $item->get_content())."'";
+					if(!($config & CONF_SHOWCONTENT) && (function_exists('jr_qtip_for_wordpress'))) $aux.="title='". htmlspecialchars(html_entity_decode($item->get_content()))."' ";
 					$aux.="$target>$title</a>";
 				}
 				
