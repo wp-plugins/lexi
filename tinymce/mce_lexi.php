@@ -32,7 +32,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 260px;">
+	<div class="panel_wrapper" style="height: 280px;">
 
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
@@ -81,6 +81,9 @@ if(!current_user_can('edit_posts')) die;
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssit" name="rsssit" checked /> <label for="rsssit"><?php _e("Show items title", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap" colspan="2" style="width: 100px;"><input type="checkbox" id="sht" name="sht" /> <label for="sht"><?php _e("Use content as hiperlink title (use with tooltip libraries).", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssa" name="rsssa" /> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>

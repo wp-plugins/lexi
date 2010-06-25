@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 13:37-0500\n"
-"PO-Revision-Date: 2010-06-15 13:37-0500\n"
+"POT-Creation-Date: 2010-06-24 21:55-0500\n"
+"PO-Revision-Date: 2010-06-24 21:57-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -29,24 +29,24 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr "Este mensaje solo será presentado al propietario o editor de este post.<br>La etiqueta o función que está usando es obsoleta.<br>En el archivo <a href='%s'>léame</a> encontrará la información para hacer los cambios requeridos."
 
-#: lexi.php:108
-#: lexi.php:109
+#: lexi.php:136
+#: lexi.php:137
 msgid "Can\\'t read Lexi Feed"
 msgstr "No se pudo leer la fuente Lexi"
 
-#: lexi.php:220
+#: lexi.php:250
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:456
+#: lexi.php:487
 msgid "Untitled"
 msgstr "Sin t&iacute;tulo"
 
-#: lexi.php:492
+#: lexi.php:525
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:683
+#: lexi.php:716
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
@@ -102,21 +102,26 @@ msgstr "Mostrar Contenido"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
+msgid "Use content as hiperlink title (use with tooltip libraries)."
+msgstr "Usar contenido como título del hiperenlace (usar con librerías de sugerencias)."
+
+#: templates/lexi_widget_manage.php:37
+#: tinymce/mce_lexi.php:89
 msgid "Show author"
 msgstr "Mostrar el autor"
 
-#: templates/lexi_widget_manage.php:35
-#: tinymce/mce_lexi.php:87
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
 msgid "Show date"
 msgstr "Mostrar la fecha"
 
-#: templates/lexi_widget_manage.php:38
-#: tinymce/mce_lexi.php:90
+#: templates/lexi_widget_manage.php:41
+#: tinymce/mce_lexi.php:93
 msgid "Open links in new page"
 msgstr "Abrir en nueva p&aacute;gina"
 
-#: templates/lexi_widget_manage.php:39
-#: tinymce/mce_lexi.php:91
+#: templates/lexi_widget_manage.php:42
+#: tinymce/mce_lexi.php:94
 msgid "Paginate"
 msgstr "Paginar"
 
@@ -132,11 +137,11 @@ msgstr "Usar el t&iacute;tulo de la fuente"
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:99
+#: tinymce/mce_lexi.php:102
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:103
+#: tinymce/mce_lexi.php:106
 msgid "Insert"
 msgstr "Insertar"
 

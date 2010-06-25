@@ -58,6 +58,7 @@ function insertLexiLink() {
 		if (document.getElementById('rsssd').checked) config = config + 64;
 		if (document.getElementById('rsspaginate').checked) config = config + 128;
 		if (!(document.getElementById('rsssit').checked)) config = config + 256;
+		if (document.getElementById('sht').checked) config = config + 512;
 
 		tagtext = "[lexi:" + config + "," + rsslink + title + "," + items + "]";
 		add_text = true;

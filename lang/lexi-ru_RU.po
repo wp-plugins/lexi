@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 13:37-0500\n"
+"POT-Creation-Date: 2010-06-24 21:57-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Fat Cow <zhr@tut.by>\n"
@@ -23,26 +23,26 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr ""
 
-#: lexi.php:108
-#: lexi.php:109
+#: lexi.php:136
+#: lexi.php:137
 #, fuzzy
 msgid "Can\\'t read Lexi Feed"
 msgstr "Lexi лента"
 
-#: lexi.php:220
+#: lexi.php:250
 msgid "Loading Feed..."
 msgstr "Загрузка ленты..."
 
-#: lexi.php:456
+#: lexi.php:487
 #, fuzzy
 msgid "Untitled"
 msgstr "Заглавие"
 
-#: lexi.php:492
+#: lexi.php:525
 msgid "Subscribe"
 msgstr "Подписка"
 
-#: lexi.php:683
+#: lexi.php:716
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
@@ -100,22 +100,27 @@ msgstr "Показзать содержание"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
+msgid "Use content as hiperlink title (use with tooltip libraries)."
+msgstr ""
+
+#: templates/lexi_widget_manage.php:37
+#: tinymce/mce_lexi.php:89
 msgid "Show author"
 msgstr ""
 
-#: templates/lexi_widget_manage.php:35
-#: tinymce/mce_lexi.php:87
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
 #, fuzzy
 msgid "Show date"
 msgstr "Показывать заглавие ленты"
 
-#: templates/lexi_widget_manage.php:38
-#: tinymce/mce_lexi.php:90
+#: templates/lexi_widget_manage.php:41
+#: tinymce/mce_lexi.php:93
 msgid "Open links in new page"
 msgstr "Открывать ссылки ва новом окне"
 
-#: templates/lexi_widget_manage.php:39
-#: tinymce/mce_lexi.php:91
+#: templates/lexi_widget_manage.php:42
+#: tinymce/mce_lexi.php:94
 msgid "Paginate"
 msgstr ""
 
@@ -131,11 +136,11 @@ msgstr "Использовать заглавие из ленты"
 msgid "Use a specific title"
 msgstr "Использовать специфический заголовок"
 
-#: tinymce/mce_lexi.php:99
+#: tinymce/mce_lexi.php:102
 msgid "Cancel"
 msgstr "Отмена"
 
-#: tinymce/mce_lexi.php:103
+#: tinymce/mce_lexi.php:106
 msgid "Insert"
 msgstr "Вставить"
 

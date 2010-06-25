@@ -31,6 +31,9 @@
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>"<?php if((int)$instance['show_content']) echo " checked"; ?>/> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
 	</tr>
 	<tr>
+		<td colspan="4"><input type="checkbox" id="<?php echo $this->get_field_id('show_href_title'); ?>" name="<?php echo $this->get_field_name('show_href_title'); ?>"<?php if(((int)$instance['show_href_title'])) echo " checked"; ?>/> <label for="href_title"><?php _e("Use content as hiperlink title (use with tooltip libraries).", 'lexi' ); ?></label></td>
+	</tr>
+	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_author'); ?>" name="<?php echo $this->get_field_name('show_author'); ?>"<?php if((int)$instance['show_author']) echo " checked"; ?>/> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>"<?php if((int)$instance['show_date']) echo " checked"; ?>/> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 	</tr>

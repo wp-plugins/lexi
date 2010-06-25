@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.103
+Version: 0.9.104
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -38,6 +38,7 @@ define('CONF_SHOWAUTHOR', 32);
 define('CONF_SHOWDATE', 64);
 define('CONF_PAGINATE', 128);
 define('CONF_NOTITEMTITLE', 256);
+define('CONF_HREFTITLE', 512);
 
 define('LEXI_CACHE_TIME', 3600); //One hour
 
@@ -335,7 +336,7 @@ function lexi_content($content) {
 * @acces public
 * @return int The conf number
 */
-function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false, $paginate=false, $show_item_title=true ) {	
+function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false, $paginate=false, $show_item_title=true, $href_title=false ) {	
 	//Calculate the conf number
 	$config = 0;
 	if($use_cache) $config = $config + CONF_CACHE;  //Cache
@@ -347,6 +348,7 @@ function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=tr
 	if($show_date)  $config = $config + CONF_SHOWDATE;  //Show date
 	if($paginate)  $config = $config + CONF_PAGINATE;  //Show date
 	if(!$show_item_title)  $config = $config + CONF_NOTITEMTITLE;  //Not show item title
+	if($href_title)  $config = $config + CONF_HREFTITLE;  //Not show item title
 	return $config;
 }
 
@@ -484,7 +486,7 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 					if ( empty($title) )
 					$title = __('Untitled');
 					$aux="<a class='rsswidget' href='$item_link' ";
-					if(!($config & CONF_SHOWCONTENT) && (function_exists('jr_qtip_for_wordpress'))) $aux.="title='". htmlspecialchars(html_entity_decode($item->get_content()))."' ";
+					if($config & CONF_HREFTITLE) $aux.="title='". htmlspecialchars(html_entity_decode($item->get_content()), ENT_QUOTES)."' ";
 					$aux.="$target>$title</a>";
 				}
 				
@@ -721,7 +723,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		function widget($args, $instance) {
 			extract($args, EXTR_SKIP);
 			
-			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'], $instance['paginate'], !$instance['not_show_item_title'] );
+			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'], $instance['paginate'], !$instance['not_show_item_title'], $instance['show_href_title'] );
 			
 			$rss = $instance['rss'];
 			$title = $instance['title'];
@@ -754,6 +756,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 			if($new_instance['show_date']) $instance['show_date'] = 1; else $instance['show_date'] = 0;
 			if($new_instance['paginate']) $instance['paginate'] = 1; else $instance['paginate'] = 0;
 			if($new_instance['not_show_item_title']) $instance['not_show_item_title'] = 0; else $instance['not_show_item_title'] = 1; //As we ask to 'show the title' (more easy to understand), we have to 'false' it.
+			if($new_instance['show_href_title']) $instance['show_href_title'] = 1; else $instance['show_href_title'] = 0;
 			
 			return $instance;
 		}
@@ -762,7 +765,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		 *	admin control form
 		 */	 	
 		function form($instance) {
-			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'not_show_item_title'=>'0', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0', 'paginate'=>'0');
+			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'not_show_item_title'=>'0', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0', 'paginate'=>'0', 'href_title'=>'0');
 			$instance = wp_parse_args( (array) $instance, $default );
 			
 			if(!array_key_exists('not_show_item_title',$instance)) { //Maybe we are showing a widget whitout 'not_show_item_title' variable,we have to create it as default

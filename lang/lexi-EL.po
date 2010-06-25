@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-15 13:36-0500\n"
-"PO-Revision-Date: 2010-06-15 13:36-0500\n"
+"POT-Creation-Date: 2010-06-24 21:54-0500\n"
+"PO-Revision-Date: 2010-06-24 21:55-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Greek by HyperCom Team <thanos@terentes.com; webmaster@hypercom.gr>\n"
 "MIME-Version: 1.0\n"
@@ -30,24 +30,24 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr "Το μήνυμα αυτό πρέπει να εμφανίζεται μόνο στον συντάκτη ή ιδιοκτήτη του άρθρου.<br>Η ετικέτα ή η λειτουργία που χρησιμοποιείται είναι παρωχημένη.<br>Δείτε το αρχείο <a href='%s'>readme</a> για το πως πρέπει να αλλαχθεί."
 
-#: lexi.php:108
-#: lexi.php:109
+#: lexi.php:136
+#: lexi.php:137
 msgid "Can\\'t read Lexi Feed"
 msgstr "Αδυναμία ανάγνωσης της ροής του Lexi"
 
-#: lexi.php:220
+#: lexi.php:250
 msgid "Loading Feed..."
 msgstr "Φόρτωση Ροής..."
 
-#: lexi.php:456
+#: lexi.php:487
 msgid "Untitled"
 msgstr "Χωρίς Τίτλο"
 
-#: lexi.php:492
+#: lexi.php:525
 msgid "Subscribe"
 msgstr "Εγγραφή"
 
-#: lexi.php:683
+#: lexi.php:716
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Προσθήκη RSS ροής στο πλευρικό πάνελ χρησιμοποιώντας το Lexi."
 
@@ -103,21 +103,26 @@ msgstr "Εμφάνιση περιεχομένου στοιχείου"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
+msgid "Use content as hiperlink title (use with tooltip libraries)."
+msgstr ""
+
+#: templates/lexi_widget_manage.php:37
+#: tinymce/mce_lexi.php:89
 msgid "Show author"
 msgstr "Εμφάνιση συγγραφέα"
 
-#: templates/lexi_widget_manage.php:35
-#: tinymce/mce_lexi.php:87
+#: templates/lexi_widget_manage.php:38
+#: tinymce/mce_lexi.php:90
 msgid "Show date"
 msgstr "Εμφάνιση Ημ/νίας"
 
-#: templates/lexi_widget_manage.php:38
-#: tinymce/mce_lexi.php:90
+#: templates/lexi_widget_manage.php:41
+#: tinymce/mce_lexi.php:93
 msgid "Open links in new page"
 msgstr "Άνοιγμα συνδέσμων σε νέα σελίδα"
 
-#: templates/lexi_widget_manage.php:39
-#: tinymce/mce_lexi.php:91
+#: templates/lexi_widget_manage.php:42
+#: tinymce/mce_lexi.php:94
 msgid "Paginate"
 msgstr "Σελιδοποίηση"
 
@@ -133,11 +138,11 @@ msgstr "Χρήση τίτλου από την ροή ειδήσεων"
 msgid "Use a specific title"
 msgstr "Χρήση συγκεκριμένου τίτλου"
 
-#: tinymce/mce_lexi.php:99
+#: tinymce/mce_lexi.php:102
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: tinymce/mce_lexi.php:103
+#: tinymce/mce_lexi.php:106
 msgid "Insert"
 msgstr "Εισαγωγή"
 
