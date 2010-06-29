@@ -88,9 +88,6 @@ if(!current_user_can('edit_posts')) die;
 		</select></td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap" colspan="2" style="width: 100px;"><input type="checkbox" id="sht" name="sht" /> <label for="sht"><?php _e("Use content as hiperlink title (use with tooltip libraries).", 'lexi' ); ?></label></td>
-				</tr>
-				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssa" name="rsssa" /> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssd" name="rsssd" /> <label for="rsssd"><?php _e("Show date", 'lexi' ); ?></label></td>
 				</tr>
