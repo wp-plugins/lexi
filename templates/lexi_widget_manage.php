@@ -1,7 +1,7 @@
 <table border="0" cellpadding="4" cellspacing="4">
 	<tr>
 		<td width="5%"></td>
-		<td></td>
+		<td width="45%"></td>
 		<td width="5%"></td>
 		<td width="45%"></td>
 	</tr>
@@ -28,10 +28,13 @@
 	</tr>
 	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('not_show_item_title'); ?>" name="<?php echo $this->get_field_name('not_show_item_title'); ?>"<?php if(!((int)$instance['not_show_item_title'])) echo " checked"; ?>/> <label for="rsstb"><?php _e("Show items title", 'lexi' ); ?></label></td>
-		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_content'); ?>" name="<?php echo $this->get_field_name('show_content'); ?>"<?php if((int)$instance['show_content']) echo " checked"; ?>/> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
-	</tr>
-	<tr>
-		<td colspan="4"><input type="checkbox" id="<?php echo $this->get_field_id('show_href_title'); ?>" name="<?php echo $this->get_field_name('show_href_title'); ?>"<?php if(((int)$instance['show_href_title'])) echo " checked"; ?>/> <label for="href_title"><?php _e("Use content as hiperlink title (use with tooltip libraries).", 'lexi' ); ?></label></td>
+		<td colspan="2"><select style="width: 120px;" id="<?php echo $this->get_field_id('content'); ?>" name="<?php echo $this->get_field_name('content'); ?>">
+			<option value="0"<?php if((int)$instance['content']=='0') echo " selected"; ?>><?php _e('Do not show content', 'lexi'); ?></option>
+			<option value="1"<?php if((int)$instance['content']=='1') echo " selected"; ?>><?php _e('Show content', 'lexi'); ?></option>
+			<option value="2"<?php if((int)$instance['content']=='2') echo " selected"; ?>><?php _e('Show truncated content', 'lexi'); ?></option>
+			<option value="3"<?php if((int)$instance['content']=='3') echo " selected"; ?>><?php _e('Truncated content as rollover title', 'lexi'); ?></option>
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="checkbox" id="<?php echo $this->get_field_id('show_author'); ?>" name="<?php echo $this->get_field_name('show_author'); ?>"<?php if((int)$instance['show_author']) echo " checked"; ?>/> <label for="rsssa"><?php _e("Show author", 'lexi' ); ?></label></td>

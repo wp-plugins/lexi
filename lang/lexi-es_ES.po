@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-24 21:55-0500\n"
-"PO-Revision-Date: 2010-06-24 21:57-0500\n"
+"POT-Creation-Date: 2010-06-29 16:39-0500\n"
+"PO-Revision-Date: 2010-06-29 16:40-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Spanish <sebaxtian@gawab.com>\n"
 "MIME-Version: 1.0\n"
@@ -29,24 +29,24 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr "Este mensaje solo será presentado al propietario o editor de este post.<br>La etiqueta o función que está usando es obsoleta.<br>En el archivo <a href='%s'>léame</a> encontrará la información para hacer los cambios requeridos."
 
-#: lexi.php:136
 #: lexi.php:137
+#: lexi.php:138
 msgid "Can\\'t read Lexi Feed"
 msgstr "No se pudo leer la fuente Lexi"
 
-#: lexi.php:250
+#: lexi.php:251
 msgid "Loading Feed..."
 msgstr "Cargando Fuente..."
 
-#: lexi.php:487
+#: lexi.php:491
 msgid "Untitled"
 msgstr "Sin t&iacute;tulo"
 
-#: lexi.php:525
+#: lexi.php:529
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: lexi.php:716
+#: lexi.php:877
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr "Agregar una fuente RSS a  la barra lateral usando Lexi."
 
@@ -95,33 +95,43 @@ msgstr "Mostrar icono RSS"
 msgid "Show items title"
 msgstr "Mostrar título de los items"
 
-#: templates/lexi_widget_manage.php:31
-#: tinymce/mce_lexi.php:83
-msgid "Show contents"
-msgstr "Mostrar Contenido"
+#: templates/lexi_widget_manage.php:32
+#: tinymce/mce_lexi.php:84
+msgid "Do not show content"
+msgstr "No mostrar contenido"
+
+#: templates/lexi_widget_manage.php:33
+#: tinymce/mce_lexi.php:85
+msgid "Show content"
+msgstr "Mostrar contenido"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
-msgid "Use content as hiperlink title (use with tooltip libraries)."
-msgstr "Usar contenido como título del hiperenlace (usar con librerías de sugerencias)."
+msgid "Show truncated content"
+msgstr "Mostrar contenido truncado"
 
-#: templates/lexi_widget_manage.php:37
-#: tinymce/mce_lexi.php:89
+#: templates/lexi_widget_manage.php:35
+#: tinymce/mce_lexi.php:87
+msgid "Truncated content as rollover title"
+msgstr "Contenido truncado como título para rollovers"
+
+#: templates/lexi_widget_manage.php:40
+#: tinymce/mce_lexi.php:94
 msgid "Show author"
 msgstr "Mostrar el autor"
 
-#: templates/lexi_widget_manage.php:38
-#: tinymce/mce_lexi.php:90
+#: templates/lexi_widget_manage.php:41
+#: tinymce/mce_lexi.php:95
 msgid "Show date"
 msgstr "Mostrar la fecha"
 
-#: templates/lexi_widget_manage.php:41
-#: tinymce/mce_lexi.php:93
+#: templates/lexi_widget_manage.php:44
+#: tinymce/mce_lexi.php:98
 msgid "Open links in new page"
 msgstr "Abrir en nueva p&aacute;gina"
 
-#: templates/lexi_widget_manage.php:42
-#: tinymce/mce_lexi.php:94
+#: templates/lexi_widget_manage.php:45
+#: tinymce/mce_lexi.php:99
 msgid "Paginate"
 msgstr "Paginar"
 
@@ -137,11 +147,15 @@ msgstr "Usar el t&iacute;tulo de la fuente"
 msgid "Use a specific title"
 msgstr "Usar un t&iacute;tulo espec&iacute;fico"
 
-#: tinymce/mce_lexi.php:102
+#: tinymce/mce_lexi.php:91
+msgid "Use content as hiperlink title (use with tooltip libraries)."
+msgstr "Usar contenido como título del hiperenlace (usar con librerías de sugerencias)."
+
+#: tinymce/mce_lexi.php:107
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tinymce/mce_lexi.php:106
+#: tinymce/mce_lexi.php:111
 msgid "Insert"
 msgstr "Insertar"
 

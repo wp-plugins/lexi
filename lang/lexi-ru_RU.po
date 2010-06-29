@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-24 21:57-0500\n"
+"POT-Creation-Date: 2010-06-29 16:41-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Fat Cow <zhr@tut.by>\n"
@@ -23,26 +23,26 @@ msgstr ""
 msgid "This message should be viewed only by the post owner or editor.<br>The tag or function you are using here has been deprecated.<br>See the <a href='%s'>readme</a> file to change into the new scheme."
 msgstr ""
 
-#: lexi.php:136
 #: lexi.php:137
+#: lexi.php:138
 #, fuzzy
 msgid "Can\\'t read Lexi Feed"
 msgstr "Lexi лента"
 
-#: lexi.php:250
+#: lexi.php:251
 msgid "Loading Feed..."
 msgstr "Загрузка ленты..."
 
-#: lexi.php:487
+#: lexi.php:491
 #, fuzzy
 msgid "Untitled"
 msgstr "Заглавие"
 
-#: lexi.php:525
+#: lexi.php:529
 msgid "Subscribe"
 msgstr "Подписка"
 
-#: lexi.php:716
+#: lexi.php:877
 msgid "Add an RSS feed to the sidebar using Lexi."
 msgstr ""
 
@@ -93,34 +93,47 @@ msgstr "Показзать содержание"
 msgid "Show items title"
 msgstr "Показывать заглавие ленты"
 
-#: templates/lexi_widget_manage.php:31
-#: tinymce/mce_lexi.php:83
-msgid "Show contents"
+#: templates/lexi_widget_manage.php:32
+#: tinymce/mce_lexi.php:84
+#, fuzzy
+msgid "Do not show content"
+msgstr "Показзать содержание"
+
+#: templates/lexi_widget_manage.php:33
+#: tinymce/mce_lexi.php:85
+#, fuzzy
+msgid "Show content"
 msgstr "Показзать содержание"
 
 #: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:86
-msgid "Use content as hiperlink title (use with tooltip libraries)."
+#, fuzzy
+msgid "Show truncated content"
+msgstr "Показзать содержание"
+
+#: templates/lexi_widget_manage.php:35
+#: tinymce/mce_lexi.php:87
+msgid "Truncated content as rollover title"
 msgstr ""
 
-#: templates/lexi_widget_manage.php:37
-#: tinymce/mce_lexi.php:89
+#: templates/lexi_widget_manage.php:40
+#: tinymce/mce_lexi.php:94
 msgid "Show author"
 msgstr ""
 
-#: templates/lexi_widget_manage.php:38
-#: tinymce/mce_lexi.php:90
+#: templates/lexi_widget_manage.php:41
+#: tinymce/mce_lexi.php:95
 #, fuzzy
 msgid "Show date"
 msgstr "Показывать заглавие ленты"
 
-#: templates/lexi_widget_manage.php:41
-#: tinymce/mce_lexi.php:93
+#: templates/lexi_widget_manage.php:44
+#: tinymce/mce_lexi.php:98
 msgid "Open links in new page"
 msgstr "Открывать ссылки ва новом окне"
 
-#: templates/lexi_widget_manage.php:42
-#: tinymce/mce_lexi.php:94
+#: templates/lexi_widget_manage.php:45
+#: tinymce/mce_lexi.php:99
 msgid "Paginate"
 msgstr ""
 
@@ -136,11 +149,15 @@ msgstr "Использовать заглавие из ленты"
 msgid "Use a specific title"
 msgstr "Использовать специфический заголовок"
 
-#: tinymce/mce_lexi.php:102
+#: tinymce/mce_lexi.php:91
+msgid "Use content as hiperlink title (use with tooltip libraries)."
+msgstr ""
+
+#: tinymce/mce_lexi.php:107
 msgid "Cancel"
 msgstr "Отмена"
 
-#: tinymce/mce_lexi.php:106
+#: tinymce/mce_lexi.php:111
 msgid "Insert"
 msgstr "Вставить"
 

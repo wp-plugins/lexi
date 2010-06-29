@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.9.104
+Stable tag: 0.9.105
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -16,7 +16,7 @@ To show a Feed in a post use `[lexi: configuration, rss, title, max_items]` or `
 The configuration number can be calculated as follows:
 
 * Add 1 if you want to save it in cache.
-* Add 2 if you want to show the contents.
+* Add 2 if you want to show the content.
 * Add 4 if you want to show the title (this is the channel link too).
 * Add 8 if you want to open it in a new page.
 * Add 16 if you want to not show the RSS icon (this is the RSS link too).
@@ -24,6 +24,8 @@ The configuration number can be calculated as follows:
 * Add 64 if you want to show the date.
 * Add 128 if you want to paginate the results.
 * Add 256 to not show items title.
+* Add 512 to show content in the reference title (usefull when using 3rd party rollover plugins).
+* Add 1024 to use the internal function to truncate the content to the first complete paragraphs until having 400 letters. Only text, no images. See the FAQ for other truncate size.
 
 If you want to use the title given by the RSS, use `[lexi: configuration, rss, max_items]` or `lexiRSS($configuration, $rss, false, $max_items)`.
 
@@ -66,6 +68,12 @@ If the validator returns the feed data, maybe the library in your WP is older th
 
 Also, it happens with some feeds the first time they are readed, but ten minutes later they work.
 
+= How does the truncate function work? =
+
+This simple function takes the html code, extract the text and truncate it to the first paragraphs with less than 400 characters. If you want to truncate allways to an specific size, define the LEXI_TRUNCATE_SIZE variable into your wp-config.php file with the required number, like this:
+
+define('LEXI_TRUNCATE_SIZE', 200);
+
 == Screenshots ==
 
 1. Add one feed in the sidebar.
@@ -74,6 +82,10 @@ Also, it happens with some feeds the first time they are readed, but ten minutes
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 0.9.105 =
+* Function to truncate the text.
+* New configuration forms to display the content as a rollover (3d party plugin required) or as text.
 
 = 0.9.104 =
 * Added configuration item to put the content in the href title. Useful to use with tooltip libraries.

@@ -80,7 +80,12 @@ if(!current_user_can('edit_posts')) die;
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssit" name="rsssit" checked /> <label for="rsssit"><?php _e("Show items title", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><input type="checkbox" id="rsssc" name="rsssc" /> <label for="rsssc"><?php _e("Show contents", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap"><select style="width: 120px;" id="content" name="content">
+			<option value="0"><?php _e('Do not show content', 'lexi'); ?></option>
+			<option value="1"><?php _e('Show content', 'lexi'); ?></option>
+			<option value="2"><?php _e('Show truncated content', 'lexi'); ?></option>
+			<option value="3"><?php _e('Truncated content as rollover title', 'lexi'); ?></option>
+		</select></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap" colspan="2" style="width: 100px;"><input type="checkbox" id="sht" name="sht" /> <label for="sht"><?php _e("Use content as hiperlink title (use with tooltip libraries).", 'lexi' ); ?></label></td>

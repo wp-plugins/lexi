@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.104
+Version: 0.9.105
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -39,6 +39,7 @@ define('CONF_SHOWDATE', 64);
 define('CONF_PAGINATE', 128);
 define('CONF_NOTITEMTITLE', 256);
 define('CONF_HREFTITLE', 512);
+define('CONF_TRUNCATE', 1024);
 
 define('LEXI_CACHE_TIME', 3600); //One hour
 
@@ -336,7 +337,7 @@ function lexi_content($content) {
 * @acces public
 * @return int The conf number
 */
-function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false, $paginate=false, $show_item_title=true, $href_title=false ) {	
+function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=true, $target_blank=true, $icon=true, $show_author=false, $show_date=false, $paginate=false, $show_item_title=true, $href_title=false, $truncate=false ) {	
 	//Calculate the conf number
 	$config = 0;
 	if($use_cache) $config = $config + CONF_CACHE;  //Cache
@@ -349,6 +350,7 @@ function lexi_calculateConf($use_cache=true, $show_content=false, $show_title=tr
 	if($paginate)  $config = $config + CONF_PAGINATE;  //Show date
 	if(!$show_item_title)  $config = $config + CONF_NOTITEMTITLE;  //Not show item title
 	if($href_title)  $config = $config + CONF_HREFTITLE;  //Not show item title
+	if($truncate)  $config = $config + CONF_TRUNCATE;  //Truncate content
 	return $config;
 }
 
@@ -477,6 +479,8 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 				//		title of the feed
 				//		the content and the variable to know if we have to show it
 				$aux="";
+				$content = $item->get_content();
+				if($config & CONF_TRUNCATE) $content = lexi_truncate($content, $truncate);
 				if(!($config & CONF_NOTITEMTITLE)) {
 					$item_link = $item->get_link();
 					while ( stristr($item_link, 'http') != $item_link )
@@ -486,7 +490,7 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 					if ( empty($title) )
 					$title = __('Untitled');
 					$aux="<a class='rsswidget' href='$item_link' ";
-					if($config & CONF_HREFTITLE) $aux.="title='". htmlspecialchars(html_entity_decode($item->get_content()), ENT_QUOTES)."' ";
+					if($config & CONF_HREFTITLE) $aux.="title='". htmlspecialchars(html_entity_decode($content), ENT_QUOTES)."' ";
 					$aux.="$target>$title</a>";
 				}
 				
@@ -501,7 +505,7 @@ function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 					$aux.="<br/>".$date;
 				}
 				
-				if($config & CONF_SHOWCONTENT) $aux.="<br/>".$item->get_content();
+				if($config & CONF_SHOWCONTENT) $aux.="<br/>".$content;
 				
 				if($config & CONF_SHOWAUTHOR) {
 					$author = $item->get_author();
@@ -698,6 +702,163 @@ function add_lexi_script($plugins) {
 }
 
 /**
+* Function to truncate any html text using.
+*
+* @param text Text to truncate.
+* @access public
+*/
+function lexi_truncate ($text) {
+
+	if(defined('LEXI_TRUNCATE_SIZE')) {
+		$truncate_size=LEXI_TRUNCATE_SIZE;
+	} else {
+		$truncate_size=false;
+	}
+
+	if(!$truncate_size) $size = 400; else $size = $truncate_size;
+
+	//Change any <br> with new line
+	$br_regex = "/<[br\s\/]{2,}>/i" ;
+	$text = preg_replace ($br_regex, "\n", $text);
+	//Change any </n> with 2 new line
+	$p_regex = "/<\/p>/i" ;
+	$text = preg_replace ($p_regex, "\n\n", $text);
+	//Delete any html tag
+	$html_regex = "/<(img|div|\/div|table|\/table|td|\/td|tr|\/tr|p|\/p|b|\/b|a|\/a|pre|\/pre)[^\>]*>/i" ;
+	$text = preg_replace ($html_regex, "", $text);
+	//Join new lines
+	$html_regex = "/\n\s*\n/i";
+	$text = preg_replace ($html_regex, "\n\n", $text);
+	//Erase extra new lines
+	$html_regex = "/\n(\n)+/i";
+	//Erase first new line
+	$text = preg_replace ($html_regex, "\n\n", $text);
+	
+	//Internal code
+	//$html_regex = "/\n/i";
+	//$text = preg_replace ($html_regex, "[ltnl]", $text);
+	
+	$text = trim($text);
+	if($truncate_size) { //As the user have defined a truncate size, use it
+		$text = cake_truncate($text, $size, ' ...', false, true);
+		$text = trim($text);
+	} else { //We have to get the first paragraphs with enough text.
+		//Explode in paragraphs
+		$pieces = explode("\n\n", $text);
+		
+		//Concatenate until we have something to show
+		$text = "";
+		foreach($pieces as $piece) {
+			if(strlen($text)+strlen($piece)<$size || strlen($text)==0)
+				$text.= "\n\n$piece"; 
+		}
+		$text = trim($text);
+	}
+	
+	return $text;
+}
+
+/**
+* Truncates text.
+*
+* Cuts a string to the length of $length and replaces the last characters
+* with the ending if the text is longer than length.
+*
+* @param string  $text String to truncate.
+* @param integer $length Length of returned string, including ellipsis.
+* @param mixed $ending If string, will be used as Ending and appended to the trimmed string. Can also be an associative array that can contain the last three params of this method.
+* @param boolean $exact If false, $text will not be cut mid-word
+* @param boolean $considerHtml If true, HTML tags would be handled correctly
+* @return string Trimmed string.
+*/
+function cake_truncate($text, $length = 100, $ending = '...', $exact = true, $considerHtml = false) {
+    if (is_array($ending)) {
+        extract($ending);
+    }
+    if ($considerHtml) {
+        if (mb_strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
+            return $text;
+        }
+        $totalLength = mb_strlen($ending);
+        $openTags = array();
+        $truncate = '';
+        preg_match_all('/(<\/?([\w+]+)[^>]*>)?([^<>]*)/', $text, $tags, PREG_SET_ORDER);
+        foreach ($tags as $tag) {
+            if (!preg_match('/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/s', $tag[2])) {
+                if (preg_match('/<[\w]+[^>]*>/s', $tag[0])) {
+                    array_unshift($openTags, $tag[2]);
+                } else if (preg_match('/<\/([\w]+)[^>]*>/s', $tag[0], $closeTag)) {
+                    $pos = array_search($closeTag[1], $openTags);
+                    if ($pos !== false) {
+                        array_splice($openTags, $pos, 1);
+                    }
+                }
+            }
+            $truncate .= $tag[1];
+ 
+            $contentLength = mb_strlen(preg_replace('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|[0-9a-f]{1,6};/i', ' ', $tag[3]));
+            if ($contentLength + $totalLength > $length) {
+                $left = $length - $totalLength;
+                $entitiesLength = 0;
+                if (preg_match_all('/&[0-9a-z]{2,8};|&#[0-9]{1,7};|[0-9a-f]{1,6};/i', $tag[3], $entities, PREG_OFFSET_CAPTURE)) {
+                    foreach ($entities[0] as $entity) {
+                        if ($entity[1] + 1 - $entitiesLength <= $left) {
+                            $left--;
+                            $entitiesLength += mb_strlen($entity[0]);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+ 
+                $truncate .= mb_substr($tag[3], 0 , $left + $entitiesLength);
+                break;
+            } else {
+                $truncate .= $tag[3];
+                $totalLength += $contentLength;
+            }
+            if ($totalLength >= $length) {
+                break;
+            }
+        }
+ 
+    } else {
+        if (mb_strlen($text) <= $length) {
+            return $text;
+        } else {
+            $truncate = mb_substr($text, 0, $length - strlen($ending));
+        }
+    }
+    if (!$exact) {
+        $spacepos = mb_strrpos($truncate, ' ');
+        if (isset($spacepos)) {
+            if ($considerHtml) {
+                $bits = mb_substr($truncate, $spacepos);
+                preg_match_all('/<\/([a-z]+)>/', $bits, $droppedTags, PREG_SET_ORDER);
+                if (!empty($droppedTags)) {
+                    foreach ($droppedTags as $closingTag) {
+                        if (!in_array($closingTag[1], $openTags)) {
+                            array_unshift($openTags, $closingTag[1]);
+                        }
+                    }
+                }
+            }
+            $truncate = mb_substr($truncate, 0, $spacepos);
+        }
+    }
+ 
+    $truncate .= $ending;
+ 
+    if ($considerHtml) {
+        foreach ($openTags as $tag) {
+            $truncate .= '';
+        }
+    }
+ 
+    return $truncate;
+}
+
+/**
 * Lexi widget stuff (New MultiWidget )
 *
 */
@@ -723,7 +884,35 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		function widget($args, $instance) {
 			extract($args, EXTR_SKIP);
 			
-			$config = lexi_calculateConf($instance['use_cache'], $instance['show_content'], $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'], $instance['paginate'], !$instance['not_show_item_title'], $instance['show_href_title'] );
+			$show_content = 0;
+			$show_href_title = 0;
+			$truncate = 0;
+			
+			if(!isset($instance['content'])) {
+				if($instance['show_content'] == '0' && $instance['show_href_title'] == '0') $instance['content'] = 0;
+				if($instance['show_content'] == '1') $instance['content'] = 1;
+				if($instance['show_content'] == '0' && $instance['show_href_title'] == '1') $instance['content'] = 3;
+			}
+			
+			switch($instance['content']) {
+				case '1':
+					$show_content = 1;
+					$show_href_title = 0;
+					$truncate = 0;
+					break;
+				case '2':
+					$show_content = 1;
+					$show_href_title = 0;
+					$truncate = 1;
+					break;
+				case '3':
+					$show_content = 0;
+					$show_href_title = 1;
+					$truncate = 1;
+					break;
+			}
+			
+			$config = lexi_calculateConf($instance['use_cache'], $show_content, $instance['show_title'], $instance['target_blank'], $instance['icon'], $instance['show_author'], $instance['show_date'], $instance['paginate'], !$instance['not_show_item_title'], $show_href_title, $truncate );
 			
 			$rss = $instance['rss'];
 			$title = $instance['title'];
@@ -748,7 +937,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 			$instance = $new_instance;
 			
 			if($new_instance['use_cache']) $instance['use_cache'] = 1; else $instance['use_cache'] = 0;
-			if($new_instance['show_content']) $instance['show_content'] = 1; else $instance['show_content'] = 0;
+			$instance['content'] = $new_instance['content'];
 			if($new_instance['show_title']) $instance['show_title'] = 1; else $instance['show_title'] = 0;
 			if($new_instance['icon']) $instance['icon'] = 1; else $instance['icon'] = 0;
 			if($new_instance['target_blank']) $instance['target_blank'] = 1; else $instance['target_blank'] = 0;
@@ -765,8 +954,16 @@ if((float)$wp_version >= 2.8) { //The new widget system
 		 *	admin control form
 		 */	 	
 		function form($instance) {
-			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_content'=>'0', 'show_title'=>'1', 'icon'=>'1', 'not_show_item_title'=>'0', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0', 'paginate'=>'0', 'href_title'=>'0');
+			$default = 	array('rss'=> '', 'title'=>'', 'items'=>'5', 'show_title'=>'1', 'icon'=>'1', 'not_show_item_title'=>'0', 'target_blank'=>'1', 'use_cache'=>'1', 'show_author'=>'0', 'show_date'=>'0', 'paginate'=>'0', 'content'=>'0');
 			$instance = wp_parse_args( (array) $instance, $default );
+			
+			if(isset($instance['show_content'])) {
+				if($instance['show_content'] == '0' && $instance['show_href_title'] == '0') $instance['content'] = 0;
+				if($instance['show_content'] == '1') $instance['content'] = 1;
+				if($instance['show_content'] == '0' && $instance['show_href_title'] == '1') $instance['content'] = 3;
+				unset($instance['show_content']);
+				unset($instance['show_href_title']);
+			}
 			
 			if(!array_key_exists('not_show_item_title',$instance)) { //Maybe we are showing a widget whitout 'not_show_item_title' variable,we have to create it as default
 				$instance['not_show_item_title']=0;

@@ -50,7 +50,6 @@ function insertLexiLink() {
 		var config = 0;
 
 		if (document.getElementById('rsscache').checked) config = config + 1;
-		if (document.getElementById('rsssc').checked) config = config + 2;
 		if (document.getElementById('rssst').checked) config = config + 4;
 		if (document.getElementById('rsstb').checked) config = config + 8;
 		if (!(document.getElementById('rssimg').checked)) config = config + 16;
@@ -58,7 +57,18 @@ function insertLexiLink() {
 		if (document.getElementById('rsssd').checked) config = config + 64;
 		if (document.getElementById('rsspaginate').checked) config = config + 128;
 		if (!(document.getElementById('rsssit').checked)) config = config + 256;
-		if (document.getElementById('sht').checked) config = config + 512;
+		
+		switch(document.getElementById('content').value) {
+			case "1":
+				config = config + 2;
+				break;
+			case "2":
+				config = config + 2 + 1024;
+				break;
+			case "3":
+				config = config + 512 + 1024;
+				break;
+		}
 
 		tagtext = "[lexi:" + config + "," + rsslink + title + "," + items + "]";
 		add_text = true;
