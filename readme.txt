@@ -3,7 +3,7 @@ Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.9.105
+Stable tag: 1.0
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -82,6 +82,9 @@ define('LEXI_TRUNCATE_SIZE', 200);
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 1.0 =
+* Stable release
 
 = 0.9.105 =
 * Function to truncate the text.

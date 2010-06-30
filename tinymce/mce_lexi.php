@@ -20,7 +20,7 @@ if(!current_user_can('edit_posts')) die;
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
-	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-content/plugins/lexi/tinymce/lexi.js"></script>
+	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-content/plugins/lexi/tinymce/lexi.js?ver=<?php echo LEXI_HEADER_V; ?>"></script>
 	<base target="_self" />
 </head>
 <body id="link" onload="tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';document.getElementById('rss_tab').focus();" style="display: none">
@@ -32,7 +32,7 @@ if(!current_user_can('edit_posts')) die;
 		</ul>
 	</div>
 	
-	<div class="panel_wrapper" style="height: 280px;">
+	<div class="panel_wrapper" style="height: 255px;">
 
 		<!-- rss panel -->
 		<div id="rss_panel" class="panel current">
@@ -75,12 +75,12 @@ if(!current_user_can('edit_posts')) die;
 					<td colspan="2" valign="top"><input type="checkbox" id="rsscache" name="rsscache" checked /> <label for="rsscache"><?php _e("Save cache", 'lexi' ); ?>. <?php _e('Uncheck this option only in case the feed updates several times in an hour.','lexi'); ?></lavel></td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show feed title", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap" width="50%"><input type="checkbox" id="rssst" name="rssst" checked /> <label for="rssst"><?php _e("Show feed title", 'lexi' ); ?></label></td>
+					<td nowrap="nowrap" width="50%"><input type="checkbox" id="rssimg" name="rssimg" checked /> <label for="rssimg"><?php _e("Show RSS icon", 'lexi' ); ?></label></td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap"><input type="checkbox" id="rsssit" name="rsssit" checked /> <label for="rsssit"><?php _e("Show items title", 'lexi' ); ?></label></td>
-					<td nowrap="nowrap"><select style="width: 120px;" id="content" name="content">
+					<td nowrap="nowrap"><select style="width: 160px;" id="content" name="content">
 			<option value="0"><?php _e('Do not show content', 'lexi'); ?></option>
 			<option value="1"><?php _e('Show content', 'lexi'); ?></option>
 			<option value="2"><?php _e('Show truncated content', 'lexi'); ?></option>

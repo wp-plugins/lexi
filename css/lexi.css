@@ -29,6 +29,7 @@ div.lexi-page-off {
 	width: 100%;
 	text-align: center;
 	background: none;
+	min-height: 15px;
 }
 
 .lexi-page-actual {

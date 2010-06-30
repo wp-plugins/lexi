@@ -180,7 +180,7 @@ function lexiLegacy_lexi($id) {
 }
 
 /**
-* A kind of readfile function to determine if use Curmnmx_readfilel or fopen.
+* A kind of readfile function to determine if use Curl or fopen.
 *
 * @access public
 * @param string filename URI of the File to open

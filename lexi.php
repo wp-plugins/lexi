@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 0.9.105
+Version: 1.0
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -27,7 +27,7 @@ Author URI: http://www.sebaxtian.com
 
 require_once("legacy.php");
 
-define('LEXI_HEADER_V', 1.0);
+define('LEXI_HEADER_V', 1.1);
 
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
@@ -85,68 +85,33 @@ function lexi_header() {
 	$url = str_replace($local_url['host'], $aux_url['host'], $url);
 
 	
-	$lexi_tooltip="";
+	$lexi_completion="lexi_completion = function(rand) {}";
 	if(function_exists('jr_qtip_for_wordpress')) {
 		$jr = get_option('jr_qtip_for_wordpress');
-		$lexi_tooltip="
-		lexi_sack.onCompletion = function() {
-			$('div#lexi'+rand+' ul li a[title]').qtip({
-				style: {
-					name: '".addslashes($jr['tooltip_color'])."', tip: true,
-					textAlign: 'center'
-				},
-				position: { 
-					corner: {
-						target: '".addslashes($jr['tooltip_target'])."',
-						tooltip: '".addslashes($jr['tooltip_position'])."'
-					}
+		$lexi_completion="lexi_completion = function(rand) {
+		$('div#lexi'+rand+' ul li a[title]').qtip({
+			style: {
+				name: '".addslashes($jr['tooltip_color'])."', tip: true,
+				textAlign: 'center'
+			},
+			position: { 
+				corner: {
+					target: '".addslashes($jr['tooltip_target'])."',
+					tooltip: '".addslashes($jr['tooltip_position'])."'
 				}
-			} );
-		}";
+			}
+		} );
+	}";
 	}
 
 	// Define custom JavaScript function
 	echo "
 	<script type='text/javascript'>
-	//<![CDATA[
-	
-	var loading_lexi_img = new Image(); 
-	loading_lexi_img.src = '".lexi_plugin_url('/img/loading-page.gif')."';
-	
-	function lexi_feed( url, title, num, conf, rand, page )
-	{
-		var lexi_sack = new sack('".$url."/wp-admin/admin-ajax.php' );
-		
-		//Our plugin sack configuration
-		lexi_sack.execute = 0;
-		lexi_sack.method = 'POST';
-		lexi_sack.setVar( 'action', 'lexi_ajax' );
-		lexi_sack.element = 'lexi'+rand;
-		
-		//The ajax call data
-		lexi_sack.setVar( 'url', url );
-		lexi_sack.setVar( 'title', title );
-		lexi_sack.setVar( 'num', num );
-		lexi_sack.setVar( 'conf', conf );
-		lexi_sack.setVar( 'rand', rand );
-		lexi_sack.setVar( 'page', page );
-		
-		//What to do on error?
-		lexi_sack.onError = function() {
-			var aux = document.getElementById(lexi_sack.element);
-			aux.innerHTMLsetAttribute='".__("Can\'t read Lexi Feed", 'lexi')."';
-			//alert( '".__("Can\'t read Lexi Feed", 'lexi')."' );
-		};
-		
-		".$lexi_tooltip."
-		
-		lexi_sack.runAJAX();
-		
-		return true;
-
-	} // end of JavaScript function lexi_feed
-	//]]>
-	</script>";
+	lexi_i18n_error = '".__("Can\'t read Lexi Feed", 'lexi')."';
+	lexi_url = '$url';
+	$lexi_completion
+	</script>
+	<script language='javascript' type='text/javascript' src='".$url."/wp-content/plugins/lexi/lexi.js?ver=".LEXI_HEADER_V."'></script>";
 }
 
 /**

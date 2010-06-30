@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lexi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-29 16:39-0500\n"
-"PO-Revision-Date: 2010-06-29 16:39-0500\n"
+"POT-Creation-Date: 2010-06-30 07:59-0500\n"
+"PO-Revision-Date: 2010-06-30 07:59-0500\n"
 "Last-Translator: Juan Sebastián Echeverry <sebaxtian@gawab.com>\n"
 "Language-Team: Greek by HyperCom Team <thanos@terentes.com; webmaster@hypercom.gr>\n"
 "MIME-Version: 1.0\n"
@@ -71,71 +71,71 @@ msgstr "Στοιχεία"
 msgid "Max number of items to show, or number of items per page when using pagination system."
 msgstr "Μέγιστος αρθμός συνολικά εμφανίσιμων στοιχείων, ή στοιχείων εμφανίσεων ανα σελίδα σε περίτπωση χρήση του συστήματος σελιδοποίησης."
 
-#: templates/lexi_widget_manage.php:23
+#: templates/lexi_widget_manage.php:25
 #: tinymce/mce_lexi.php:75
 msgid "Save cache"
 msgstr "Αποθήκευση cache"
 
-#: templates/lexi_widget_manage.php:23
+#: templates/lexi_widget_manage.php:25
 #: tinymce/mce_lexi.php:75
 msgid "Uncheck this option only in case the feed updates several times in an hour."
 msgstr "Αποεπιλέξτε την επιλογή αυτή μόνο στην περίπτωση που η ροή ενημερώνεται πολλές φορές σε μια ώρα."
 
-#: templates/lexi_widget_manage.php:26
+#: templates/lexi_widget_manage.php:28
 #: tinymce/mce_lexi.php:78
 msgid "Show feed title"
 msgstr "Εμφάνιση τίτλου ροής"
 
-#: templates/lexi_widget_manage.php:27
+#: templates/lexi_widget_manage.php:29
 #: tinymce/mce_lexi.php:79
 msgid "Show RSS icon"
 msgstr "Εμφάνιση εικονιδίου RSS"
 
-#: templates/lexi_widget_manage.php:30
+#: templates/lexi_widget_manage.php:32
 #: tinymce/mce_lexi.php:82
 msgid "Show items title"
 msgstr "Εμφάνιση τίτλου στοιχείου"
 
-#: templates/lexi_widget_manage.php:32
+#: templates/lexi_widget_manage.php:34
 #: tinymce/mce_lexi.php:84
 #, fuzzy
 msgid "Do not show content"
 msgstr "Εμφάνιση περιεχομένου στοιχείου"
 
-#: templates/lexi_widget_manage.php:33
+#: templates/lexi_widget_manage.php:35
 #: tinymce/mce_lexi.php:85
 #, fuzzy
 msgid "Show content"
 msgstr "Εμφάνιση περιεχομένου στοιχείου"
 
-#: templates/lexi_widget_manage.php:34
+#: templates/lexi_widget_manage.php:36
 #: tinymce/mce_lexi.php:86
 #, fuzzy
 msgid "Show truncated content"
 msgstr "Εμφάνιση περιεχομένου στοιχείου"
 
-#: templates/lexi_widget_manage.php:35
+#: templates/lexi_widget_manage.php:37
 #: tinymce/mce_lexi.php:87
 msgid "Truncated content as rollover title"
 msgstr ""
 
-#: templates/lexi_widget_manage.php:40
-#: tinymce/mce_lexi.php:94
+#: templates/lexi_widget_manage.php:42
+#: tinymce/mce_lexi.php:91
 msgid "Show author"
 msgstr "Εμφάνιση συγγραφέα"
 
-#: templates/lexi_widget_manage.php:41
-#: tinymce/mce_lexi.php:95
+#: templates/lexi_widget_manage.php:43
+#: tinymce/mce_lexi.php:92
 msgid "Show date"
 msgstr "Εμφάνιση Ημ/νίας"
 
-#: templates/lexi_widget_manage.php:44
-#: tinymce/mce_lexi.php:98
+#: templates/lexi_widget_manage.php:46
+#: tinymce/mce_lexi.php:95
 msgid "Open links in new page"
 msgstr "Άνοιγμα συνδέσμων σε νέα σελίδα"
 
-#: templates/lexi_widget_manage.php:45
-#: tinymce/mce_lexi.php:99
+#: templates/lexi_widget_manage.php:47
+#: tinymce/mce_lexi.php:96
 msgid "Paginate"
 msgstr "Σελιδοποίηση"
 
@@ -151,15 +151,11 @@ msgstr "Χρήση τίτλου από την ροή ειδήσεων"
 msgid "Use a specific title"
 msgstr "Χρήση συγκεκριμένου τίτλου"
 
-#: tinymce/mce_lexi.php:91
-msgid "Use content as hiperlink title (use with tooltip libraries)."
-msgstr ""
-
-#: tinymce/mce_lexi.php:107
+#: tinymce/mce_lexi.php:104
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: tinymce/mce_lexi.php:111
+#: tinymce/mce_lexi.php:108
 msgid "Insert"
 msgstr "Εισαγωγή"
 
