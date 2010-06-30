@@ -1,5 +1,5 @@
 	var loading_lexi_img = new Image(); 
-	loading_lexi_img.src = '/img/loading-page.gif';
+	loading_lexi_img.src = lexi_url+'/wp-content/plugins/lexi/img/loading-page.gif';
 	
 	function lexi_feed( url, title, num, conf, rand, page )
 	{
