@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 1.0
+Version: 1.0.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -68,23 +68,14 @@ function lexi_text_domain() {
 * @access public
 */
 function lexi_header() {
-	echo "<link rel='stylesheet' href='".lexi_plugin_url("/css/lexi.css")."?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
-	//This is the default style feed
-	$css = get_theme_root()."/".get_template()."/lexi.css";
-	if(file_exists($css)) { //If we found the style file in the theme use it insetad
-		echo "<link rel='stylesheet' href='".get_bloginfo('template_directory')."/lexi.css?ver=".LEXI_HEADER_V."' type='text/css' media='screen' />";
-	}
-	
-	// Declare we use JavaScript SACK library for Ajax
-	wp_print_scripts( array( 'sack' ));
-	
+
 	//Local URL
 	$url = get_bloginfo( 'wpurl' );
 	$local_url = parse_url( $url );
 	$aux_url   = parse_url(wp_guess_url());
 	$url = str_replace($local_url['host'], $aux_url['host'], $url);
-
 	
+	//Define custom JavaScript options (jr_qtip)
 	$lexi_completion="lexi_completion = function(rand) {}";
 	if(function_exists('jr_qtip_for_wordpress')) {
 		$jr = get_option('jr_qtip_for_wordpress');
@@ -105,13 +96,31 @@ function lexi_header() {
 	}
 
 	// Define custom JavaScript function
-	echo "
-	<script type='text/javascript'>
+	echo "<script type='text/javascript'>
 	lexi_i18n_error = '".__("Can\'t read Lexi Feed", 'lexi')."';
 	lexi_url = '$url';
 	$lexi_completion
 	</script>
-	<script language='javascript' type='text/javascript' src='".$url."/wp-content/plugins/lexi/lexi.js?ver=".LEXI_HEADER_V."'></script>";
+	";
+	
+	//Declare javascript
+	wp_register_script('lexi', $url.'/wp-content/plugins/lexi/lexi.js', array('sack'), LEXI_HEADER_V);
+	wp_enqueue_script('lexi');
+	
+	//Define custom CSS URI
+	$css = get_theme_root()."/".get_template()."/lexi.css";
+	if(file_exists($css)) {
+		$css_register = get_bloginfo('template_directory')."/lexi.css";
+	} else {
+		$css_register = lexi_plugin_url("/css/lexi.css");
+	}
+	//Declare style
+	wp_register_style('lexi', $css_register, false, LEXI_HEADER_V);
+	wp_enqueue_style('lexi');
+	
+	// Declare we use JavaScript SACK library for Ajax
+	wp_print_scripts( array( 'lexi' ));
+	wp_print_styles( array( 'lexi' ));
 }
 
 /**
