@@ -7,7 +7,6 @@ if (!file_exists($wpconfig)) {
 }// stop when wp-config is not there
 
 require_once($wpconfig);
-require_once(ABSPATH.'/wp-admin/admin.php');
 
 // check for rights
 if(!current_user_can('edit_posts')) die;

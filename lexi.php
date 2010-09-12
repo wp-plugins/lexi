@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 1.0.1
+Version: 1.0.2
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -47,7 +47,6 @@ add_action('init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
 add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
-add_action('activate_plugin', 'lexi_activate');
 add_action('wp_ajax_lexi_ajax', 'lexi_ajax');
 add_action('wp_ajax_nopriv_lexi_ajax', 'lexi_ajax');
 
@@ -58,7 +57,7 @@ add_action('wp_ajax_nopriv_lexi_ajax', 'lexi_ajax');
 * @access public
 */
 function lexi_text_domain() {
-	load_plugin_textdomain('lexi', 'wp-content/plugins/lexi/lang');
+	load_plugin_textdomain('lexi', false, 'lexi/lang');
 }
 
 /**
@@ -139,7 +138,7 @@ function lexi_ajax() {
 	$page  = $_POST['page'];
 	
 	//Get the div id where we want to show the data
-	$results_id = $_POST['results_div_id'];
+	//$results_id = $_POST['results_div_id'];
 	
 	//Get the new data.
 	$results = lexi_read_feed($url, $title, $num, $conf, $rand, $page); 
@@ -391,8 +390,8 @@ function lexiRss($conf, $rss, $title, $max_items) {
 function lexi_read_feed($link, $name, $num, $config, $rand=false, $group=1) {
 	//Use the rss libraries in WP.
 	require_once (ABSPATH . WPINC . '/class-feed.php');
-	require_once (ABSPATH . WPINC . '/rss.php');
 	require_once (ABSPATH . WPINC . '/class-simplepie.php');
+	$answer = false;
 	
 	// As this data come from a POST, fix the situation with the dobled quoted strings 
 	$name=str_replace("\\\"","\"",$name);
@@ -949,7 +948,7 @@ if((float)$wp_version >= 2.8) { //The new widget system
 	}
 
 	/* register widget when loading the WP core */
-	add_action('widgets_init', lexi_register_widgets);
+	add_action('widgets_init', 'lexi_register_widgets');
 
 	function lexi_register_widgets() {
 		register_widget('LexiWidget');
