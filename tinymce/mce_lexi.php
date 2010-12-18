@@ -3,7 +3,7 @@
 if ( !defined('ABSPATH') )
     die('You are not allowed to call this page directly.');
     
-global $wpdb, $nggdb;
+global $wpdb;
 
 @header('Content-Type: ' . get_option('html_type') . '; charset=' . get_option('blog_charset'));
 ?>
