@@ -39,6 +39,8 @@ function insertLexiLink() {
 	// who is active ?
 	if(rss.className.indexOf('current') != -1) {
 		var rsslink = document.getElementById('rsslink').value;
+		//Replace commas
+		rsslink = rsslink.replace(/,/gi, '%2C');
 		var items = document.getElementById('rssitems').value;
 		if(!is_numeric(items)) items = 5;
 		//var rssitems = items.options[items.selectedIndex].value;

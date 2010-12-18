@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 1.0.2
+Version: 1.0.3
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -27,7 +27,7 @@ Author URI: http://www.sebaxtian.com
 
 require_once("legacy.php");
 
-define('LEXI_HEADER_V', 1.1);
+define('LEXI_HEADER_V', 1.2);
 
 define('CONF_CACHE', 1);
 define('CONF_SHOWCONTENT', 2);
@@ -47,6 +47,7 @@ add_action('init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
 add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
+add_action('wp_ajax_lexi_tinymce', 'lexi_tinymce');
 add_action('wp_ajax_lexi_ajax', 'lexi_ajax');
 add_action('wp_ajax_nopriv_lexi_ajax', 'lexi_ajax');
 
@@ -120,6 +121,22 @@ function lexi_header() {
 	// Declare we use JavaScript SACK library for Ajax
 	wp_print_scripts( array( 'lexi' ));
 	wp_print_styles( array( 'lexi' ));
+}
+
+/**
+* Function to answer the MCE ajax call.
+* This function should be called by an action.
+*
+* @access public
+*/
+function lexi_tinymce() {
+	// check for rights
+    if ( !current_user_can('edit_pages') && !current_user_can('edit_posts') ) 
+    	die(__("You are not allowed to be here"));
+   	
+   	require_once('tinymce/mce_lexi.php');
+    
+    die();
 }
 
 /**

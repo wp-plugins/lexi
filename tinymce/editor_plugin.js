@@ -17,7 +17,7 @@
                         // Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceLexi');
          ed.addCommand('mceLexi', function() {
             ed.windowManager.open({
-               file : url + '/mce_lexi.php',
+               file : ajaxurl + '?action=lexi_tinymce',
                width : 420 + ed.getLang('Lexi.delta_width', 0),
                height : 335 + ed.getLang('Lexi.delta_height', 0),
                inline : 1
