@@ -3,7 +3,7 @@
 Plugin Name: Lexi
 Plugin URI: http://www.sebaxtian.com/acerca-de/lexi
 Description: An RSS feeder using ajax to show contents after the page has been loaded.
-Version: 1.0.4
+Version: 1.1
 Author: Juan Sebastián Echeverry
 Author URI: http://www.sebaxtian.com
 */
@@ -47,6 +47,7 @@ add_action('admin_init', 'lexi_add_buttons');
 add_action('init', 'lexi_text_domain', 1);
 add_action('wp_head', 'lexi_header');
 add_filter('the_content', 'lexi_content');
+add_filter('the_excerpt', 'lexi_content');
 add_action('wp_ajax_lexi_tinymce', 'lexi_tinymce');
 add_action('wp_ajax_lexi_ajax', 'lexi_ajax');
 add_action('wp_ajax_nopriv_lexi_ajax', 'lexi_ajax');

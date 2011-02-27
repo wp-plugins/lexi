@@ -2,8 +2,8 @@
 Contributors: sebaxtian
 Tags: rss
 Requires at least: 2.8
-Tested up to: 3.0.3
-Stable tag: 1.0.4
+Tested up to: 3.1
+Stable tag: 1.1
 
 An RSS reader that can be placed in pages, posts and sidebar, using ajax to show contents after the site has been loaded.
 
@@ -82,6 +82,10 @@ define('LEXI_TRUNCATE_SIZE', 200);
 4. Box to add an RSS feed.
 
 == Changelog ==
+
+= 1.1 =
+* Solved problem with the excerpt.
+* Checked for WP 3.1
 
 = 1.0.4 =
 * Solved bug with script call.
